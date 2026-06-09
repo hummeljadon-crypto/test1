@@ -3,194 +3,354 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy 3 Months ❤️</title>
+  <title>Our 3 Months 💖</title>
   <style>
+    :root {
+      --pink: #ff4d8d;
+      --soft: #ffd6e8;
+      --dark: #160814;
+      --gold: #ffd166;
+      --white: #fff7fb;
+    }
+
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
       overflow: hidden;
-      font-family: "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #ffd6e8, #ff8fab, #4a102a);
-      color: white;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, #ff7eb3 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #8e44ff 0%, transparent 35%),
+        linear-gradient(135deg, #15071c, #331129 55%, #130812);
+      color: var(--white);
     }
 
-    #game, #final {
+    .screen {
       position: fixed;
       inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      display: grid;
+      place-items: center;
+      padding: 24px;
       text-align: center;
-      padding: 20px;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.04);
+    }
+
+    .card {
+      width: min(720px, 95vw);
+      padding: 32px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 28px;
+      background: rgba(255,255,255,.09);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 80px rgba(0,0,0,.35);
     }
 
     h1 {
-      font-size: clamp(2rem, 6vw, 4rem);
-      margin: 0 0 10px;
-      text-shadow: 0 4px 20px rgba(0,0,0,.3);
+      font-size: clamp(2rem, 7vw, 4.5rem);
+      margin: 0 0 12px;
+      line-height: 1;
     }
 
     p {
-      font-size: clamp(1rem, 3vw, 1.4rem);
-      max-width: 650px;
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      opacity: .92;
       line-height: 1.6;
     }
 
     button {
-      border: none;
-      padding: 14px 25px;
-      border-radius: 999px;
-      background: white;
-      color: #c9184a;
-      font-size: 1.1rem;
-      font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 24px;
+      margin-top: 16px;
+      font-weight: 800;
+      color: #3a071d;
+      background: linear-gradient(135deg, #fff, var(--soft), var(--gold));
+      box-shadow: 0 10px 35px rgba(255, 77, 141, .35);
+      transition: transform .2s ease;
     }
 
-    .heart {
+    button:hover { transform: translateY(-2px) scale(1.03); }
+
+    #game {
+      width: min(900px, 96vw);
+      height: min(600px, 75vh);
+      position: relative;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.22);
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255,255,255,.15), transparent 30%),
+        rgba(255,255,255,.08);
+      box-shadow: inset 0 0 50px rgba(255,255,255,.08), 0 20px 80px rgba(0,0,0,.35);
+      overflow: hidden;
+    }
+
+    #player {
       position: absolute;
-      font-size: 35px;
-      cursor: pointer;
-      animation: floatDown 4s linear forwards;
+      width: 48px;
+      height: 48px;
+      left: 50%;
+      bottom: 35px;
+      transform: translateX(-50%);
+      filter: drop-shadow(0 0 14px rgba(255,255,255,.75));
+      font-size: 42px;
       user-select: none;
     }
 
-    @keyframes floatDown {
-      from { transform: translateY(-80px) rotate(0deg); opacity: 1; }
-      to { transform: translateY(110vh) rotate(360deg); opacity: .2; }
+    .star {
+      position: absolute;
+      font-size: 30px;
+      animation: fall linear forwards;
+      user-select: none;
+    }
+
+    @keyframes fall {
+      from { transform: translateY(-50px) rotate(0deg); }
+      to { transform: translateY(700px) rotate(260deg); }
     }
 
     #score {
-      position: fixed;
-      top: 20px;
-      font-size: 1.3rem;
-      background: rgba(255,255,255,.2);
-      padding: 10px 18px;
-      border-radius: 999px;
-      backdrop-filter: blur(10px);
-    }
-
-    #final {
-      display: none;
-      background: rgba(0,0,0,.25);
-      backdrop-filter: blur(6px);
-    }
-
-    .card {
-      background: rgba(255,255,255,.18);
-      border: 1px solid rgba(255,255,255,.35);
-      border-radius: 28px;
-      padding: 35px;
-      max-width: 720px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.35);
-      animation: pop .9s ease;
-    }
-
-    @keyframes pop {
-      from { transform: scale(.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .floating {
       position: absolute;
-      animation: rise 7s linear infinite;
-      opacity: .75;
+      top: 18px;
+      left: 20px;
+      font-weight: 900;
+      background: rgba(0,0,0,.25);
+      padding: 10px 14px;
+      border-radius: 999px;
+    }
+
+    #hint {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      opacity: .82;
+      font-size: .95rem;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -40px;
+      font-size: 24px;
+      animation: floatUp 5s linear forwards;
       pointer-events: none;
     }
 
-    @keyframes rise {
-      from { transform: translateY(110vh) scale(.7); }
-      to { transform: translateY(-20vh) scale(1.4); }
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(.6) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.4) rotate(360deg); opacity: 0; }
+    }
+
+    .typewriter {
+      min-height: 160px;
+      white-space: pre-wrap;
+      font-size: clamp(1.1rem, 3.5vw, 1.55rem);
+      line-height: 1.65;
+    }
+
+    .glow {
+      text-shadow: 0 0 18px rgba(255, 214, 232, .9);
+    }
+
+    .photo-frame {
+      margin: 18px auto 0;
+      width: min(260px, 70vw);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 28px;
+      border: 2px dashed rgba(255,255,255,.38);
+      color: rgba(255,255,255,.75);
+      padding: 18px;
+    }
+
+    .small {
+      font-size: .95rem;
+      opacity: .72;
     }
   </style>
 </head>
 <body>
-
-  <div id="game">
-    <h1>Catch the Hearts 💘</h1>
-    <p>Catch 10 hearts to unlock your surprise.</p>
-    <button onclick="startGame()">Start</button>
-    <div id="score">Hearts: 0 / 10</div>
-  </div>
-
-  <div id="final">
+  <section id="intro" class="screen">
     <div class="card">
-      <h1>Happy 3 Months, My Love ❤️</h1>
-      <p>
-        Three months with you, and somehow the world feels softer,
-        brighter, and a lot more magical.
-      </p>
-      <p>
-        You make ordinary days feel like little adventures.
-        You make me smile in ways I didn’t even know I could.
-      </p>
-      <p>
-        I’m so lucky to have you. This is only month three,
-        but I already know you’re someone incredibly special to me.
-      </p>
-      <h1>Here’s to us 🥰</h1>
+      <h1 class="glow">A tiny quest 💫</h1>
+      <p>Collect the falling stars. Something cute happens when you get enough.</p>
+      <button onclick="startGame()">Start</button>
+      <p class="small">Use ← → keys, A/D, or drag/tap on mobile.</p>
     </div>
-  </div>
+  </section>
+
+  <section id="gameScreen" class="screen hidden">
+    <div id="game">
+      <div id="score">Stars: 0 / 12</div>
+      <div id="hint">catch them ✨</div>
+      <div id="player">💖</div>
+    </div>
+  </section>
+
+  <section id="final" class="screen hidden">
+    <div class="card">
+      <h1 class="glow">Happy 3 Months 💗</h1>
+      <div id="message" class="typewriter"></div>
+      <div class="photo-frame">
+        Add a favorite picture here later<br />
+        <span class="small">replace this box with an image if you want</span>
+      </div>
+      <button onclick="restart()">Play again</button>
+    </div>
+  </section>
 
   <script>
+    // EDIT THIS MESSAGE:
+    const loveMessage =
+`Three months with you, and somehow the world feels softer.
+
+You are my favorite notification, my calm place, my silly little miracle.
+
+I made this tiny website because you deserve something that feels like magic.
+
+Happy 3 months, my love. Here’s to us — and to way more memories. 💖`;
+
+    const intro = document.getElementById("intro");
+    const gameScreen = document.getElementById("gameScreen");
+    const finalScreen = document.getElementById("final");
+    const game = document.getElementById("game");
+    const player = document.getElementById("player");
+    const scoreEl = document.getElementById("score");
+    const messageEl = document.getElementById("message");
+
     let score = 0;
-    let gameStarted = false;
-    let heartInterval;
+    let playerX = 50;
+    let gameRunning = false;
+    let starTimer;
+    let heartTimer;
 
     function startGame() {
-      if (gameStarted) return;
-      gameStarted = true;
-      document.querySelector("button").style.display = "none";
-      heartInterval = setInterval(createHeart, 650);
+      intro.classList.add("hidden");
+      gameScreen.classList.remove("hidden");
+      score = 0;
+      playerX = 50;
+      gameRunning = true;
+      updatePlayer();
+      scoreEl.textContent = "Stars: 0 / 12";
+      starTimer = setInterval(dropStar, 650);
     }
 
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.textContent = ["❤️", "💖", "💕", "💘", "💝"][Math.floor(Math.random() * 5)];
-      heart.style.left = Math.random() * 90 + "vw";
-      heart.style.top = "-60px";
+    function updatePlayer() {
+      player.style.left = playerX + "%";
+    }
 
-      heart.onclick = () => {
-        score++;
-        document.getElementById("score").textContent = `Hearts: ${score} / 10`;
-        heart.remove();
+    document.addEventListener("keydown", (e) => {
+      if (!gameRunning) return;
+      if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") playerX -= 6;
+      if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") playerX += 6;
+      playerX = Math.max(5, Math.min(95, playerX));
+      updatePlayer();
+    });
 
-        if (score >= 10) {
-          endGame();
+    game.addEventListener("pointermove", (e) => {
+      if (!gameRunning) return;
+      const rect = game.getBoundingClientRect();
+      playerX = ((e.clientX - rect.left) / rect.width) * 100;
+      playerX = Math.max(5, Math.min(95, playerX));
+      updatePlayer();
+    });
+
+    function dropStar() {
+      const star = document.createElement("div");
+      star.className = "star";
+      star.textContent = Math.random() > .25 ? "✨" : "🌙";
+      star.style.left = Math.random() * 92 + "%";
+      star.style.animationDuration = (2.2 + Math.random() * 1.4) + "s";
+      game.appendChild(star);
+
+      const collisionCheck = setInterval(() => {
+        if (!gameRunning || !star.isConnected) {
+          clearInterval(collisionCheck);
+          return;
         }
-      };
 
-      document.body.appendChild(heart);
+        const s = star.getBoundingClientRect();
+        const p = player.getBoundingClientRect();
 
-      setTimeout(() => heart.remove(), 4000);
+        const hit = !(s.right < p.left || s.left > p.right || s.bottom < p.top || s.top > p.bottom);
+
+        if (hit) {
+          star.remove();
+          clearInterval(collisionCheck);
+          score++;
+          scoreEl.textContent = `Stars: ${score} / 12`;
+          popHeart(p.left + p.width / 2, p.top);
+          if (score >= 12) revealSurprise();
+        }
+      }, 40);
+
+      setTimeout(() => {
+        star.remove();
+        clearInterval(collisionCheck);
+      }, 4200);
     }
 
-    function endGame() {
-      clearInterval(heartInterval);
+    function popHeart(x, y) {
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = ["💖","💕","💗","💘","💞"][Math.floor(Math.random()*5)];
+      h.style.left = x + "px";
+      h.style.top = y + "px";
+      h.style.bottom = "auto";
+      h.style.animationDuration = "1.6s";
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 1700);
+    }
 
+    function revealSurprise() {
+      gameRunning = false;
+      clearInterval(starTimer);
+
+      document.querySelectorAll(".star").forEach(s => s.remove());
+
+      heartTimer = setInterval(() => {
+        const h = document.createElement("div");
+        h.className = "heart";
+        h.textContent = ["💖","💕","💗","💘","💞","❤️"][Math.floor(Math.random()*6)];
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.fontSize = (18 + Math.random() * 30) + "px";
+        h.style.animationDuration = (3.5 + Math.random() * 3) + "s";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 7000);
+      }, 170);
+
+      setTimeout(() => {
+        gameScreen.classList.add("hidden");
+        finalScreen.classList.remove("hidden");
+        typeMessage();
+      }, 1200);
+    }
+
+    function typeMessage() {
+      messageEl.textContent = "";
+      let i = 0;
+      const typer = setInterval(() => {
+        messageEl.textContent += loveMessage[i];
+        i++;
+        if (i >= loveMessage.length) clearInterval(typer);
+      }, 38);
+    }
+
+    function restart() {
+      clearInterval(heartTimer);
       document.querySelectorAll(".heart").forEach(h => h.remove());
-
-      document.getElementById("game").style.display = "none";
-      document.getElementById("final").style.display = "flex";
-
-      setInterval(() => {
-        const heart = document.createElement("div");
-        heart.className = "floating";
-        heart.textContent = ["❤️", "💗", "💞", "💕"][Math.floor(Math.random() * 4)];
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = Math.random() * 30 + 20 + "px";
-        heart.style.animationDuration = Math.random() * 4 + 5 + "s";
-        document.body.appendChild(heart);
-
-        setTimeout(() => heart.remove(), 9000);
-      }, 250);
+      finalScreen.classList.add("hidden");
+      intro.classList.remove("hidden");
     }
   </script>
-
 </body>
 </html>
