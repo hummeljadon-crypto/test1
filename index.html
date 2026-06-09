@@ -1,131 +1,196 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Mini Game</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy 3 Months ❤️</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #ffd6e8, #ff8fab, #4a102a);
+      color: white;
+    }
+
+    #game, #final {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      margin: 0 0 10px;
+      text-shadow: 0 4px 20px rgba(0,0,0,.3);
+    }
+
+    p {
+      font-size: clamp(1rem, 3vw, 1.4rem);
+      max-width: 650px;
+      line-height: 1.6;
+    }
+
+    button {
+      border: none;
+      padding: 14px 25px;
+      border-radius: 999px;
+      background: white;
+      color: #c9184a;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 35px;
+      cursor: pointer;
+      animation: floatDown 4s linear forwards;
+      user-select: none;
+    }
+
+    @keyframes floatDown {
+      from { transform: translateY(-80px) rotate(0deg); opacity: 1; }
+      to { transform: translateY(110vh) rotate(360deg); opacity: .2; }
+    }
+
+    #score {
+      position: fixed;
+      top: 20px;
+      font-size: 1.3rem;
+      background: rgba(255,255,255,.2);
+      padding: 10px 18px;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+    }
+
+    #final {
+      display: none;
+      background: rgba(0,0,0,.25);
+      backdrop-filter: blur(6px);
+    }
+
+    .card {
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 28px;
+      padding: 35px;
+      max-width: 720px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+      animation: pop .9s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .floating {
+      position: absolute;
+      animation: rise 7s linear infinite;
+      opacity: .75;
+      pointer-events: none;
+    }
+
+    @keyframes rise {
+      from { transform: translateY(110vh) scale(.7); }
+      to { transform: translateY(-20vh) scale(1.4); }
+    }
+  </style>
 </head>
 <body>
+
   <div id="game">
-    <h1>⭐ Catch the Star ⭐</h1>
-    <p id="text">Click the star 5 times to win.</p>
-    <button id="star">⭐</button>
-    <p id="score">Score: 0</p>
+    <h1>Catch the Hearts 💘</h1>
+    <p>Catch 10 hearts to unlock your surprise.</p>
+    <button onclick="startGame()">Start</button>
+    <div id="score">Hearts: 0 / 10</div>
   </div>
 
-  <div id="surprise" class="hidden">
-    <div class="heart">❤️</div>
-    <h1>Happy 3 Months, My Love</h1>
-    <p>
-      Surprise. This was never really a game.
-      It was just a sneaky little way to tell you how much you mean to me.
-    </p>
-    <p>
-      Three months with you has been special, even from far away.
-      I’m grateful for your love, your time, your patience, and every little moment we share.
-    </p>
-    <h2>I love you so much 💕</h2>
+  <div id="final">
+    <div class="card">
+      <h1>Happy 3 Months, My Love ❤️</h1>
+      <p>
+        Three months with you, and somehow the world feels softer,
+        brighter, and a lot more magical.
+      </p>
+      <p>
+        You make ordinary days feel like little adventures.
+        You make me smile in ways I didn’t even know I could.
+      </p>
+      <p>
+        I’m so lucky to have you. This is only month three,
+        but I already know you’re someone incredibly special to me.
+      </p>
+      <h1>Here’s to us 🥰</h1>
+    </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    let score = 0;
+    let gameStarted = false;
+    let heartInterval;
+
+    function startGame() {
+      if (gameStarted) return;
+      gameStarted = true;
+      document.querySelector("button").style.display = "none";
+      heartInterval = setInterval(createHeart, 650);
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = ["❤️", "💖", "💕", "💘", "💝"][Math.floor(Math.random() * 5)];
+      heart.style.left = Math.random() * 90 + "vw";
+      heart.style.top = "-60px";
+
+      heart.onclick = () => {
+        score++;
+        document.getElementById("score").textContent = `Hearts: ${score} / 10`;
+        heart.remove();
+
+        if (score >= 10) {
+          endGame();
+        }
+      };
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 4000);
+    }
+
+    function endGame() {
+      clearInterval(heartInterval);
+
+      document.querySelectorAll(".heart").forEach(h => h.remove());
+
+      document.getElementById("game").style.display = "none";
+      document.getElementById("final").style.display = "flex";
+
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "floating";
+        heart.textContent = ["❤️", "💗", "💞", "💕"][Math.floor(Math.random() * 4)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 30 + 20 + "px";
+        heart.style.animationDuration = Math.random() * 4 + 5 + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 9000);
+      }, 250);
+    }
+  </script>
+
 </body>
 </html>
-
-body {
-  margin: 0;
-  height: 100vh;
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  overflow: hidden;
-}
-
-#game, #surprise {
-  max-width: 600px;
-  padding: 30px;
-}
-
-button {
-  font-size: 60px;
-  padding: 20px;
-  border: none;
-  border-radius: 50%;
-  background: transparent;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-button:hover {
-  transform: scale(1.2);
-}
-
-.hidden {
-  display: none;
-}
-
-.heart {
-  font-size: 120px;
-  animation: beat 1s infinite;
-}
-
-#surprise {
-  animation: fadeIn 2s ease;
-}
-
-#surprise h1 {
-  color: #fb7185;
-}
-
-#surprise p {
-  font-size: 20px;
-  line-height: 1.6;
-}
-
-@keyframes beat {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.25);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-let score = 0;
-
-const star = document.getElementById("star");
-const scoreText = document.getElementById("score");
-const game = document.getElementById("game");
-const surprise = document.getElementById("surprise");
-const text = document.getElementById("text");
-
-star.addEventListener("click", () => {
-  score++;
-  scoreText.textContent = "Score: " + score;
-
-  star.style.position = "absolute";
-  star.style.left = Math.random() * 80 + "vw";
-  star.style.top = Math.random() * 80 + "vh";
-
-  if (score === 3) {
-    text.textContent = "Wait... something feels different...";
-  }
-
-  if (score === 5) {
-    game.classList.add("hidden");
-    surprise.classList.remove("hidden");
-  }
-});
