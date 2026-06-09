@@ -3,23 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For You 🤍🌿</title>
+
+  <title>For You 🤍</title>
+
   <style>
     :root {
-      --night: #070611;
-      --sky1: #0d1535;
-      --sky2: #284d88;
-      --lake: #497aa2;
-      --pink: #ff6f9f;
-      --hot-pink: #ff3f86;
-      --lily: #fff7e8;
-      --paper: #fff3dc;
-      --ink: #3b2330;
+      --night: #060711;
+      --night2: #101935;
+      --ink: #2b1a24;
+      --paper: #fff4df;
+      --white: #fffaf5;
+      --cream: #fff7e8;
       --gold: #ffd166;
+      --pink: #ff6f9f;
+      --rose: #d94c65;
       --green: #93cfa2;
-      --deep-green: #345c3f;
-      --soft-green: #d8f3dc;
-      --white: #fffaf7;
+      --deepgreen: #23492f;
+      --softgreen: #d8f3dc;
+      --lake: #517ea1;
+      --lake2: #2f5f83;
+      --shadow: rgba(0,0,0,.42);
     }
 
     * {
@@ -38,9 +41,9 @@
       color: var(--white);
       font-family: Georgia, "Times New Roman", serif;
       background:
-        radial-gradient(circle at 20% 10%, rgba(255, 111, 159, .22), transparent 28%),
-        radial-gradient(circle at 85% 20%, rgba(109, 93, 252, .25), transparent 30%),
-        linear-gradient(140deg, #07050e, #171022 55%, #090611);
+        radial-gradient(circle at 15% 10%, rgba(255,111,159,.16), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(147,207,162,.13), transparent 30%),
+        linear-gradient(145deg, #05060e, #11172f 55%, #070711);
     }
 
     body.unlocked {
@@ -57,7 +60,7 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: #2d1323;
       background: linear-gradient(135deg, #ffffff, #fff1d6, #d8f3dc);
-      box-shadow: 0 10px 35px rgba(255, 209, 102, .25);
+      box-shadow: 0 10px 35px rgba(255, 209, 102, .22);
       transition: transform .2s ease, filter .2s ease;
     }
 
@@ -66,50 +69,17 @@
       filter: brightness(1.05);
     }
 
-    .screen {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      text-align: center;
-      transition: opacity 850ms ease, transform 850ms ease;
-    }
-
-    .fixed-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-    }
-
-    .hidden {
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(1.035);
-    }
-
-    .card {
-      width: min(880px, 95vw);
-      padding: clamp(24px, 5vw, 50px);
-      border: 1px solid rgba(255,255,255,.19);
-      border-radius: 34px;
-      background: rgba(255,255,255,.08);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 24px 90px rgba(0,0,0,.42);
-      position: relative;
-      overflow: hidden;
-    }
-
     h1 {
-      margin: 0 0 14px;
-      font-size: clamp(2.35rem, 8vw, 5.5rem);
+      margin: 0 0 16px;
+      font-size: clamp(2.35rem, 8vw, 5.6rem);
       line-height: .95;
       letter-spacing: -2px;
-      text-shadow: 0 0 26px rgba(255, 247, 232, .45);
+      text-shadow: 0 0 28px rgba(255,247,232,.36);
     }
 
     h2 {
       margin: 0 0 18px;
-      font-size: clamp(1.75rem, 5vw, 3.4rem);
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
       line-height: 1.05;
     }
 
@@ -124,6 +94,40 @@
       opacity: .72;
     }
 
+    .scene {
+      min-height: 100vh;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      text-align: center;
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      opacity: 0;
+      transition: opacity .65s ease;
+    }
+
+    .scene.active {
+      display: grid;
+      opacity: 1;
+    }
+
+    .card {
+      width: min(880px, 95vw);
+      padding: clamp(24px, 5vw, 50px);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 34px;
+      background: rgba(255,255,255,.075);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 90px var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card.clean {
+      background: rgba(255,255,255,.09);
+    }
+
     .choice {
       display: block;
       width: min(100%, 580px);
@@ -133,7 +137,7 @@
     #quizFeedback {
       min-height: 34px;
       font-weight: bold;
-      color: var(--soft-green);
+      color: var(--softgreen);
     }
 
     .progress {
@@ -145,8 +149,8 @@
     .ambient {
       position: fixed;
       inset: 0;
-      pointer-events: none;
       z-index: 1;
+      pointer-events: none;
       overflow: hidden;
     }
 
@@ -154,116 +158,119 @@
       position: absolute;
       top: 7vh;
       right: 8vw;
-      width: 92px;
-      height: 92px;
+      width: 96px;
+      height: 96px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #fffaf0, #ffeeb8 58%, rgba(255,238,184,.18));
-      box-shadow: 0 0 60px rgba(255,238,184,.45);
-      opacity: .82;
+      background:
+        radial-gradient(circle at 36% 34%, #fffaf0, #ffeeb8 60%, rgba(255,238,184,.2));
+      box-shadow: 0 0 65px rgba(255,238,184,.44);
+      opacity: .76;
+    }
+
+    .star-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.8) 0 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,.5) 0 1px, transparent 1.7px);
+      background-size: 90px 90px, 140px 140px;
+      background-position: 10px 20px, 45px 70px;
+      opacity: .32;
+    }
+
+    .petal {
+      position: fixed;
+      top: -40px;
+      z-index: 5;
+      pointer-events: none;
+      animation: petalFall linear forwards;
+      text-shadow: 0 0 10px rgba(255,255,255,.38);
+    }
+
+    @keyframes petalFall {
+      from { transform: translateY(-50px) translateX(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      to { transform: translateY(110vh) translateX(var(--drift)) rotate(360deg); opacity: 0; }
     }
 
     .willow {
       position: fixed;
       left: 50%;
-      bottom: -40px;
-      transform: translateX(-50%) scale(.55);
+      bottom: -80px;
+      transform: translateX(-50%) scale(.45);
       z-index: 2;
-      width: min(1050px, 160vw);
-      height: 660px;
+      width: min(1250px, 190vw);
+      height: 760px;
       pointer-events: none;
-      opacity: .20;
+      opacity: .13;
       transition: opacity 1s ease, transform 1s ease;
     }
 
     .willow.stage-1 {
-      opacity: .34;
-      transform: translateX(-50%) scale(.68);
+      opacity: .22;
+      transform: translateX(-50%) scale(.58);
     }
 
     .willow.stage-2 {
-      opacity: .50;
-      transform: translateX(-50%) scale(.82);
+      opacity: .36;
+      transform: translateX(-50%) scale(.72);
     }
 
     .willow.stage-3 {
-      opacity: .72;
-      transform: translateX(-50%) scale(.98);
+      opacity: .56;
+      transform: translateX(-50%) scale(.88);
     }
 
     .willow.stage-4 {
-      opacity: .88;
-      transform: translateX(-50%) scale(1.12);
+      opacity: .78;
+      transform: translateX(-50%) scale(1.05);
+    }
+
+    .willow.stage-final {
+      opacity: .96;
+      transform: translateX(-50%) scale(1.26);
     }
 
     .trunk {
       position: absolute;
       bottom: 0;
       left: 50%;
-      width: 72px;
-      height: 380px;
+      width: 90px;
+      height: 455px;
       transform: translateX(-50%);
       border-radius: 48% 48% 0 0;
-      background: linear-gradient(90deg, #25170f, #7d563d 45%, #2c1c12);
-      box-shadow: inset -18px 0 26px rgba(0,0,0,.42);
+      background: linear-gradient(90deg, #21140d, #765139 48%, #2c1c12);
+      box-shadow: inset -22px 0 30px rgba(0,0,0,.48);
     }
 
     .canopy {
       position: absolute;
-      bottom: 255px;
       left: 50%;
-      width: 760px;
-      height: 330px;
+      bottom: 330px;
+      width: 940px;
+      height: 390px;
       transform: translateX(-50%);
       border-radius: 50%;
       background:
-        radial-gradient(circle at 50% 42%, rgba(180,231,181,.86), rgba(71,125,80,.72) 50%, transparent 73%);
+        radial-gradient(circle at 50% 42%, rgba(195,240,198,.9), rgba(71,125,80,.7) 49%, transparent 75%);
       filter: blur(.2px);
     }
 
     .willow-branch {
       position: absolute;
-      top: 155px;
-      width: 9px;
+      top: 175px;
+      width: 10px;
       border-radius: 999px;
       transform-origin: top;
       background: linear-gradient(var(--green), rgba(147,207,162,.3), transparent);
-      animation: sway 3.8s ease-in-out infinite alternate;
+      animation: sway 4s ease-in-out infinite alternate;
     }
 
-    .willow-branch.b1 {
-      left: 245px;
-      height: 420px;
-      transform: rotate(22deg);
-      animation-delay: .1s;
-    }
-
-    .willow-branch.b2 {
-      left: 330px;
-      height: 450px;
-      transform: rotate(12deg);
-      animation-delay: .8s;
-    }
-
-    .willow-branch.b3 {
-      left: 465px;
-      height: 460px;
-      transform: rotate(1deg);
-      animation-delay: .3s;
-    }
-
-    .willow-branch.b4 {
-      left: 600px;
-      height: 450px;
-      transform: rotate(-12deg);
-      animation-delay: 1s;
-    }
-
-    .willow-branch.b5 {
-      left: 685px;
-      height: 420px;
-      transform: rotate(-22deg);
-      animation-delay: .5s;
-    }
+    .b1 { left: 270px; height: 540px; transform: rotate(24deg); animation-delay: .1s; }
+    .b2 { left: 390px; height: 570px; transform: rotate(13deg); animation-delay: .8s; }
+    .b3 { left: 570px; height: 590px; transform: rotate(0deg); animation-delay: .3s; }
+    .b4 { left: 750px; height: 570px; transform: rotate(-13deg); animation-delay: 1s; }
+    .b5 { left: 870px; height: 540px; transform: rotate(-24deg); animation-delay: .5s; }
 
     @keyframes sway {
       from { translate: -7px 0; }
@@ -272,21 +279,22 @@
 
     .leaf {
       position: absolute;
-      width: 12px;
-      height: 22px;
+      width: 13px;
+      height: 24px;
       border-radius: 80% 20% 80% 20%;
-      background: linear-gradient(135deg, #d8f3dc, #76b985);
+      background: linear-gradient(135deg, #e7ffe9, #77bc86);
       opacity: 0;
-      transform: scale(.1);
-      transition: opacity .8s ease, transform .8s ease;
-      animation: leafSway 3s ease-in-out infinite alternate;
+      transform: scale(.08);
+      transition: opacity .9s ease, transform .9s ease;
+      animation: leafSway 3.4s ease-in-out infinite alternate;
     }
 
-    .willow.stage-1 .leaf:nth-of-type(-n+30),
-    .willow.stage-2 .leaf:nth-of-type(-n+70),
-    .willow.stage-3 .leaf:nth-of-type(-n+115),
-    .willow.stage-4 .leaf {
-      opacity: .92;
+    .stage-1 .leaf:nth-of-type(-n+45),
+    .stage-2 .leaf:nth-of-type(-n+100),
+    .stage-3 .leaf:nth-of-type(-n+160),
+    .stage-4 .leaf:nth-of-type(-n+230),
+    .stage-final .leaf {
+      opacity: .95;
       transform: scale(1);
     }
 
@@ -297,20 +305,30 @@
 
     .tree-memory {
       position: absolute;
-      width: 76px;
-      height: 92px;
+      width: 78px;
+      height: 94px;
       padding: 5px;
       background: #fffdf8;
-      box-shadow: 0 10px 25px rgba(0,0,0,.3);
+      box-shadow: 0 10px 25px rgba(0,0,0,.28);
       border-radius: 4px;
       opacity: 0;
       transform: scale(.3) rotate(var(--tilt));
       transition: opacity 1s ease, transform 1s ease;
     }
 
-    .tree-memory .mini-img {
+    .tree-memory::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -28px;
+      width: 1px;
+      height: 30px;
+      background: rgba(255,255,255,.65);
+    }
+
+    .mini-img {
       width: 100%;
-      height: 63px;
+      height: 65px;
       border-radius: 3px;
       background: linear-gradient(135deg, #ffe1ed, #d8f3dc);
       display: grid;
@@ -322,45 +340,20 @@
       overflow: hidden;
     }
 
-    .tree-memory .mini-img img {
+    .mini-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .tree-memory::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: -26px;
-      width: 1px;
-      height: 28px;
-      background: rgba(255,255,255,.55);
-    }
-
-    .willow.stage-2 .memory-1,
-    .willow.stage-3 .memory-1,
-    .willow.stage-3 .memory-2,
-    .willow.stage-3 .memory-3,
-    .willow.stage-4 .tree-memory {
-      opacity: .94;
+    .stage-2 .memory-1,
+    .stage-3 .memory-1,
+    .stage-3 .memory-2,
+    .stage-3 .memory-3,
+    .stage-4 .tree-memory,
+    .stage-final .tree-memory {
+      opacity: .95;
       transform: scale(1) rotate(var(--tilt));
-    }
-
-    .petal {
-      position: fixed;
-      top: -40px;
-      z-index: 3;
-      pointer-events: none;
-      color: var(--lily);
-      animation: petalFall linear forwards;
-      text-shadow: 0 0 10px rgba(255,255,255,.38);
-    }
-
-    @keyframes petalFall {
-      from { transform: translateY(-50px) translateX(0) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      to { transform: translateY(110vh) translateX(var(--drift)) rotate(360deg); opacity: 0; }
     }
 
     #game {
@@ -368,12 +361,11 @@
       height: min(660px, 78vh);
       position: relative;
       border-radius: 32px;
-      border: 1px solid rgba(255,255,255,.24);
-      background:
-        linear-gradient(180deg, #1c2b5c 0%, #5f8fc7 42%, #eab7a2 62%, #3e82ad 63%, #285c81 100%);
+      border: 1px solid rgba(255,255,255,.22);
       box-shadow: inset 0 0 70px rgba(255,255,255,.08), 0 20px 90px rgba(0,0,0,.44);
       overflow: hidden;
       touch-action: none;
+      background: linear-gradient(180deg, #1d2b5d 0%, #628fc7 42%, #ecbca8 62%, #4783a9 63%, #245477 100%);
     }
 
     .como-scene {
@@ -386,33 +378,27 @@
     .sunset {
       position: absolute;
       left: 50%;
-      top: 18%;
-      width: 130px;
-      height: 130px;
+      top: 16%;
+      width: 136px;
+      height: 136px;
       transform: translateX(-50%);
       border-radius: 50%;
       background: radial-gradient(circle, #fff3b0, #ffb36b 65%, transparent 70%);
-      opacity: .8;
-      filter: blur(.3px);
+      opacity: .78;
     }
 
     .mountain {
       position: absolute;
       bottom: 38%;
-      width: 60%;
-      height: 34%;
-      background: linear-gradient(135deg, #182841, #355a78);
+      width: 62%;
+      height: 35%;
+      background: linear-gradient(135deg, #17263f, #375d7c);
       clip-path: polygon(0 100%, 35% 22%, 50% 62%, 68% 18%, 100% 100%);
       opacity: .95;
     }
 
     .mountain.left { left: -10%; }
-
-    .mountain.right {
-      right: -8%;
-      transform: scaleX(-1);
-      opacity: .78;
-    }
+    .mountain.right { right: -8%; transform: scaleX(-1); opacity: .78; }
 
     .lake {
       position: absolute;
@@ -423,7 +409,7 @@
       background:
         repeating-linear-gradient(0deg, rgba(255,255,255,.18) 0 2px, transparent 2px 12px),
         linear-gradient(180deg, rgba(99,160,195,.8), rgba(34,82,119,.98));
-      opacity: .9;
+      opacity: .93;
     }
 
     .village {
@@ -431,7 +417,7 @@
       left: 7%;
       bottom: 38%;
       width: 86%;
-      height: 50px;
+      height: 54px;
       display: flex;
       align-items: flex-end;
       gap: 8px;
@@ -441,7 +427,7 @@
     .house {
       width: 34px;
       height: 28px;
-      background: rgba(255, 231, 188, .85);
+      background: rgba(255,231,188,.85);
       border-radius: 3px 3px 0 0;
       position: relative;
     }
@@ -491,43 +477,26 @@
     }
 
     .cloud1 { top: 10%; left: -190px; }
-
-    .cloud2 {
-      top: 25%;
-      left: -260px;
-      animation-delay: 7s;
-      transform: scale(.75);
-    }
+    .cloud2 { top: 25%; left: -260px; animation-delay: 7s; transform: scale(.75); }
 
     @keyframes cloudDrift {
       from { translate: 0 0; }
       to { translate: 1250px 0; }
     }
 
-    #score {
+    #score, #hint {
       position: absolute;
       top: 18px;
-      left: 20px;
+      z-index: 4;
       padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(0,0,0,.32);
+      background: rgba(0,0,0,.30);
       font-family: system-ui, sans-serif;
       font-weight: 900;
-      z-index: 4;
     }
 
-    #hint {
-      position: absolute;
-      top: 18px;
-      right: 20px;
-      font-family: system-ui, sans-serif;
-      font-size: .95rem;
-      opacity: .92;
-      z-index: 4;
-      background: rgba(0,0,0,.22);
-      padding: 10px 14px;
-      border-radius: 999px;
-    }
+    #score { left: 20px; }
+    #hint { right: 20px; font-size: .95rem; opacity: .92; }
 
     #player {
       position: absolute;
@@ -603,10 +572,23 @@
       to { transform: translateY(790px) rotate(250deg); }
     }
 
-    .heart, .burst, .poured-flower {
+    .particle, .heart, .poured-flower {
       position: fixed;
       z-index: 90;
       pointer-events: none;
+    }
+
+    .particle {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 34px;
+      animation: burst 1.8s ease-out forwards;
+    }
+
+    @keyframes burst {
+      from { transform: translate(-50%, -50%) rotate(0deg) scale(.2); opacity: 1; }
+      to { transform: translate(var(--x), var(--y)) rotate(540deg) scale(1.7); opacity: 0; }
     }
 
     .heart {
@@ -619,19 +601,6 @@
       0% { transform: translateY(0) scale(.6) rotate(0deg); opacity: 0; }
       10% { opacity: 1; }
       100% { transform: translateY(-115vh) scale(1.4) rotate(360deg); opacity: 0; }
-    }
-
-    .burst {
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 34px;
-      animation: burst 1.8s ease-out forwards;
-    }
-
-    @keyframes burst {
-      from { transform: translate(-50%, -50%) rotate(0deg) scale(.2); opacity: 1; }
-      to { transform: translate(var(--x), var(--y)) rotate(540deg) scale(1.7); opacity: 0; }
     }
 
     .typewriter {
@@ -647,12 +616,11 @@
       min-height: 240px;
       display: grid;
       place-items: center;
-      position: relative;
     }
 
     .bouquet-burst {
       font-size: clamp(5.4rem, 18vw, 10.5rem);
-      filter: drop-shadow(0 0 30px rgba(255, 255, 255, .35));
+      filter: drop-shadow(0 0 30px rgba(255,255,255,.35));
       animation: bouquetPop 1.4s ease-in-out infinite alternate;
     }
 
@@ -661,7 +629,15 @@
       to { transform: scale(1.05) rotate(2deg); }
     }
 
-    .content { position: relative; z-index: 10; }
+    .content {
+      display: none;
+      position: relative;
+      z-index: 10;
+    }
+
+    body.unlocked .content {
+      display: block;
+    }
 
     .section {
       min-height: 100vh;
@@ -755,7 +731,10 @@
       transform: rotate(-.8deg);
     }
 
-    .letter h2 { text-align: center; color: #8b2349; }
+    .letter h2 {
+      text-align: center;
+      color: #8b2349;
+    }
 
     .letter p {
       color: var(--ink);
@@ -782,7 +761,9 @@
       transition: transform .25s ease;
     }
 
-    .polaroid:hover { transform: rotate(0deg) translateY(-6px) scale(1.02); }
+    .polaroid:hover {
+      transform: rotate(0deg) translateY(-6px) scale(1.02);
+    }
 
     .photo {
       aspect-ratio: 1 / 1;
@@ -834,57 +815,127 @@
       to { transform: translateY(120vh) translateX(var(--drift)) rotate(420deg); opacity: 0; }
     }
 
-    .final-buttons button { min-width: 190px; }
+    .pinky-card {
+      width: min(900px, 96vw);
+      padding: clamp(28px, 5vw, 54px);
+      border-radius: 36px;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.2);
+      backdrop-filter: blur(14px);
+      text-align: center;
+      box-shadow: 0 24px 90px rgba(0,0,0,.34);
+    }
 
     .pinky-stage {
-      width: min(720px, 94vw);
+      width: min(760px, 94vw);
       height: 360px;
       margin: 20px auto;
       position: relative;
       overflow: hidden;
     }
 
-    .hand {
-      position: absolute;
-      top: 110px;
-      width: 310px;
-      height: 160px;
-      transition: transform 1.3s ease;
+    .pinky-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
     }
 
-    .hand-left { left: 0; transform: translateX(-90px) rotate(4deg); }
+    .left-pinky {
+      transform: translateX(-90px);
+      transition: transform 1.4s ease;
+    }
 
-    .hand-right { right: 0; transform: translateX(90px) rotate(-4deg); }
+    .right-pinky {
+      transform: translateX(90px);
+      transition: transform 1.4s ease;
+    }
 
-    .pinky-stage.hooked .hand-left { transform: translateX(40px) rotate(1deg); }
+    .hooked .left-pinky {
+      transform: translateX(55px) rotate(1deg);
+    }
 
-    .pinky-stage.hooked .hand-right { transform: translateX(-40px) rotate(-1deg); }
+    .hooked .right-pinky {
+      transform: translateX(-55px) rotate(-1deg);
+    }
 
-    .touch-heart {
-      position: absolute;
-      left: 50%;
-      top: 130px;
-      transform: translate(-50%, -50%) scale(.2);
-      font-size: 58px;
+    .pinky-heart {
       opacity: 0;
-      transition: opacity .8s ease .7s, transform .8s ease .7s;
+      transform: scale(.2);
+      transform-origin: 380px 135px;
+      transition: opacity .7s ease .8s, transform .7s ease .8s;
     }
 
-    .pinky-stage.hooked .touch-heart {
+    .hooked .pinky-heart {
       opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
+      transform: scale(1);
     }
+
+    .final-scene {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      padding: 90px 20px;
+      display: grid;
+      place-items: center;
+    }
+
+    .final-scene::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 15%, rgba(255,255,255,.10), transparent 38%),
+        linear-gradient(180deg, #050713, #101935 48%, #07100b);
+      z-index: -2;
+    }
+
+    .final-scene .willow-overlay {
+      position: absolute;
+      inset: auto -10% -15% -10%;
+      height: 70%;
+      pointer-events: none;
+      opacity: .45;
+      background:
+        radial-gradient(ellipse at 50% 95%, rgba(35,73,47,.86), transparent 62%);
+      z-index: -1;
+    }
+
+    .vine {
+      position: absolute;
+      width: 220px;
+      height: 420px;
+      border: 3px solid rgba(147,207,162,.75);
+      border-bottom: 0;
+      border-right: 0;
+      border-radius: 70% 0 0 0;
+      opacity: .55;
+    }
+
+    .vine.left { left: -40px; top: 8%; transform: rotate(-8deg); }
+    .vine.right { right: -40px; top: 8%; transform: scaleX(-1) rotate(-8deg); }
 
     .sketch-card {
       width: min(940px, 96vw);
       padding: clamp(28px, 5vw, 54px);
       border-radius: 26px;
-      background: linear-gradient(135deg, #fffaf0, #fff0d7);
+      background: linear-gradient(135deg, rgba(255,250,240,.98), rgba(255,240,215,.98));
       color: var(--ink);
       box-shadow: 0 25px 90px rgba(0,0,0,.38);
       text-align: center;
       position: relative;
+      overflow: hidden;
     }
+
+    .sketch-card::before,
+    .sketch-card::after {
+      content: "🌿";
+      position: absolute;
+      font-size: 42px;
+      opacity: .35;
+    }
+
+    .sketch-card::before { left: 18px; top: 18px; }
+    .sketch-card::after { right: 18px; bottom: 18px; transform: rotate(180deg); }
 
     .sketch-map {
       width: min(780px, 100%);
@@ -896,32 +947,60 @@
     .sketch-line {
       stroke-dasharray: 1000;
       stroke-dashoffset: 1000;
-      animation: drawLine 3s ease forwards;
+    }
+
+    .final-animate .sketch-line {
+      animation: drawLine 2.6s ease forwards;
     }
 
     .closing-line {
       stroke-dasharray: 1000;
       stroke-dashoffset: 1000;
-      animation: drawLine 3s ease forwards .8s, closeDistance 2.5s ease forwards 3.7s;
       transform-origin: center;
     }
 
-    @keyframes drawLine { to { stroke-dashoffset: 0; } }
+    .final-animate .closing-line {
+      animation:
+        drawLine 2.6s ease forwards .5s,
+        closeDistance 2.5s ease forwards 3.4s;
+    }
 
-    @keyframes closeDistance { to { transform: scaleX(.08); } }
+    @keyframes drawLine {
+      to { stroke-dashoffset: 0; }
+    }
 
-    .dot-de { animation: moveDE 2.5s ease forwards 3.7s; }
+    @keyframes closeDistance {
+      to { transform: scaleX(.08); }
+    }
 
-    .dot-br { animation: moveBR 2.5s ease forwards 3.7s; }
+    .dot-de, .dot-br {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
 
-    @keyframes moveDE { to { transform: translateX(250px); } }
+    .final-animate .dot-de {
+      animation: moveDE 2.5s ease forwards 3.4s;
+    }
 
-    @keyframes moveBR { to { transform: translateX(-250px); } }
+    .final-animate .dot-br {
+      animation: moveBR 2.5s ease forwards 3.4s;
+    }
+
+    @keyframes moveDE {
+      to { transform: translateX(250px); }
+    }
+
+    @keyframes moveBR {
+      to { transform: translateX(-250px); }
+    }
 
     .hug-figure {
       opacity: 0;
       transform-origin: center;
-      animation: hugAppear 1.4s ease forwards 6.2s;
+    }
+
+    .final-animate .hug-figure {
+      animation: hugAppear 1.3s ease forwards 5.8s;
     }
 
     @keyframes hugAppear {
@@ -931,39 +1010,155 @@
 
     .final-title {
       opacity: 0;
-      animation: fadeIn 1.2s ease forwards 6.7s;
     }
 
-    @keyframes fadeIn { to { opacity: 1; } }
+    .final-animate .final-title {
+      animation: fadeIn 1.2s ease forwards 6.3s;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .sky-section {
+      min-height: 130vh;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 72% 28%, rgba(255,238,184,.18), transparent 12%),
+        linear-gradient(180deg, #07100b 0%, #070711 35%, #02030a 100%);
+      display: grid;
+      place-items: center;
+      padding: 100px 20px;
+    }
+
+    .sky-section .big-moon {
+      position: absolute;
+      top: 18%;
+      right: 16%;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fffaf0, #ffeeb8 60%, rgba(255,238,184,.2));
+      box-shadow: 0 0 90px rgba(255,238,184,.48);
+    }
+
+    .shooting-star {
+      position: absolute;
+      top: 27%;
+      right: 20%;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 18px #fff;
+      animation: moonLoop 5.5s ease-in-out infinite;
+    }
+
+    .shooting-star::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 2px;
+      right: 10px;
+      top: 5px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.9));
+    }
+
+    @keyframes moonLoop {
+      0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+      12% { opacity: 1; }
+      35% { transform: translate(-120px, 70px) rotate(55deg); }
+      65% { transform: translate(-20px, 150px) rotate(160deg); }
+      88% { opacity: 1; }
+      100% { transform: translate(70px, 10px) rotate(260deg); opacity: 0; }
+    }
+
+    .pulse-star {
+      position: absolute;
+      left: 22%;
+      top: 38%;
+      font-size: 42px;
+      cursor: pointer;
+      animation: pulseStar 1.2s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 18px rgba(255,255,255,.7));
+      z-index: 3;
+    }
+
+    @keyframes pulseStar {
+      from { transform: scale(.9); opacity: .72; }
+      to { transform: scale(1.2); opacity: 1; }
+    }
+
+    .sky-message {
+      display: none;
+      width: min(820px, 94vw);
+      padding: clamp(28px, 5vw, 54px);
+      border-radius: 36px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.22);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 24px 90px rgba(0,0,0,.34);
+      text-align: center;
+      z-index: 4;
+    }
+
+    .sky-message.show {
+      display: block;
+      animation: fadeIn .8s ease forwards;
+    }
 
     @media (max-width: 760px) {
       #hint { display: none; }
-      #countdownTimer { grid-template-columns: repeat(2, 1fr); }
-      .gallery { grid-template-columns: 1fr; }
-      .route { grid-template-columns: 1fr; }
+
+      #countdownTimer {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .route {
+        grid-template-columns: 1fr;
+      }
+
       .line {
         height: 54px;
         width: 2px;
         margin: 0 auto;
         background: linear-gradient(180deg, transparent, rgba(255,255,255,.65), transparent);
       }
+
       .willow {
-        width: 190vw;
-        opacity: .22;
+        width: 230vw;
       }
+
       .tree-memory {
         width: 60px;
         height: 76px;
       }
-      .pinky-stage { height: 310px; }
-      .hand { width: 245px; }
-      .hand-left { transform: translateX(-120px) rotate(4deg); }
-      .hand-right { transform: translateX(120px) rotate(-4deg); }
+
+      .pinky-stage {
+        height: 300px;
+      }
+
+      .sky-section .big-moon {
+        right: 9%;
+        width: 110px;
+        height: 110px;
+      }
+
+      .pulse-star {
+        left: 14%;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="ambient">
+    <div class="star-bg"></div>
     <div class="moon"></div>
   </div>
 
@@ -976,31 +1171,31 @@
     <div class="willow-branch b4"></div>
     <div class="willow-branch b5"></div>
 
-    <div class="tree-memory memory-1" style="left: 300px; top: 195px; --tilt: -6deg;">
+    <div class="tree-memory memory-1" style="left: 340px; top: 235px; --tilt:-6deg;">
       <div class="mini-img"><img src="photo1.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo1';"></div>
     </div>
-    <div class="tree-memory memory-2" style="left: 520px; top: 165px; --tilt: 5deg;">
+    <div class="tree-memory memory-2" style="left: 610px; top: 185px; --tilt:5deg;">
       <div class="mini-img"><img src="photo2.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo2';"></div>
     </div>
-    <div class="tree-memory memory-3" style="left: 650px; top: 245px; --tilt: -4deg;">
+    <div class="tree-memory memory-3" style="left: 785px; top: 270px; --tilt:-4deg;">
       <div class="mini-img"><img src="photo3.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo3';"></div>
     </div>
-    <div class="tree-memory memory-4" style="left: 405px; top: 110px; --tilt: 4deg;">
+    <div class="tree-memory memory-4" style="left: 500px; top: 135px; --tilt:4deg;">
       <div class="mini-img"><img src="main.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='main';"></div>
     </div>
   </div>
 
-  <section id="introScreen" class="screen fixed-screen">
-    <div class="card">
+  <section id="introScene" class="scene active">
+    <div class="card clean">
       <h1>Germany 🇩🇪<br>Brazil 🇧🇷</h1>
-      <p>Three months.<br>One ocean.<br>One girl I cannot wait to see.</p>
+      <p>Three months. One ocean. One girl I cannot wait to see.</p>
       <p class="small">August 8th is loading.</p>
       <button onclick="startQuiz()">Begin</button>
     </div>
   </section>
 
-  <section id="quizScreen" class="screen fixed-screen hidden">
-    <div class="card">
+  <section id="quizScene" class="scene">
+    <div class="card clean">
       <h1>Little Love Quiz</h1>
       <p>Official. Scientific. Definitely not rigged.</p>
       <h2 id="questionText"></h2>
@@ -1010,7 +1205,7 @@
     </div>
   </section>
 
-  <section id="gameScreen" class="screen fixed-screen hidden">
+  <section id="gameScene" class="scene">
     <div id="game">
       <div class="como-scene">
         <div class="sunset"></div>
@@ -1033,6 +1228,7 @@
 
       <div id="score">Bouquet pieces: 0 / 14</div>
       <div id="hint">Lake Como quest: catch the bouquet pieces</div>
+
       <div id="player">
         <div class="basket">
           <div id="basketFill" class="basket-fill"></div>
@@ -1042,10 +1238,12 @@
     </div>
   </section>
 
-  <section id="revealScreen" class="screen fixed-screen hidden">
-    <div class="card">
+  <section id="revealScene" class="scene">
+    <div class="card clean">
       <h1>For You 🤍</h1>
-      <div class="bouquet"><div class="bouquet-burst">💐</div></div>
+      <div class="bouquet">
+        <div class="bouquet-burst">💐</div>
+      </div>
       <div id="revealText" class="typewriter"></div>
       <button onclick="unlockSite()">Open the rest ↓</button>
       <p class="small">Scroll after this. The basket has more flowers to pour out.</p>
@@ -1057,6 +1255,7 @@
       <div class="countdown-card">
         <h2>First Hug Countdown ✈️</h2>
         <p>Until Germany and Brazil become one hug.</p>
+
         <div class="route">
           <div>Germany 🇩🇪</div>
           <div class="line"></div>
@@ -1064,85 +1263,165 @@
           <div class="line"></div>
           <div>Brazil 🇧🇷</div>
         </div>
+
         <div id="countdownTimer">
           <div class="time-box"><span id="days">0</span><small>Days</small></div>
           <div class="time-box"><span id="hours">0</span><small>Hours</small></div>
           <div class="time-box"><span id="minutes">0</span><small>Minutes</small></div>
           <div class="time-box"><span id="seconds">0</span><small>Seconds</small></div>
         </div>
-        <p class="small">Distance remaining: Germany ↔ Brazil<br>Future distance: one hug.</p>
+
+        <p class="small">
+          Distance remaining: Germany ↔ Brazil<br>
+          Future distance: one hug.
+        </p>
       </div>
     </section>
 
     <section class="section album-section">
       <div>
         <div class="polaroid main-photo">
-          <div class="photo"><img src="main.jpg" alt="Her main photo" onerror="this.style.display='none'; this.parentElement.innerHTML='main.jpg<br>Main photo of her goes here';"></div>
+          <div class="photo">
+            <img src="main.jpg" alt="Her main photo" onerror="this.style.display='none'; this.parentElement.innerHTML='main.jpg<br>Main photo of her goes here';">
+          </div>
           <p>The main character. Obviously.</p>
         </div>
+
         <div class="letter">
           <h2>My letter to you</h2>
+
           <p>My love,</p>
-          <p>Three months might sound small to the rest of the world, but to me, it already feels like you painted your way into my life.</p>
-          <p>You are in Brazil, I am in Germany, and somehow you still feel close. Through screens, messages, calls, and every tiny moment in between, you have become my favorite part of the day.</p>
-          <p>I think about August 8th a lot. I think about finally seeing you for real, hearing your voice without a phone between us, and holding the person I have been missing from so far away.</p>
-          <p>I know the bouquet was not only lilies — there were roses and other flowers too — but the lilies stayed in my mind because they felt like you: soft, beautiful, and impossible not to notice.</p>
-          <p>Happy 3 months, baby. Distance has been loud, but us? We have been louder.</p>
-          <p>Love,<br>Me 🤍</p>
+
+          <p>
+            Three months might sound small to the rest of the world, but to me,
+            it already feels like you painted your way into my life.
+          </p>
+
+          <p>
+            You are in Brazil, I am in Germany, and somehow you still feel close.
+            Through screens, messages, calls, and every tiny moment in between,
+            you have become my favorite part of the day.
+          </p>
+
+          <p>
+            I think about August 8th a lot. I think about finally seeing you for real,
+            hearing your voice without a phone between us, and holding the person
+            I have been missing from so far away.
+          </p>
+
+          <p>
+            I know the bouquet was not only lilies — there were roses and other flowers too —
+            but the lilies stayed in my mind because they felt like you: soft, beautiful,
+            and impossible not to notice.
+          </p>
+
+          <p>
+            Happy 3 months, baby. Distance has been loud, but us? We have been louder.
+          </p>
+
+          <p>
+            Love,<br>
+            Me 🤍
+          </p>
         </div>
+
         <div class="gallery">
-          <div class="polaroid" style="--tilt:-3deg"><div class="photo"><img src="photo1.jpg" alt="Memory 1" onerror="this.style.display='none'; this.parentElement.innerHTML='photo1.jpg';"></div><p>One of my favorite little memories.</p></div>
-          <div class="polaroid" style="--tilt:2deg"><div class="photo"><img src="photo2.jpg" alt="Memory 2" onerror="this.style.display='none'; this.parentElement.innerHTML='photo2.jpg';"></div><p>The smile that makes distance feel smaller.</p></div>
-          <div class="polaroid" style="--tilt:-1deg"><div class="photo"><img src="photo3.jpg" alt="Memory 3" onerror="this.style.display='none'; this.parentElement.innerHTML='photo3.jpg';"></div><p>A moment I wish I could frame forever.</p></div>
-          <div class="polaroid" style="--tilt:2.8deg"><div class="photo"><img src="photo4.jpg" alt="Memory 4" onerror="this.style.display='none'; this.parentElement.innerHTML='photo4.jpg';"></div><p>Proof that my phone gallery has a favorite person.</p></div>
-          <div class="polaroid" style="--tilt:-2.2deg"><div class="photo"><img src="photo5.jpg" alt="Memory 5" onerror="this.style.display='none'; this.parentElement.innerHTML='photo5.jpg';"></div><p>Another reason August needs to hurry up.</p></div>
-          <div class="polaroid" style="--tilt:1.4deg"><div class="photo"><img src="photo6.jpg" alt="Memory 6" onerror="this.style.display='none'; this.parentElement.innerHTML='photo6.jpg';"></div><p>More memories. More us. Please.</p></div>
+          <div class="polaroid" style="--tilt:-3deg">
+            <div class="photo"><img src="photo1.jpg" alt="Memory 1" onerror="this.style.display='none'; this.parentElement.innerHTML='photo1.jpg';"></div>
+            <p>One of my favorite little memories.</p>
+          </div>
+
+          <div class="polaroid" style="--tilt:2deg">
+            <div class="photo"><img src="photo2.jpg" alt="Memory 2" onerror="this.style.display='none'; this.parentElement.innerHTML='photo2.jpg';"></div>
+            <p>The smile that makes distance feel smaller.</p>
+          </div>
+
+          <div class="polaroid" style="--tilt:-1deg">
+            <div class="photo"><img src="photo3.jpg" alt="Memory 3" onerror="this.style.display='none'; this.parentElement.innerHTML='photo3.jpg';"></div>
+            <p>A moment I wish I could frame forever.</p>
+          </div>
+
+          <div class="polaroid" style="--tilt:2.8deg">
+            <div class="photo"><img src="photo4.jpg" alt="Memory 4" onerror="this.style.display='none'; this.parentElement.innerHTML='photo4.jpg';"></div>
+            <p>Proof that my phone gallery has a favorite person.</p>
+          </div>
+
+          <div class="polaroid" style="--tilt:-2.2deg">
+            <div class="photo"><img src="photo5.jpg" alt="Memory 5" onerror="this.style.display='none'; this.parentElement.innerHTML='photo5.jpg';"></div>
+            <p>Another reason August needs to hurry up.</p>
+          </div>
+
+          <div class="polaroid" style="--tilt:1.4deg">
+            <div class="photo"><img src="photo6.jpg" alt="Memory 6" onerror="this.style.display='none'; this.parentElement.innerHTML='photo6.jpg';"></div>
+            <p>More memories. More us. Please.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="adventureSection" class="section">
-      <div class="card">
+      <div class="countdown-card">
         <h1>Next Chapter?</h1>
         <p>Will you continue this adventure with me?</p>
-        <div class="final-buttons">
-          <button onclick="askPinky()">Yes 💖</button>
-          <button onclick="askPinky()">Yes 🤍</button>
-          <button onclick="askPinky()">Definitely yes 🌿</button>
-        </div>
+        <button onclick="askPinky()">Yes 💖</button>
+        <button onclick="askPinky()">Yes 🤍</button>
+        <button onclick="askPinky()">Definitely yes 🌿</button>
       </div>
     </section>
 
-    <section id="pinkySection" class="section hidden">
-      <div class="card">
+    <section id="pinkySection" class="section" style="display:none;">
+      <div class="pinky-card">
         <h1>Pinky promise?</h1>
         <p>No backing out. This is legally binding in silly couple law.</p>
+
         <div id="pinkyStage" class="pinky-stage">
-          <svg class="hand hand-left" viewBox="0 0 330 190" aria-hidden="true">
-            <path d="M20 130 C80 70 145 72 205 118 C232 139 248 161 272 180 L150 190 C117 160 88 150 32 160 Z" fill="#f1a093"/>
-            <path d="M205 118 C235 70 270 62 302 92 C282 105 258 126 238 154 Z" fill="#f1a093"/>
-            <path d="M206 118 C235 70 270 62 302 92" fill="none" stroke="#8b4c42" stroke-width="8" stroke-linecap="round"/>
+          <svg class="pinky-svg" viewBox="0 0 760 360" role="img" aria-label="Animated pinky promise">
+            <g class="left-pinky">
+              <path d="M30 238 C95 176, 170 165, 250 215 C285 238, 304 267, 334 306 L185 328 C145 278, 102 270, 42 286 Z" fill="#f0a596"/>
+              <path d="M247 213 C286 130, 338 108, 383 150 C355 168, 322 202, 300 246 Z" fill="#f0a596"/>
+              <path d="M247 213 C286 130, 338 108, 383 150" fill="none" stroke="#8b4c42" stroke-width="10" stroke-linecap="round"/>
+              <path d="M76 245 C130 215, 180 221, 232 260" fill="none" stroke="#cf7f73" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+            </g>
+
+            <g class="right-pinky">
+              <path d="M730 238 C665 176, 590 165, 510 215 C475 238, 456 267, 426 306 L575 328 C615 278, 658 270, 718 286 Z" fill="#c77b65"/>
+              <path d="M513 213 C474 130, 422 108, 377 150 C405 168, 438 202, 460 246 Z" fill="#c77b65"/>
+              <path d="M513 213 C474 130, 422 108, 377 150" fill="none" stroke="#6f3b32" stroke-width="10" stroke-linecap="round"/>
+              <path d="M684 245 C630 215, 580 221, 528 260" fill="none" stroke="#a75e50" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+            </g>
+
+            <text class="pinky-heart" x="380" y="130" text-anchor="middle" font-size="60">🤍</text>
           </svg>
-          <svg class="hand hand-right" viewBox="0 0 330 190" aria-hidden="true">
-            <path d="M310 130 C250 70 185 72 125 118 C98 139 82 161 58 180 L180 190 C213 160 242 150 298 160 Z" fill="#c77b65"/>
-            <path d="M125 118 C95 70 60 62 28 92 C48 105 72 126 92 154 Z" fill="#c77b65"/>
-            <path d="M124 118 C95 70 60 62 28 92" fill="none" stroke="#6f3b32" stroke-width="8" stroke-linecap="round"/>
-          </svg>
-          <div class="touch-heart">🤍</div>
         </div>
+
         <button onclick="hookPinkies()">Yes, pinky promise</button>
       </div>
     </section>
 
-    <section id="finalSection" class="section hidden">
-      <div class="sketch-card">
+    <section id="finalSection" class="final-scene" style="display:none;">
+      <div class="willow-overlay"></div>
+      <div class="vine left"></div>
+      <div class="vine right"></div>
+
+      <div id="sketchCard" class="sketch-card">
         <h1 class="final-title">Distance Remaining:</h1>
-        <svg class="sketch-map" viewBox="0 0 800 360" role="img" aria-label="Sketch of Germany and Brazil distance closing">
+
+        <svg class="sketch-map" viewBox="0 0 800 360" role="img" aria-label="Animated sketch of distance closing">
           <path class="sketch-line" d="M90 155 C115 120, 150 110, 178 140 C205 168, 185 215, 145 225 C105 235, 70 195, 90 155 Z" fill="none" stroke="#3b2330" stroke-width="4" stroke-linecap="round"/>
           <path class="sketch-line" d="M640 140 C700 150, 728 210, 704 260 C680 310, 610 320, 572 275 C535 230, 565 155, 640 140 Z" fill="none" stroke="#3b2330" stroke-width="4" stroke-linecap="round"/>
-          <g class="dot-de"><circle cx="145" cy="175" r="12" fill="#ff6f9f"/><text x="145" y="130" text-anchor="middle" font-size="24" fill="#3b2330">Germany</text></g>
-          <g class="dot-br"><circle cx="655" cy="230" r="12" fill="#93cfa2"/><text x="655" y="285" text-anchor="middle" font-size="24" fill="#3b2330">Brazil</text></g>
+
+          <g class="dot-de">
+            <circle cx="145" cy="175" r="12" fill="#ff6f9f"/>
+            <text x="145" y="130" text-anchor="middle" font-size="24" fill="#3b2330">Germany</text>
+          </g>
+
+          <g class="dot-br">
+            <circle cx="655" cy="230" r="12" fill="#93cfa2"/>
+            <text x="655" y="285" text-anchor="middle" font-size="24" fill="#3b2330">Brazil</text>
+          </g>
+
           <line class="closing-line" x1="160" y1="178" x2="640" y2="228" stroke="#3b2330" stroke-width="4" stroke-dasharray="10 12" stroke-linecap="round"/>
+
           <g class="hug-figure" transform="translate(400 180)">
             <circle cx="-28" cy="-34" r="24" fill="#ffb3c8"/>
             <circle cx="28" cy="-34" r="24" fill="#9bd7a8"/>
@@ -1151,8 +1430,24 @@
             <text x="0" y="118" text-anchor="middle" font-size="52">🤍</text>
           </g>
         </svg>
+
         <h2 class="final-title">One Hug</h2>
         <p class="final-title">August 8th is not just a date anymore. It is where the distance ends.</p>
+      </div>
+    </section>
+
+    <section class="sky-section">
+      <div class="big-moon"></div>
+      <div class="shooting-star"></div>
+      <div class="pulse-star" onclick="openSkyMessage()">✦</div>
+
+      <div id="skyMessage" class="sky-message">
+        <h2>To the moon and back</h2>
+        <p>
+          No matter the time, no matter the day, under these skies I will be by your side.
+          Across countries, across oceans, across every quiet night until the end of time.
+        </p>
+        <p class="small">You found the little star. Obviously it was hiding something soft.</p>
       </div>
     </section>
   </main>
@@ -1193,10 +1488,13 @@ Soon...
 
 I finally get to hold your hand. 🤍`;
 
-    const introScreen = document.getElementById("introScreen");
-    const quizScreen = document.getElementById("quizScreen");
-    const gameScreen = document.getElementById("gameScreen");
-    const revealScreen = document.getElementById("revealScreen");
+    const scenes = {
+      intro: document.getElementById("introScene"),
+      quiz: document.getElementById("quizScene"),
+      game: document.getElementById("gameScene"),
+      reveal: document.getElementById("revealScene")
+    };
+
     const willow = document.getElementById("willow");
     const questionText = document.getElementById("questionText");
     const answers = document.getElementById("answers");
@@ -1212,47 +1510,35 @@ I finally get to hold your hand. 🤍`;
     let score = 0;
     let playerX = 50;
     let gameRunning = false;
-    let flowerTimer;
+    let flowerTimer = null;
+    let heartTimer = null;
 
+    plantWillowLeaves();
     setInterval(makeBackgroundPetal, 900);
     updateCountdown();
     setInterval(updateCountdown, 1000);
-    plantWillowLeaves();
 
-    function plantWillowLeaves() {
-      for (let i = 0; i < 150; i++) {
-        const leaf = document.createElement("div");
-        leaf.className = "leaf";
-        const angle = Math.random() * Math.PI * 2;
-        const radiusX = 80 + Math.random() * 350;
-        const radiusY = 25 + Math.random() * 165;
-        const left = 525 + Math.cos(angle) * radiusX;
-        const top = 235 + Math.sin(angle) * radiusY;
-        leaf.style.left = left + "px";
-        leaf.style.top = top + "px";
-        leaf.style.animationDelay = (i * 0.035) + "s";
-        willow.appendChild(leaf);
-      }
-    }
-
-    function growWillow(stage) {
-      willow.classList.remove("stage-1", "stage-2", "stage-3", "stage-4");
-      willow.classList.add("stage-" + stage);
+    function switchScene(name) {
+      Object.values(scenes).forEach(scene => {
+        scene.classList.remove("active");
+      });
+      scenes[name].classList.add("active");
     }
 
     function startQuiz() {
-      introScreen.classList.add("hidden");
-      quizScreen.classList.remove("hidden");
       growWillow(1);
+      switchScene("quiz");
       renderQuestion();
     }
 
     function renderQuestion() {
       const q = quiz[quizIndex];
+
       questionText.textContent = q.question;
       answers.innerHTML = "";
       quizFeedback.textContent = "";
       quizProgress.textContent = `${quizIndex + 1} / ${quiz.length}`;
+
       q.answers.forEach((answer, index) => {
         const btn = document.createElement("button");
         btn.className = "choice";
@@ -1264,12 +1550,16 @@ I finally get to hold your hand. 🤍`;
 
     function chooseAnswer(index) {
       const q = quiz[quizIndex];
+
       if (index === q.correct) {
         quizFeedback.textContent = "Correct. Suspiciously cute.";
+
         setTimeout(() => {
           quizIndex++;
+
           if (quizIndex === 1) growWillow(2);
           if (quizIndex === 2) growWillow(3);
+
           if (quizIndex >= quiz.length) {
             startGame();
           } else {
@@ -1282,15 +1572,16 @@ I finally get to hold your hand. 🤍`;
     }
 
     function startGame() {
-      quizScreen.classList.add("hidden");
-      gameScreen.classList.remove("hidden");
+      switchScene("game");
       growWillow(3);
+
       score = 0;
       playerX = 50;
       gameRunning = true;
       scoreEl.textContent = "Bouquet pieces: 0 / 14";
       updateBasket();
       updatePlayer();
+
       flowerTimer = setInterval(dropFlower, 570);
     }
 
@@ -1300,14 +1591,17 @@ I finally get to hold your hand. 🤍`;
 
     document.addEventListener("keydown", (e) => {
       if (!gameRunning) return;
+
       if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") playerX -= 6;
       if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") playerX += 6;
+
       playerX = Math.max(6, Math.min(94, playerX));
       updatePlayer();
     });
 
     game.addEventListener("pointermove", (e) => {
       if (!gameRunning) return;
+
       const rect = game.getBoundingClientRect();
       playerX = ((e.clientX - rect.left) / rect.width) * 100;
       playerX = Math.max(6, Math.min(94, playerX));
@@ -1317,29 +1611,37 @@ I finally get to hold your hand. 🤍`;
     function dropFlower() {
       const flower = document.createElement("div");
       flower.className = "falling-flower";
+
       const flowers = ["🤍", "🌹", "🌸", "🌿", "💮"];
       flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+
       flower.style.left = Math.random() * 92 + "%";
       flower.style.animationDuration = (2.05 + Math.random() * 1.35) + "s";
       game.appendChild(flower);
+
       const collisionCheck = setInterval(() => {
         if (!gameRunning || !flower.isConnected) {
           clearInterval(collisionCheck);
           return;
         }
+
         const f = flower.getBoundingClientRect();
         const b = player.getBoundingClientRect();
         const hit = !(f.right < b.left || f.left > b.right || f.bottom < b.top || f.top > b.bottom);
+
         if (hit) {
           flower.remove();
           clearInterval(collisionCheck);
+
           score++;
           scoreEl.textContent = `Bouquet pieces: ${score} / 14`;
           updateBasket();
           popFlower(b.left + b.width / 2, b.top);
+
           if (score >= 14) revealSurprise();
         }
       }, 40);
+
       setTimeout(() => {
         flower.remove();
         clearInterval(collisionCheck);
@@ -1349,9 +1651,13 @@ I finally get to hold your hand. 🤍`;
     function updateBasket() {
       const percent = Math.min(100, (score / 14) * 100);
       basketFill.style.height = percent + "%";
+
       const miniFlowers = "🤍🌹🌸🌿💮";
       let fill = "";
-      for (let i = 0; i < score; i++) fill += miniFlowers[i % miniFlowers.length];
+      for (let i = 0; i < score; i++) {
+        fill += miniFlowers[i % miniFlowers.length];
+      }
+
       basketFill.textContent = fill;
     }
 
@@ -1359,93 +1665,132 @@ I finally get to hold your hand. 🤍`;
       gameRunning = false;
       clearInterval(flowerTimer);
       document.querySelectorAll(".falling-flower").forEach(f => f.remove());
+
       growWillow(4);
       explode();
       startHearts();
+
       setTimeout(() => {
-        gameScreen.classList.add("hidden");
-        revealScreen.classList.remove("hidden");
+        switchScene("reveal");
         typeReveal();
-      }, 1350);
+      }, 1200);
     }
 
     function typeReveal() {
       revealText.textContent = "";
       let i = 0;
+
       const typer = setInterval(() => {
         revealText.textContent += revealMessage[i];
         i++;
+
         if (i >= revealMessage.length) clearInterval(typer);
       }, 37);
     }
 
     function unlockSite() {
       document.body.classList.add("unlocked");
-      revealScreen.classList.add("hidden");
+      switchScene("intro");
+      scenes.intro.classList.remove("active");
       pourFlowers();
-      setTimeout(() => {
-        revealScreen.style.display = "none";
-        document.querySelector(".content .section").scrollIntoView({ behavior: "smooth" });
-      }, 420);
-    }
 
-    function pourFlowers() {
-      let count = 0;
-      const pour = setInterval(() => {
-        count++;
-        const flower = document.createElement("div");
-        flower.className = "poured-flower";
-        flower.textContent = ["🤍", "🌹", "🌸", "🌿", "💮"][Math.floor(Math.random() * 5)];
-        flower.style.left = (35 + Math.random() * 30) + "vw";
-        flower.style.animationDuration = (4 + Math.random() * 3) + "s";
-        flower.style.setProperty("--drift", (-220 + Math.random() * 440) + "px");
-        document.body.appendChild(flower);
-        setTimeout(() => flower.remove(), 8000);
-        if (count > 85) clearInterval(pour);
-      }, 90);
+      setTimeout(() => {
+        document.querySelector(".content .section").scrollIntoView({ behavior: "smooth" });
+      }, 250);
     }
 
     function askPinky() {
       explode();
-      document.getElementById("adventureSection").classList.add("hidden");
-      document.getElementById("pinkySection").classList.remove("hidden");
-      setTimeout(() => document.getElementById("pinkySection").scrollIntoView({ behavior: "smooth" }), 300);
+
+      document.getElementById("adventureSection").style.display = "none";
+      document.getElementById("pinkySection").style.display = "grid";
+
+      setTimeout(() => {
+        document.getElementById("pinkySection").scrollIntoView({ behavior: "smooth" });
+      }, 300);
     }
 
     function hookPinkies() {
       document.getElementById("pinkyStage").classList.add("hooked");
       explode();
+
       setTimeout(() => {
-        document.getElementById("pinkySection").classList.add("hidden");
-        document.getElementById("finalSection").classList.remove("hidden");
+        document.getElementById("pinkySection").style.display = "none";
+        document.getElementById("finalSection").style.display = "grid";
+        growWillow("final");
+
         document.getElementById("finalSection").scrollIntoView({ behavior: "smooth" });
-      }, 1800);
+
+        setTimeout(() => {
+          document.getElementById("sketchCard").classList.add("final-animate");
+        }, 500);
+      }, 1600);
+    }
+
+    function openSkyMessage() {
+      document.getElementById("skyMessage").classList.add("show");
+      explode();
+    }
+
+    function growWillow(stage) {
+      willow.classList.remove("stage-1", "stage-2", "stage-3", "stage-4", "stage-final");
+      if (stage === "final") {
+        willow.classList.add("stage-final");
+      } else {
+        willow.classList.add("stage-" + stage);
+      }
+    }
+
+    function plantWillowLeaves() {
+      for (let i = 0; i < 300; i++) {
+        const leaf = document.createElement("div");
+        leaf.className = "leaf";
+
+        const angle = Math.random() * Math.PI * 2;
+        const radiusX = 90 + Math.random() * 470;
+        const radiusY = 30 + Math.random() * 205;
+
+        const left = 625 + Math.cos(angle) * radiusX;
+        const top = 290 + Math.sin(angle) * radiusY;
+
+        leaf.style.left = left + "px";
+        leaf.style.top = top + "px";
+        leaf.style.animationDelay = (i * 0.025) + "s";
+
+        willow.appendChild(leaf);
+      }
     }
 
     function explode() {
-      const emojis = ["🤍","💖","✨","🌿","🌸","🎨","💫","🌹","💮"];
+      const emojis = ["🤍", "💖", "✨", "🌿", "🌸", "🎨", "💫", "🌹", "💮"];
       for (let i = 0; i < 105; i++) {
         const piece = document.createElement("div");
-        piece.className = "burst";
+        piece.className = "particle";
         piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
         const angle = Math.random() * Math.PI * 2;
         const distance = 130 + Math.random() * 560;
+
         piece.style.setProperty("--x", Math.cos(angle) * distance + "px");
         piece.style.setProperty("--y", Math.sin(angle) * distance + "px");
         piece.style.animationDelay = Math.random() * .18 + "s";
+
         document.body.appendChild(piece);
         setTimeout(() => piece.remove(), 2300);
       }
     }
 
     function startHearts() {
-      setInterval(() => {
+      if (heartTimer) return;
+
+      heartTimer = setInterval(() => {
         const h = document.createElement("div");
         h.className = "heart";
-        h.textContent = ["🤍","💖","💕","🌿","🌸","🌹"][Math.floor(Math.random()*6)];
+        h.textContent = ["🤍", "💖", "💕", "🌿", "🌸", "🌹"][Math.floor(Math.random() * 6)];
         h.style.left = Math.random() * 100 + "vw";
         h.style.fontSize = (18 + Math.random() * 30) + "px";
         h.style.animationDuration = (3.5 + Math.random() * 3) + "s";
+
         document.body.appendChild(h);
         setTimeout(() => h.remove(), 7000);
       }, 190);
@@ -1454,13 +1799,34 @@ I finally get to hold your hand. 🤍`;
     function popFlower(x, y) {
       const h = document.createElement("div");
       h.className = "heart";
-      h.textContent = ["🤍","🌹","🌿","🌸","💮"][Math.floor(Math.random()*5)];
+      h.textContent = ["🤍", "🌹", "🌿", "🌸", "💮"][Math.floor(Math.random() * 5)];
       h.style.left = x + "px";
       h.style.top = y + "px";
       h.style.bottom = "auto";
       h.style.animationDuration = "1.45s";
+
       document.body.appendChild(h);
       setTimeout(() => h.remove(), 1600);
+    }
+
+    function pourFlowers() {
+      let count = 0;
+
+      const pour = setInterval(() => {
+        count++;
+
+        const flower = document.createElement("div");
+        flower.className = "poured-flower";
+        flower.textContent = ["🤍", "🌹", "🌸", "🌿", "💮"][Math.floor(Math.random() * 5)];
+        flower.style.left = (35 + Math.random() * 30) + "vw";
+        flower.style.animationDuration = (4 + Math.random() * 3) + "s";
+        flower.style.setProperty("--drift", (-220 + Math.random() * 440) + "px");
+
+        document.body.appendChild(flower);
+        setTimeout(() => flower.remove(), 8000);
+
+        if (count > 85) clearInterval(pour);
+      }, 90);
     }
 
     function makeBackgroundPetal() {
@@ -1471,6 +1837,7 @@ I finally get to hold your hand. 🤍`;
       p.style.fontSize = (14 + Math.random() * 18) + "px";
       p.style.animationDuration = (7 + Math.random() * 7) + "s";
       p.style.setProperty("--drift", (-80 + Math.random() * 160) + "px");
+
       document.body.appendChild(p);
       setTimeout(() => p.remove(), 15000);
     }
@@ -1478,10 +1845,13 @@ I finally get to hold your hand. 🤍`;
     function updateCountdown() {
       const now = new Date();
       const diff = meetingDate - now;
+
       if (diff <= 0) {
-        document.getElementById("countdownTimer").innerHTML = "<h2 style='grid-column:1/-1'>TODAY IS THE DAY. GO GET YOUR HUG. 🤍</h2>";
+        document.getElementById("countdownTimer").innerHTML =
+          "<h2 style='grid-column:1/-1'>TODAY IS THE DAY. GO GET YOUR HUG. 🤍</h2>";
         return;
       }
+
       document.getElementById("days").textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
       document.getElementById("hours").textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
       document.getElementById("minutes").textContent = Math.floor((diff / (1000 * 60)) % 60);
@@ -1490,4 +1860,5 @@ I finally get to hold your hand. 🤍`;
   </script>
 </body>
 </html>
+
 
