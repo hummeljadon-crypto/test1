@@ -8,8 +8,9 @@
 
   <style>
     :root {
-      --night: #090611;
-      --deep: #171022;
+      --night: #070611;
+      --sky1: #0c1027;
+      --sky2: #243b75;
       --pink: #ff6f9f;
       --hot-pink: #ff3f86;
       --lily: #fff7e8;
@@ -17,17 +18,14 @@
       --ink: #3b2330;
       --gold: #ffd166;
       --green: #93cfa2;
+      --deep-green: #345c3f;
       --soft-green: #d8f3dc;
       --white: #fffaf7;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -42,9 +40,7 @@
         linear-gradient(140deg, #07050e, #171022 55%, #090611);
     }
 
-    body.unlocked {
-      overflow-y: auto;
-    }
+    body.unlocked { overflow-y: auto; }
 
     button {
       cursor: pointer;
@@ -77,7 +73,7 @@
     .fixed-screen {
       position: fixed;
       inset: 0;
-      z-index: 30;
+      z-index: 40;
     }
 
     .hidden {
@@ -87,7 +83,7 @@
     }
 
     .card {
-      width: min(850px, 95vw);
+      width: min(860px, 95vw);
       padding: clamp(24px, 5vw, 48px);
       border: 1px solid rgba(255,255,255,.19);
       border-radius: 34px;
@@ -118,14 +114,11 @@
       opacity: .94;
     }
 
-    .small {
-      font-size: .95rem;
-      opacity: .72;
-    }
+    .small { font-size: .95rem; opacity: .72; }
 
     .choice {
       display: block;
-      width: min(100%, 540px);
+      width: min(100%, 560px);
       margin: 12px auto;
     }
 
@@ -164,60 +157,84 @@
     .willow {
       position: fixed;
       left: 50%;
-      bottom: -8px;
-      transform: translateX(-50%);
+      bottom: -10px;
+      transform: translateX(-50%) scale(.72);
       z-index: 2;
-      width: min(620px, 100vw);
-      height: 340px;
+      width: min(760px, 120vw);
+      height: 440px;
       pointer-events: none;
-      opacity: .34;
+      opacity: .26;
       transition: opacity 1s ease, transform 1s ease;
     }
 
-    .willow.strong {
-      opacity: .72;
-      transform: translateX(-50%) scale(1.04);
-    }
+    .willow.stage-1 { opacity: .38; transform: translateX(-50%) scale(.84); }
+    .willow.stage-2 { opacity: .55; transform: translateX(-50%) scale(.96); }
+    .willow.stage-3 { opacity: .78; transform: translateX(-50%) scale(1.06); }
 
     .trunk {
       position: absolute;
       bottom: 0;
       left: 50%;
-      width: 42px;
-      height: 225px;
+      width: 48px;
+      height: 260px;
       transform: translateX(-50%);
-      border-radius: 40% 40% 0 0;
-      background: linear-gradient(90deg, #3a2718, #795039, #332114);
-      box-shadow: inset -10px 0 15px rgba(0,0,0,.3);
+      border-radius: 44% 44% 0 0;
+      background: linear-gradient(90deg, #2b1b12, #7a523b, #2c1c12);
+      box-shadow: inset -12px 0 18px rgba(0,0,0,.38);
     }
 
     .canopy {
       position: absolute;
-      bottom: 150px;
+      bottom: 180px;
       left: 50%;
-      width: 420px;
-      height: 180px;
+      width: 520px;
+      height: 230px;
       transform: translateX(-50%);
       border-radius: 50%;
-      background: radial-gradient(circle at 50% 42%, rgba(147,207,162,.75), rgba(55,110,70,.55) 55%, transparent 72%);
+      background:
+        radial-gradient(circle at 50% 42%, rgba(180,231,181,.82), rgba(71,125,80,.62) 52%, transparent 74%);
+      filter: blur(.2px);
+    }
+
+    .leaf {
+      position: absolute;
+      width: 10px;
+      height: 18px;
+      border-radius: 80% 20% 80% 20%;
+      background: linear-gradient(135deg, #d8f3dc, #76b985);
+      opacity: 0;
+      transform: scale(.2);
+      transition: opacity .8s ease, transform .8s ease;
+      animation: leafSway 3s ease-in-out infinite alternate;
+    }
+
+    .willow.stage-1 .leaf:nth-child(-n+18),
+    .willow.stage-2 .leaf:nth-child(-n+38),
+    .willow.stage-3 .leaf {
+      opacity: .9;
+      transform: scale(1);
+    }
+
+    @keyframes leafSway {
+      from { translate: -3px 0; rotate: -6deg; }
+      to { translate: 3px 0; rotate: 6deg; }
     }
 
     .branch {
       position: absolute;
-      top: 88px;
-      width: 6px;
-      height: 210px;
+      top: 115px;
+      width: 7px;
       border-radius: 999px;
       transform-origin: top;
-      background: linear-gradient(var(--green), transparent);
+      background: linear-gradient(var(--green), rgba(147,207,162,.25), transparent);
       animation: sway 3.8s ease-in-out infinite alternate;
     }
 
-    .branch:nth-child(3) { left: 150px; height: 230px; transform: rotate(18deg); animation-delay: .1s; }
-    .branch:nth-child(4) { left: 205px; height: 250px; transform: rotate(9deg); animation-delay: .8s; }
-    .branch:nth-child(5) { left: 275px; height: 240px; transform: rotate(1deg); animation-delay: .3s; }
-    .branch:nth-child(6) { left: 345px; height: 255px; transform: rotate(-9deg); animation-delay: 1s; }
-    .branch:nth-child(7) { left: 410px; height: 230px; transform: rotate(-18deg); animation-delay: .5s; }
+    .branch.b1 { left: 180px; height: 280px; transform: rotate(18deg); animation-delay: .1s; }
+    .branch.b2 { left: 245px; height: 300px; transform: rotate(9deg); animation-delay: .8s; }
+    .branch.b3 { left: 335px; height: 310px; transform: rotate(1deg); animation-delay: .3s; }
+    .branch.b4 { left: 425px; height: 300px; transform: rotate(-9deg); animation-delay: 1s; }
+    .branch.b5 { left: 490px; height: 280px; transform: rotate(-18deg); animation-delay: .5s; }
 
     @keyframes sway {
       from { translate: -5px 0; }
@@ -235,29 +252,43 @@
     }
 
     @keyframes petalFall {
-      from {
-        transform: translateY(-50px) translateX(0) rotate(0deg);
-        opacity: 0;
-      }
+      from { transform: translateY(-50px) translateX(0) rotate(0deg); opacity: 0; }
       10% { opacity: 1; }
-      to {
-        transform: translateY(110vh) translateX(var(--drift)) rotate(360deg);
-        opacity: 0;
-      }
+      to { transform: translateY(110vh) translateX(var(--drift)) rotate(360deg); opacity: 0; }
     }
 
     #game {
-      width: min(920px, 96vw);
-      height: min(610px, 75vh);
+      width: min(950px, 96vw);
+      height: min(640px, 78vh);
       position: relative;
       border-radius: 32px;
-      border: 1px solid rgba(255,255,255,.22);
+      border: 1px solid rgba(255,255,255,.24);
       background:
-        radial-gradient(circle at 50% 18%, rgba(255,255,255,.16), transparent 30%),
-        rgba(255,255,255,.08);
-      box-shadow: inset 0 0 55px rgba(255,255,255,.08), 0 20px 90px rgba(0,0,0,.38);
+        radial-gradient(circle at 50% 14%, rgba(255,255,255,.9) 0 1px, transparent 2px),
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,.6) 0 1px, transparent 2px),
+        radial-gradient(circle at 70% 38%, rgba(255,255,255,.7) 0 1px, transparent 2px),
+        radial-gradient(circle at 80% 12%, rgba(255,255,255,.7) 0 1px, transparent 2px),
+        linear-gradient(180deg, #080b24, #162f68 50%, #f3b7c8 100%);
+      background-size: auto, auto, auto, auto, auto;
+      box-shadow: inset 0 0 70px rgba(255,255,255,.08), 0 20px 90px rgba(0,0,0,.44);
       overflow: hidden;
       touch-action: none;
+    }
+
+    #game::before {
+      content: "";
+      position: absolute;
+      left: -10%;
+      right: -10%;
+      bottom: -46px;
+      height: 150px;
+      background:
+        radial-gradient(ellipse at 25% 50%, rgba(255,255,255,.8), transparent 62%),
+        radial-gradient(ellipse at 55% 45%, rgba(255,255,255,.72), transparent 64%),
+        radial-gradient(ellipse at 80% 48%, rgba(255,255,255,.78), transparent 62%);
+      filter: blur(8px);
+      opacity: .78;
+      pointer-events: none;
     }
 
     #score {
@@ -278,22 +309,70 @@
       right: 20px;
       font-family: system-ui, sans-serif;
       font-size: .95rem;
-      opacity: .82;
+      opacity: .88;
       z-index: 3;
     }
 
     #player {
       position: absolute;
       left: 50%;
-      bottom: 34px;
+      bottom: 28px;
       transform: translateX(-50%);
-      font-size: 48px;
-      user-select: none;
-      filter: drop-shadow(0 0 16px rgba(255,255,255,.75));
+      width: 96px;
+      height: 78px;
       z-index: 4;
+      user-select: none;
+      filter: drop-shadow(0 14px 18px rgba(0,0,0,.25));
     }
 
-    .falling-lily {
+    .basket {
+      width: 96px;
+      height: 62px;
+      position: relative;
+    }
+
+    .basket::before {
+      content: "";
+      position: absolute;
+      left: 17px;
+      top: -21px;
+      width: 62px;
+      height: 42px;
+      border: 7px solid #8b5a2b;
+      border-bottom: 0;
+      border-radius: 60px 60px 0 0;
+    }
+
+    .basket-body {
+      position: absolute;
+      bottom: 0;
+      left: 6px;
+      width: 84px;
+      height: 50px;
+      border-radius: 0 0 24px 24px;
+      background:
+        repeating-linear-gradient(45deg, #b98245 0 8px, #8f5e2f 8px 16px);
+      border: 4px solid #6c421f;
+      overflow: hidden;
+    }
+
+    .basket-fill {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 12px;
+      height: 0%;
+      transition: height .35s ease;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1px;
+      font-size: 15px;
+      overflow: hidden;
+    }
+
+    .falling-flower {
       position: absolute;
       font-size: 34px;
       user-select: none;
@@ -303,10 +382,10 @@
 
     @keyframes fall {
       from { transform: translateY(-70px) rotate(0deg); }
-      to { transform: translateY(730px) rotate(250deg); }
+      to { transform: translateY(760px) rotate(250deg); }
     }
 
-    .heart, .burst {
+    .heart, .burst, .poured-flower {
       position: fixed;
       z-index: 80;
       pointer-events: none;
@@ -333,14 +412,8 @@
     }
 
     @keyframes burst {
-      from {
-        transform: translate(-50%, -50%) rotate(0deg) scale(.2);
-        opacity: 1;
-      }
-      to {
-        transform: translate(var(--x), var(--y)) rotate(540deg) scale(1.7);
-        opacity: 0;
-      }
+      from { transform: translate(-50%, -50%) rotate(0deg) scale(.2); opacity: 1; }
+      to { transform: translate(var(--x), var(--y)) rotate(540deg) scale(1.7); opacity: 0; }
     }
 
     .typewriter {
@@ -350,16 +423,35 @@
       line-height: 1.7;
     }
 
-    .content {
+    .bouquet {
+      margin: 20px auto;
+      width: min(320px, 80vw);
+      min-height: 230px;
+      display: grid;
+      place-items: center;
       position: relative;
-      z-index: 10;
     }
+
+    .bouquet-burst {
+      font-size: clamp(5rem, 18vw, 10rem);
+      filter: drop-shadow(0 0 30px rgba(255, 255, 255, .35));
+      animation: bouquetPop 1.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes bouquetPop {
+      from { transform: scale(.96) rotate(-2deg); }
+      to { transform: scale(1.05) rotate(2deg); }
+    }
+
+    .content { position: relative; z-index: 10; }
 
     .section {
       min-height: 100vh;
       padding: 100px 20px;
       display: grid;
       place-items: center;
+      position: relative;
+      overflow: hidden;
     }
 
     .countdown-card {
@@ -462,6 +554,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 22px;
+      position: relative;
     }
 
     .polaroid {
@@ -516,38 +609,40 @@
       transform: rotate(-2deg);
     }
 
-    .final-buttons button {
-      min-width: 190px;
+    .poured-flower {
+      top: -40px;
+      font-size: 26px;
+      animation: pourDown linear forwards;
     }
 
-    .pinkies {
-      font-size: clamp(4rem, 18vw, 11rem);
-      margin: 20px 0;
-      filter: drop-shadow(0 0 30px rgba(255, 111, 159, .6));
-      animation: pinkyPulse 1.4s ease-in-out infinite alternate;
+    @keyframes pourDown {
+      from { transform: translateY(-80px) translateX(0) rotate(0deg); opacity: 0; }
+      8% { opacity: 1; }
+      to { transform: translateY(120vh) translateX(var(--drift)) rotate(420deg); opacity: 0; }
+    }
+
+    .final-buttons button { min-width: 190px; }
+
+    .pinky-art {
+      width: min(520px, 92vw);
+      margin: 18px auto;
+      filter: drop-shadow(0 0 28px rgba(255, 111, 159, .45));
+      animation: pinkyPulse 1.5s ease-in-out infinite alternate;
     }
 
     @keyframes pinkyPulse {
-      from { transform: scale(.96) rotate(-2deg); }
-      to { transform: scale(1.04) rotate(2deg); }
+      from { transform: scale(.98); }
+      to { transform: scale(1.03); }
     }
 
     @media (max-width: 760px) {
-      #hint {
-        display: none;
-      }
+      #hint { display: none; }
 
-      #countdownTimer {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      #countdownTimer { grid-template-columns: repeat(2, 1fr); }
 
-      .gallery {
-        grid-template-columns: 1fr;
-      }
+      .gallery { grid-template-columns: 1fr; }
 
-      .route {
-        grid-template-columns: 1fr;
-      }
+      .route { grid-template-columns: 1fr; }
 
       .line {
         height: 54px;
@@ -557,7 +652,7 @@
       }
 
       .willow {
-        width: 120vw;
+        width: 130vw;
         opacity: .22;
       }
     }
@@ -572,11 +667,11 @@
   <div id="willow" class="willow">
     <div class="canopy"></div>
     <div class="trunk"></div>
-    <div class="branch"></div>
-    <div class="branch"></div>
-    <div class="branch"></div>
-    <div class="branch"></div>
-    <div class="branch"></div>
+    <div class="branch b1"></div>
+    <div class="branch b2"></div>
+    <div class="branch b3"></div>
+    <div class="branch b4"></div>
+    <div class="branch b5"></div>
   </div>
 
   <section id="introScreen" class="screen fixed-screen">
@@ -587,7 +682,7 @@
         August 8th is loading.
       </p>
       <p class="small">
-        A tiny art piece, a tiny game, and a very serious girlfriend quiz.
+        A tiny art piece, a tiny sky game, and a very serious girlfriend quiz.
       </p>
       <button onclick="startQuiz()">Begin</button>
     </div>
@@ -606,18 +701,26 @@
 
   <section id="gameScreen" class="screen fixed-screen hidden">
     <div id="game">
-      <div id="score">Lilies: 0 / 12</div>
-      <div id="hint">Use ← →, A/D, or drag/tap 🤍</div>
-      <div id="player">🖌️</div>
+      <div id="score">Bouquet pieces: 0 / 14</div>
+      <div id="hint">Catch them in the basket — drag/tap or use ← →</div>
+      <div id="player">
+        <div class="basket">
+          <div id="basketFill" class="basket-fill"></div>
+          <div class="basket-body"></div>
+        </div>
+      </div>
     </div>
   </section>
 
   <section id="revealScreen" class="screen fixed-screen hidden">
     <div class="card">
-      <h1>Mission Complete 🤍</h1>
+      <h1>For You 🤍</h1>
+      <div class="bouquet">
+        <div class="bouquet-burst">💐</div>
+      </div>
       <div id="revealText" class="typewriter"></div>
       <button onclick="unlockSite()">Open the rest ↓</button>
-      <p class="small">Scroll after this. The willow has more to say.</p>
+      <p class="small">Scroll after this. The basket has more flowers to pour out.</p>
     </div>
   </section>
 
@@ -625,9 +728,7 @@
     <section class="section">
       <div class="countdown-card">
         <h2>First Hug Countdown ✈️</h2>
-        <p>
-          Until Germany and Brazil become one hug.
-        </p>
+        <p>Until Germany and Brazil become one hug.</p>
 
         <div class="route">
           <div>Germany 🇩🇪</div>
@@ -651,7 +752,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section album-section">
       <div>
         <div class="polaroid main-photo">
           <div class="photo">
@@ -683,8 +784,9 @@
           </p>
 
           <p>
-            You love lilies, willow trees, and art, so I tried to make this feel
-            like a small garden, a small sketchbook, and a small piece of my heart.
+            I know the bouquet was not only lilies — there were roses and other flowers too —
+            but the lilies stayed in my mind because they felt like you: soft, beautiful,
+            and impossible not to notice.
           </p>
 
           <p>
@@ -748,16 +850,40 @@
       <div class="card">
         <h1>Pinky promise?</h1>
         <p>No backing out. This is legally binding in silly couple law.</p>
-        <button onclick="showFinal()">Yes, pinky promise 🤙</button>
+        <button onclick="showFinal()">Yes, pinky promise</button>
       </div>
     </section>
 
     <section id="finalSection" class="section hidden">
       <div class="card">
         <h1>Distance Remaining:</h1>
-        <div class="pinkies">🤙💖🤙</div>
+
+        <svg class="pinky-art" viewBox="0 0 700 330" role="img" aria-label="Two pinkies holding">
+          <defs>
+            <linearGradient id="skinA" x1="0" x2="1">
+              <stop offset="0%" stop-color="#f4b6a8"/>
+              <stop offset="100%" stop-color="#d98b7c"/>
+            </linearGradient>
+            <linearGradient id="skinB" x1="0" x2="1">
+              <stop offset="0%" stop-color="#c77b65"/>
+              <stop offset="100%" stop-color="#8f4e3e"/>
+            </linearGradient>
+          </defs>
+
+          <path d="M50 230 C130 170, 190 165, 245 205 C275 230, 290 255, 305 285 L185 315 C160 275, 125 260, 70 270 Z" fill="url(#skinA)"/>
+          <path d="M650 230 C570 170, 510 165, 455 205 C425 230, 410 255, 395 285 L515 315 C540 275, 575 260, 630 270 Z" fill="url(#skinB)"/>
+
+          <path d="M250 206 C285 150, 320 120, 350 148 C380 120, 415 150, 450 206 C425 220, 394 218, 365 190 C360 185, 354 185, 350 190 C321 218, 275 220, 250 206 Z" fill="#f1a093"/>
+          <path d="M350 148 C376 124, 414 154, 450 206 C426 220, 394 218, 365 190 C360 185, 354 185, 350 190 Z" fill="#aa6756"/>
+
+          <path d="M250 206 C285 150, 320 120, 350 148" fill="none" stroke="#8b4c42" stroke-width="8" stroke-linecap="round"/>
+          <path d="M350 148 C380 120, 415 150, 450 206" fill="none" stroke="#6f3b32" stroke-width="8" stroke-linecap="round"/>
+
+          <text x="350" y="80" text-anchor="middle" font-size="48">🤍</text>
+        </svg>
+
         <h2>One Hug</h2>
-        <p id="finalLine">August 8th, hurry up.</p>
+        <p>August 8th, hurry up.</p>
       </div>
     </section>
   </main>
@@ -772,8 +898,8 @@
         correct: 2
       },
       {
-        question: "What flowers did I get you for our 2nd month?",
-        answers: ["Lilies", "Roses", "A suspiciously emotional bouquet"],
+        question: "What did I get you for our 2nd month?",
+        answers: ["A bouquet with lilies, roses, and main-character energy", "One lonely leaf", "A suspicious potato"],
         correct: 0
       },
       {
@@ -784,19 +910,17 @@
     ];
 
     const revealMessage =
-`12 lily petals collected.
+`Basket full.
 
+Bouquet assembled.
 Distance weakened.
 Time zones defeated.
 August 8th unlocked.
 
-For three months,
-I've loved you through screens,
-messages,
-calls,
-and all the space between us.
+Flowers just for you,
+with all my love.
 
-But soon...
+Soon...
 
 I finally get to hold your hand. 🤍`;
 
@@ -813,6 +937,7 @@ I finally get to hold your hand. 🤍`;
 
     const game = document.getElementById("game");
     const player = document.getElementById("player");
+    const basketFill = document.getElementById("basketFill");
     const scoreEl = document.getElementById("score");
     const revealText = document.getElementById("revealText");
 
@@ -820,15 +945,46 @@ I finally get to hold your hand. 🤍`;
     let score = 0;
     let playerX = 50;
     let gameRunning = false;
-    let lilyTimer;
+    let flowerTimer;
 
     setInterval(makeBackgroundPetal, 900);
     updateCountdown();
     setInterval(updateCountdown, 1000);
+    plantWillowLeaves();
+
+    function plantWillowLeaves() {
+      const positions = [
+        [250,170],[310,155],[370,155],[430,170],[205,205],[275,215],[345,210],[415,215],[485,205],
+        [170,250],[230,265],[290,275],[350,270],[410,275],[470,265],[530,250],
+        [180,130],[245,115],[320,105],[390,108],[465,125],
+        [150,185],[550,185],[120,230],[580,230],
+        [260,310],[330,320],[400,315],[470,300],[220,315],
+        [195,155],[505,155],[290,135],[410,135],[350,90],
+        [140,275],[560,275],[300,245],[390,245],[350,235],
+        [235,190],[465,190],[320,180],[380,180],[350,165],
+        [210,240],[490,240],[270,250],[430,250],[350,295],
+        [165,215],[535,215],[250,120],[450,120],[350,130]
+      ];
+
+      positions.forEach(([left, top], i) => {
+        const leaf = document.createElement("div");
+        leaf.className = "leaf";
+        leaf.style.left = left + "px";
+        leaf.style.top = top + "px";
+        leaf.style.animationDelay = (i * 0.06) + "s";
+        willow.appendChild(leaf);
+      });
+    }
+
+    function growWillow(stage) {
+      willow.classList.remove("stage-1", "stage-2", "stage-3");
+      willow.classList.add("stage-" + stage);
+    }
 
     function startQuiz() {
       introScreen.classList.add("hidden");
       quizScreen.classList.remove("hidden");
+      growWillow(1);
       renderQuestion();
     }
 
@@ -856,6 +1012,8 @@ I finally get to hold your hand. 🤍`;
         quizFeedback.textContent = "Correct. Suspiciously cute.";
         setTimeout(() => {
           quizIndex++;
+          if (quizIndex === 2) growWillow(2);
+
           if (quizIndex >= quiz.length) {
             startGame();
           } else {
@@ -870,15 +1028,16 @@ I finally get to hold your hand. 🤍`;
     function startGame() {
       quizScreen.classList.add("hidden");
       gameScreen.classList.remove("hidden");
-      willow.classList.add("strong");
+      growWillow(2);
 
       score = 0;
       playerX = 50;
       gameRunning = true;
-      scoreEl.textContent = "Lilies: 0 / 12";
+      scoreEl.textContent = "Bouquet pieces: 0 / 14";
+      updateBasket();
       updatePlayer();
 
-      lilyTimer = setInterval(dropLily, 620);
+      flowerTimer = setInterval(dropFlower, 570);
     }
 
     function updatePlayer() {
@@ -891,7 +1050,7 @@ I finally get to hold your hand. 🤍`;
       if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") playerX -= 6;
       if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") playerX += 6;
 
-      playerX = Math.max(5, Math.min(95, playerX));
+      playerX = Math.max(6, Math.min(94, playerX));
       updatePlayer();
     });
 
@@ -900,51 +1059,68 @@ I finally get to hold your hand. 🤍`;
 
       const rect = game.getBoundingClientRect();
       playerX = ((e.clientX - rect.left) / rect.width) * 100;
-      playerX = Math.max(5, Math.min(95, playerX));
+      playerX = Math.max(6, Math.min(94, playerX));
       updatePlayer();
     });
 
-    function dropLily() {
-      const lily = document.createElement("div");
-      lily.className = "falling-lily";
-      lily.textContent = Math.random() > .25 ? "🤍" : "🌿";
-      lily.style.left = Math.random() * 92 + "%";
-      lily.style.animationDuration = (2.1 + Math.random() * 1.45) + "s";
-      game.appendChild(lily);
+    function dropFlower() {
+      const flower = document.createElement("div");
+      flower.className = "falling-flower";
+
+      const flowers = ["🤍", "🌹", "🌸", "🌿", "💮"];
+      flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+
+      flower.style.left = Math.random() * 92 + "%";
+      flower.style.animationDuration = (2.05 + Math.random() * 1.35) + "s";
+      game.appendChild(flower);
 
       const collisionCheck = setInterval(() => {
-        if (!gameRunning || !lily.isConnected) {
+        if (!gameRunning || !flower.isConnected) {
           clearInterval(collisionCheck);
           return;
         }
 
-        const l = lily.getBoundingClientRect();
-        const p = player.getBoundingClientRect();
-        const hit = !(l.right < p.left || l.left > p.right || l.bottom < p.top || l.top > p.bottom);
+        const f = flower.getBoundingClientRect();
+        const b = player.getBoundingClientRect();
+        const hit = !(f.right < b.left || f.left > b.right || f.bottom < b.top || f.top > b.bottom);
 
         if (hit) {
-          lily.remove();
+          flower.remove();
           clearInterval(collisionCheck);
 
           score++;
-          scoreEl.textContent = `Lilies: ${score} / 12`;
-          popHeart(p.left + p.width / 2, p.top);
+          scoreEl.textContent = `Bouquet pieces: ${score} / 14`;
+          updateBasket();
+          popFlower(b.left + b.width / 2, b.top);
 
-          if (score >= 12) revealSurprise();
+          if (score >= 14) revealSurprise();
         }
       }, 40);
 
       setTimeout(() => {
-        lily.remove();
+        flower.remove();
         clearInterval(collisionCheck);
       }, 4300);
     }
 
+    function updateBasket() {
+      const percent = Math.min(100, (score / 14) * 100);
+      basketFill.style.height = percent + "%";
+
+      const miniFlowers = "🤍🌹🌸🌿💮";
+      let fill = "";
+      for (let i = 0; i < score; i++) {
+        fill += miniFlowers[i % miniFlowers.length];
+      }
+      basketFill.textContent = fill;
+    }
+
     function revealSurprise() {
       gameRunning = false;
-      clearInterval(lilyTimer);
-      document.querySelectorAll(".falling-lily").forEach(l => l.remove());
+      clearInterval(flowerTimer);
+      document.querySelectorAll(".falling-flower").forEach(f => f.remove());
 
+      growWillow(3);
       explode();
       startHearts();
 
@@ -970,11 +1146,29 @@ I finally get to hold your hand. 🤍`;
     function unlockSite() {
       document.body.classList.add("unlocked");
       revealScreen.classList.add("hidden");
+      pourFlowers();
 
       setTimeout(() => {
         revealScreen.style.display = "none";
         document.querySelector(".content .section").scrollIntoView({ behavior: "smooth" });
       }, 420);
+    }
+
+    function pourFlowers() {
+      let count = 0;
+      const pour = setInterval(() => {
+        count++;
+        const flower = document.createElement("div");
+        flower.className = "poured-flower";
+        flower.textContent = ["🤍", "🌹", "🌸", "🌿", "💮"][Math.floor(Math.random() * 5)];
+        flower.style.left = (35 + Math.random() * 30) + "vw";
+        flower.style.animationDuration = (4 + Math.random() * 3) + "s";
+        flower.style.setProperty("--drift", (-220 + Math.random() * 440) + "px");
+        document.body.appendChild(flower);
+        setTimeout(() => flower.remove(), 8000);
+
+        if (count > 75) clearInterval(pour);
+      }, 90);
     }
 
     function askPinky() {
@@ -996,8 +1190,8 @@ I finally get to hold your hand. 🤍`;
     }
 
     function explode() {
-      const emojis = ["🤍","💖","✨","🌿","🌸","🎨","💫"];
-      for (let i = 0; i < 100; i++) {
+      const emojis = ["🤍","💖","✨","🌿","🌸","🎨","💫","🌹","💮"];
+      for (let i = 0; i < 105; i++) {
         const piece = document.createElement("div");
         piece.className = "burst";
         piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
@@ -1018,7 +1212,7 @@ I finally get to hold your hand. 🤍`;
       setInterval(() => {
         const h = document.createElement("div");
         h.className = "heart";
-        h.textContent = ["🤍","💖","💕","🌿","🌸"][Math.floor(Math.random()*5)];
+        h.textContent = ["🤍","💖","💕","🌿","🌸","🌹"][Math.floor(Math.random()*6)];
         h.style.left = Math.random() * 100 + "vw";
         h.style.fontSize = (18 + Math.random() * 30) + "px";
         h.style.animationDuration = (3.5 + Math.random() * 3) + "s";
@@ -1027,10 +1221,10 @@ I finally get to hold your hand. 🤍`;
       }, 190);
     }
 
-    function popHeart(x, y) {
+    function popFlower(x, y) {
       const h = document.createElement("div");
       h.className = "heart";
-      h.textContent = ["🤍","💖","🌿","🌸"][Math.floor(Math.random()*4)];
+      h.textContent = ["🤍","🌹","🌿","🌸","💮"][Math.floor(Math.random()*5)];
       h.style.left = x + "px";
       h.style.top = y + "px";
       h.style.bottom = "auto";
