@@ -3,82 +3,1070 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our 3 Months 💖</title>
+
+  <title>For You 🤍🌿</title>
+
   <style>
-    :root{--pink:#ff4d8d;--soft:#ffd6e8;--dark:#150716;--gold:#ffd166;--white:#fff7fb}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;overflow-x:hidden;overflow-y:hidden;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top left,rgba(255,126,179,.9),transparent 34%),radial-gradient(circle at bottom right,rgba(124,58,237,.8),transparent 35%),linear-gradient(135deg,#15071c,#331129 55%,#130812);color:var(--white)}body.unlocked{overflow-y:auto}.screen{min-height:100vh;display:grid;place-items:center;padding:24px;text-align:center;transition:opacity .9s ease,transform .9s ease}.fixed-screen{position:fixed;inset:0;z-index:10}.hidden{opacity:0;pointer-events:none;transform:scale(1.04)}.card{width:min(760px,95vw);padding:clamp(24px,5vw,42px);border:1px solid rgba(255,255,255,.22);border-radius:32px;background:rgba(255,255,255,.1);backdrop-filter:blur(16px);box-shadow:0 20px 90px rgba(0,0,0,.38)}h1{font-size:clamp(2.2rem,7vw,5rem);margin:0 0 12px;line-height:.98}h2{font-size:clamp(1.8rem,5vw,3.5rem);margin:0 0 20px}p{font-size:clamp(1rem,3vw,1.25rem);opacity:.92;line-height:1.65}button{cursor:pointer;border:0;border-radius:999px;padding:14px 24px;margin:10px 8px 0;font-weight:900;color:#3a071d;background:linear-gradient(135deg,#fff,var(--soft),var(--gold));box-shadow:0 10px 35px rgba(255,77,141,.35);transition:transform .2s ease,filter .2s ease}button:hover{transform:translateY(-2px) scale(1.03);filter:brightness(1.05)}.choice{width:min(100%,460px);display:block;margin:12px auto}.glow{text-shadow:0 0 20px rgba(255,214,232,.95)}.small{font-size:.95rem;opacity:.72}.progress{margin-top:10px;font-weight:800;opacity:.75}#quizFeedback{min-height:34px;font-weight:800;color:var(--soft)}#game{width:min(900px,96vw);height:min(600px,75vh);position:relative;border-radius:30px;border:1px solid rgba(255,255,255,.24);background:radial-gradient(circle at 50% 20%,rgba(255,255,255,.16),transparent 30%),rgba(255,255,255,.08);box-shadow:inset 0 0 50px rgba(255,255,255,.08),0 20px 80px rgba(0,0,0,.35);overflow:hidden;touch-action:none}#player{position:absolute;width:54px;height:54px;left:50%;bottom:35px;transform:translateX(-50%);filter:drop-shadow(0 0 16px rgba(255,255,255,.75));font-size:46px;user-select:none}.star{position:absolute;font-size:32px;animation:fall linear forwards;user-select:none}@keyframes fall{from{transform:translateY(-60px) rotate(0)}to{transform:translateY(720px) rotate(260deg)}}#score{position:absolute;top:18px;left:20px;font-weight:900;background:rgba(0,0,0,.28);padding:10px 14px;border-radius:999px}#hint{position:absolute;top:18px;right:20px;opacity:.84;font-size:.95rem}.heart{position:fixed;bottom:-40px;z-index:50;font-size:24px;animation:floatUp 5s linear forwards;pointer-events:none}@keyframes floatUp{0%{transform:translateY(0) scale(.6) rotate(0);opacity:0}10%{opacity:1}100%{transform:translateY(-115vh) scale(1.4) rotate(360deg);opacity:0}}.burst{position:fixed;left:50%;top:50%;z-index:60;pointer-events:none;transform:translate(-50%,-50%);font-size:34px;animation:burst 1.8s ease-out forwards}@keyframes burst{from{transform:translate(-50%,-50%) rotate(0) translateX(0) scale(.2);opacity:1}to{transform:translate(var(--x),var(--y)) rotate(540deg) scale(1.7);opacity:0}}.typewriter{min-height:150px;white-space:pre-wrap;font-size:clamp(1.1rem,3.5vw,1.55rem);line-height:1.65}#letterSection{padding:110px 20px 80px;position:relative;overflow:hidden}.letter-wrap{width:min(1000px,95vw);margin:0 auto;display:grid;grid-template-columns:1fr;gap:28px;align-items:center}.letter{padding:clamp(24px,5vw,54px);border-radius:34px;color:#411020;background:linear-gradient(135deg,rgba(255,255,255,.96),rgba(255,235,244,.96));box-shadow:0 25px 90px rgba(0,0,0,.35);text-align:left}.letter h2{color:#991343;text-align:center}.letter p{color:#411020;opacity:1;font-size:clamp(1.04rem,2.7vw,1.22rem)}.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}.photo{min-height:180px;border-radius:28px;overflow:hidden;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);box-shadow:0 16px 45px rgba(0,0,0,.25);display:grid;place-items:center;text-align:center;padding:18px}.photo img{width:100%;height:100%;object-fit:cover;display:block}.photo span{opacity:.85;line-height:1.4}.caption{margin-top:32px;text-align:center;font-weight:800;color:rgba(255,255,255,.88)}@media(max-width:760px){.gallery{grid-template-columns:1fr}#hint{display:none}}
+    :root {
+      --night: #090611;
+      --deep: #171022;
+      --pink: #ff6f9f;
+      --hot-pink: #ff3f86;
+      --lily: #fff7e8;
+      --paper: #fff3dc;
+      --ink: #3b2330;
+      --gold: #ffd166;
+      --green: #93cfa2;
+      --soft-green: #d8f3dc;
+      --white: #fffaf7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      color: var(--white);
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255, 111, 159, .22), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(109, 93, 252, .25), transparent 30%),
+        linear-gradient(140deg, #07050e, #171022 55%, #090611);
+    }
+
+    body.unlocked {
+      overflow-y: auto;
+    }
+
+    button {
+      cursor: pointer;
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 24px;
+      margin: 8px;
+      font-weight: 900;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #2d1323;
+      background: linear-gradient(135deg, #ffffff, #fff1d6, #d8f3dc);
+      box-shadow: 0 10px 35px rgba(255, 209, 102, .25);
+      transition: transform .2s ease, filter .2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px) scale(1.03);
+      filter: brightness(1.05);
+    }
+
+    .screen {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      text-align: center;
+      transition: opacity 850ms ease, transform 850ms ease;
+    }
+
+    .fixed-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.035);
+    }
+
+    .card {
+      width: min(850px, 95vw);
+      padding: clamp(24px, 5vw, 48px);
+      border: 1px solid rgba(255,255,255,.19);
+      border-radius: 34px;
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 90px rgba(0,0,0,.42);
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.35rem, 8vw, 5.5rem);
+      line-height: .95;
+      letter-spacing: -2px;
+      text-shadow: 0 0 26px rgba(255, 247, 232, .45);
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: clamp(1.75rem, 5vw, 3.4rem);
+      line-height: 1.05;
+    }
+
+    p {
+      font-size: clamp(1.02rem, 3vw, 1.25rem);
+      line-height: 1.7;
+      opacity: .94;
+    }
+
+    .small {
+      font-size: .95rem;
+      opacity: .72;
+    }
+
+    .choice {
+      display: block;
+      width: min(100%, 540px);
+      margin: 12px auto;
+    }
+
+    #quizFeedback {
+      min-height: 34px;
+      font-weight: bold;
+      color: var(--soft-green);
+    }
+
+    .progress {
+      font-family: system-ui, sans-serif;
+      font-weight: 800;
+      opacity: .7;
+    }
+
+    .ambient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .moon {
+      position: absolute;
+      top: 8vh;
+      right: 9vw;
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fffaf0, #ffeeb8 58%, rgba(255,238,184,.18));
+      box-shadow: 0 0 55px rgba(255,238,184,.45);
+      opacity: .82;
+    }
+
+    .willow {
+      position: fixed;
+      left: 50%;
+      bottom: -8px;
+      transform: translateX(-50%);
+      z-index: 2;
+      width: min(620px, 100vw);
+      height: 340px;
+      pointer-events: none;
+      opacity: .34;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .willow.strong {
+      opacity: .72;
+      transform: translateX(-50%) scale(1.04);
+    }
+
+    .trunk {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 42px;
+      height: 225px;
+      transform: translateX(-50%);
+      border-radius: 40% 40% 0 0;
+      background: linear-gradient(90deg, #3a2718, #795039, #332114);
+      box-shadow: inset -10px 0 15px rgba(0,0,0,.3);
+    }
+
+    .canopy {
+      position: absolute;
+      bottom: 150px;
+      left: 50%;
+      width: 420px;
+      height: 180px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 42%, rgba(147,207,162,.75), rgba(55,110,70,.55) 55%, transparent 72%);
+    }
+
+    .branch {
+      position: absolute;
+      top: 88px;
+      width: 6px;
+      height: 210px;
+      border-radius: 999px;
+      transform-origin: top;
+      background: linear-gradient(var(--green), transparent);
+      animation: sway 3.8s ease-in-out infinite alternate;
+    }
+
+    .branch:nth-child(3) { left: 150px; height: 230px; transform: rotate(18deg); animation-delay: .1s; }
+    .branch:nth-child(4) { left: 205px; height: 250px; transform: rotate(9deg); animation-delay: .8s; }
+    .branch:nth-child(5) { left: 275px; height: 240px; transform: rotate(1deg); animation-delay: .3s; }
+    .branch:nth-child(6) { left: 345px; height: 255px; transform: rotate(-9deg); animation-delay: 1s; }
+    .branch:nth-child(7) { left: 410px; height: 230px; transform: rotate(-18deg); animation-delay: .5s; }
+
+    @keyframes sway {
+      from { translate: -5px 0; }
+      to { translate: 5px 0; }
+    }
+
+    .petal {
+      position: fixed;
+      top: -40px;
+      z-index: 3;
+      pointer-events: none;
+      color: var(--lily);
+      animation: petalFall linear forwards;
+      text-shadow: 0 0 10px rgba(255,255,255,.38);
+    }
+
+    @keyframes petalFall {
+      from {
+        transform: translateY(-50px) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      to {
+        transform: translateY(110vh) translateX(var(--drift)) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    #game {
+      width: min(920px, 96vw);
+      height: min(610px, 75vh);
+      position: relative;
+      border-radius: 32px;
+      border: 1px solid rgba(255,255,255,.22);
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,.16), transparent 30%),
+        rgba(255,255,255,.08);
+      box-shadow: inset 0 0 55px rgba(255,255,255,.08), 0 20px 90px rgba(0,0,0,.38);
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    #score {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.28);
+      font-family: system-ui, sans-serif;
+      font-weight: 900;
+      z-index: 3;
+    }
+
+    #hint {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      font-family: system-ui, sans-serif;
+      font-size: .95rem;
+      opacity: .82;
+      z-index: 3;
+    }
+
+    #player {
+      position: absolute;
+      left: 50%;
+      bottom: 34px;
+      transform: translateX(-50%);
+      font-size: 48px;
+      user-select: none;
+      filter: drop-shadow(0 0 16px rgba(255,255,255,.75));
+      z-index: 4;
+    }
+
+    .falling-lily {
+      position: absolute;
+      font-size: 34px;
+      user-select: none;
+      animation: fall linear forwards;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,.35));
+    }
+
+    @keyframes fall {
+      from { transform: translateY(-70px) rotate(0deg); }
+      to { transform: translateY(730px) rotate(250deg); }
+    }
+
+    .heart, .burst {
+      position: fixed;
+      z-index: 80;
+      pointer-events: none;
+    }
+
+    .heart {
+      bottom: -40px;
+      font-size: 24px;
+      animation: floatUp 5s linear forwards;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(.6) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-115vh) scale(1.4) rotate(360deg); opacity: 0; }
+    }
+
+    .burst {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 34px;
+      animation: burst 1.8s ease-out forwards;
+    }
+
+    @keyframes burst {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg) scale(.2);
+        opacity: 1;
+      }
+      to {
+        transform: translate(var(--x), var(--y)) rotate(540deg) scale(1.7);
+        opacity: 0;
+      }
+    }
+
+    .typewriter {
+      min-height: 170px;
+      white-space: pre-wrap;
+      font-size: clamp(1.08rem, 3.3vw, 1.5rem);
+      line-height: 1.7;
+    }
+
+    .content {
+      position: relative;
+      z-index: 10;
+    }
+
+    .section {
+      min-height: 100vh;
+      padding: 100px 20px;
+      display: grid;
+      place-items: center;
+    }
+
+    .countdown-card {
+      width: min(980px, 96vw);
+      padding: clamp(28px, 5vw, 54px);
+      border-radius: 36px;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.2);
+      backdrop-filter: blur(14px);
+      text-align: center;
+      box-shadow: 0 24px 90px rgba(0,0,0,.34);
+    }
+
+    .route {
+      margin: 28px auto;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      gap: 14px;
+      align-items: center;
+      width: min(780px, 100%);
+      font-family: system-ui, sans-serif;
+      font-weight: 900;
+    }
+
+    .line {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+    }
+
+    .plane {
+      font-size: 2rem;
+      animation: planeMove 2.6s ease-in-out infinite alternate;
+    }
+
+    @keyframes planeMove {
+      from { transform: translateX(-12px); }
+      to { transform: translateX(12px); }
+    }
+
+    #countdownTimer {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 26px auto 0;
+      width: min(760px, 100%);
+      font-family: system-ui, sans-serif;
+    }
+
+    .time-box {
+      padding: 18px 10px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+
+    .time-box span {
+      display: block;
+      font-size: clamp(2rem, 6vw, 4rem);
+      line-height: 1;
+      font-weight: 1000;
+      color: var(--gold);
+      text-shadow: 0 0 22px rgba(255,209,102,.35);
+    }
+
+    .time-box small {
+      display: block;
+      margin-top: 8px;
+      opacity: .8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: .75rem;
+    }
+
+    .letter {
+      width: min(900px, 95vw);
+      padding: clamp(28px, 6vw, 62px);
+      border-radius: 18px 42px 22px 38px;
+      background: linear-gradient(135deg, rgba(255,252,243,.98), rgba(255,242,218,.98));
+      color: var(--ink);
+      box-shadow: 0 28px 95px rgba(0,0,0,.38);
+      text-align: left;
+      position: relative;
+      transform: rotate(-.8deg);
+    }
+
+    .letter h2 {
+      text-align: center;
+      color: #8b2349;
+    }
+
+    .letter p {
+      color: var(--ink);
+      opacity: 1;
+      font-size: clamp(1.06rem, 2.6vw, 1.22rem);
+    }
+
+    .gallery {
+      width: min(1050px, 95vw);
+      margin: 44px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .polaroid {
+      background: #fffdf8;
+      color: #4a2635;
+      padding: 14px 14px 20px;
+      border-radius: 8px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.34);
+      transform: rotate(var(--tilt));
+      transition: transform .25s ease;
+    }
+
+    .polaroid:hover {
+      transform: rotate(0deg) translateY(-6px) scale(1.02);
+    }
+
+    .photo {
+      aspect-ratio: 1 / 1;
+      border-radius: 4px;
+      background: linear-gradient(135deg, rgba(216,243,220,.9), rgba(255,214,232,.9));
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      text-align: center;
+      padding: 14px;
+      color: rgba(64,32,48,.82);
+      font-family: system-ui, sans-serif;
+      font-weight: 800;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 4px;
+    }
+
+    .polaroid p {
+      font-family: system-ui, sans-serif;
+      margin: 12px 0 0;
+      color: #4a2635;
+      opacity: .9;
+      font-size: .98rem;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .main-photo {
+      width: min(420px, 88vw);
+      margin: 0 auto 36px;
+      transform: rotate(-2deg);
+    }
+
+    .final-buttons button {
+      min-width: 190px;
+    }
+
+    .pinkies {
+      font-size: clamp(4rem, 18vw, 11rem);
+      margin: 20px 0;
+      filter: drop-shadow(0 0 30px rgba(255, 111, 159, .6));
+      animation: pinkyPulse 1.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes pinkyPulse {
+      from { transform: scale(.96) rotate(-2deg); }
+      to { transform: scale(1.04) rotate(2deg); }
+    }
+
+    @media (max-width: 760px) {
+      #hint {
+        display: none;
+      }
+
+      #countdownTimer {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .route {
+        grid-template-columns: 1fr;
+      }
+
+      .line {
+        height: 54px;
+        width: 2px;
+        margin: 0 auto;
+        background: linear-gradient(180deg, transparent, rgba(255,255,255,.65), transparent);
+      }
+
+      .willow {
+        width: 120vw;
+        opacity: .22;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <section id="quizScreen" class="screen fixed-screen">
+  <div class="ambient">
+    <div class="moon"></div>
+  </div>
+
+  <div id="willow" class="willow">
+    <div class="canopy"></div>
+    <div class="trunk"></div>
+    <div class="branch"></div>
+    <div class="branch"></div>
+    <div class="branch"></div>
+    <div class="branch"></div>
+    <div class="branch"></div>
+  </div>
+
+  <section id="introScreen" class="screen fixed-screen">
     <div class="card">
-      <h1 class="glow">Before the surprise...</h1>
-      <p>You have to pass the tiny girlfriend quiz first. Very serious. Very official.</p>
+      <h1>Germany 🇩🇪<br>Brazil 🇧🇷</h1>
+      <p>
+        Three months down.<br>
+        August 8th is loading.
+      </p>
+      <p class="small">
+        A tiny art piece, a tiny game, and a very serious girlfriend quiz.
+      </p>
+      <button onclick="startQuiz()">Begin</button>
+    </div>
+  </section>
+
+  <section id="quizScreen" class="screen fixed-screen hidden">
+    <div class="card">
+      <h1>Little Love Quiz</h1>
+      <p>Official. Scientific. Definitely not rigged.</p>
       <h2 id="questionText"></h2>
       <div id="answers"></div>
       <p id="quizFeedback"></p>
-      <p class="progress" id="quizProgress"></p>
+      <p id="quizProgress" class="progress"></p>
     </div>
   </section>
 
   <section id="gameScreen" class="screen fixed-screen hidden">
     <div id="game">
-      <div id="score">Stars: 0 / 12</div>
-      <div id="hint">Use ← →, A/D, or drag/tap ✨</div>
-      <div id="player">💖</div>
+      <div id="score">Lilies: 0 / 12</div>
+      <div id="hint">Use ← →, A/D, or drag/tap 🤍</div>
+      <div id="player">🖌️</div>
     </div>
   </section>
 
-  <section id="surpriseScreen" class="screen fixed-screen hidden">
+  <section id="revealScreen" class="screen fixed-screen hidden">
     <div class="card">
-      <h1 class="glow">Happy 3 Months 💗</h1>
-      <div id="message" class="typewriter"></div>
-      <button onclick="unlockLetter()">Open the letter ↓</button>
-      <p class="small">Scroll after this. There is more.</p>
+      <h1>Mission Complete 🤍</h1>
+      <div id="revealText" class="typewriter"></div>
+      <button onclick="unlockSite()">Open the rest ↓</button>
+      <p class="small">Scroll after this. The willow has more to say.</p>
     </div>
   </section>
 
-  <section id="letterSection">
-    <div class="letter-wrap">
-      <div class="letter">
-        <h2>My letter to you</h2>
-        <p>My love,</p>
-        <p>Three months does not sound like a long time to the rest of the world, but to me it already feels like you have left little pieces of light all over my life.</p>
-        <p>I love the way you make normal days feel special. I love your laugh, your energy, your softness, your chaos, and all the tiny things about you that somehow became my favorite things.</p>
-        <p>This little website is not perfect, but it is made with my whole heart. Happy 3 months, baby. I am so lucky I get to call you mine.</p>
-        <p>Love,<br>Me 💖</p>
-      </div>
+  <main class="content">
+    <section class="section">
+      <div class="countdown-card">
+        <h2>First Hug Countdown ✈️</h2>
+        <p>
+          Until Germany and Brazil become one hug.
+        </p>
 
-      <div class="gallery">
-        <div class="photo"><span>Photo 1 goes here<br>Use: photo1.jpg</span></div>
-        <div class="photo"><span>Photo 2 goes here<br>Use: photo2.jpg</span></div>
-        <div class="photo"><span>Photo 3 goes here<br>Use: photo3.jpg</span></div>
-        <div class="photo"><span>Photo 4 goes here<br>Use: photo4.jpg</span></div>
-        <div class="photo"><span>Photo 5 goes here<br>Use: photo5.jpg</span></div>
-        <div class="photo"><span>Photo 6 goes here<br>Use: photo6.jpg</span></div>
+        <div class="route">
+          <div>Germany 🇩🇪</div>
+          <div class="line"></div>
+          <div class="plane">✈️</div>
+          <div class="line"></div>
+          <div>Brazil 🇧🇷</div>
+        </div>
+
+        <div id="countdownTimer">
+          <div class="time-box"><span id="days">0</span><small>Days</small></div>
+          <div class="time-box"><span id="hours">0</span><small>Hours</small></div>
+          <div class="time-box"><span id="minutes">0</span><small>Minutes</small></div>
+          <div class="time-box"><span id="seconds">0</span><small>Seconds</small></div>
+        </div>
+
+        <p class="small">
+          Distance remaining: Germany ↔ Brazil<br>
+          Future distance: one hug.
+        </p>
       </div>
-      <p class="caption">More months. More pictures. More us. 💞</p>
-    </div>
-  </section>
+    </section>
+
+    <section class="section">
+      <div>
+        <div class="polaroid main-photo">
+          <div class="photo">
+            <img src="main.jpg" alt="Her main photo" onerror="this.style.display='none'; this.parentElement.innerHTML='main.jpg<br>Main photo of her goes here';">
+          </div>
+          <p>The main character. Obviously.</p>
+        </div>
+
+        <div class="letter">
+          <h2>My letter to you</h2>
+
+          <p>My love,</p>
+
+          <p>
+            Three months might sound small to the rest of the world, but to me,
+            it already feels like you painted your way into my life.
+          </p>
+
+          <p>
+            You are in Brazil, I am in Germany, and somehow you still feel close.
+            Through screens, messages, calls, and every tiny moment in between,
+            you have become my favorite part of the day.
+          </p>
+
+          <p>
+            I think about August 8th a lot. I think about finally seeing you for real,
+            hearing your voice without a phone between us, and holding the person
+            I have been missing from so far away.
+          </p>
+
+          <p>
+            You love lilies, willow trees, and art, so I tried to make this feel
+            like a small garden, a small sketchbook, and a small piece of my heart.
+          </p>
+
+          <p>
+            Happy 3 months, baby. Distance has been loud, but us? We have been louder.
+          </p>
+
+          <p>
+            Love,<br>
+            Me 🤍
+          </p>
+        </div>
+
+        <div class="gallery">
+          <div class="polaroid" style="--tilt:-3deg">
+            <div class="photo"><img src="photo1.jpg" alt="Memory 1" onerror="this.style.display='none'; this.parentElement.innerHTML='photo1.jpg';"></div>
+            <p>One of my favorite little memories.</p>
+          </div>
+
+          <div class="polaroid" style="--tilt:2deg">
+            <div class="photo"><img src="photo2.jpg" alt="Memory 2" onerror="this.style.display='none'; this.parentElement.innerHTML='photo2.jpg';"></div>
+            <p>The smile that makes distance feel smaller.</p>
+          </div>
+
+          <div class="polaroid" style="--tilt:-1deg">
+            <div class="photo"><img src="photo3.jpg" alt="Memory 3" onerror="this.style.display='none'; this.parentElement.innerHTML='photo3.jpg';"></div>
+            <p>A moment I wish I could frame forever.</p>
+          </div>
+
+          <div class="polaroid" style="--tilt:2.8deg">
+            <div class="photo"><img src="photo4.jpg" alt="Memory 4" onerror="this.style.display='none'; this.parentElement.innerHTML='photo4.jpg';"></div>
+            <p>Proof that my phone gallery has a favorite person.</p>
+          </div>
+
+          <div class="polaroid" style="--tilt:-2.2deg">
+            <div class="photo"><img src="photo5.jpg" alt="Memory 5" onerror="this.style.display='none'; this.parentElement.innerHTML='photo5.jpg';"></div>
+            <p>Another reason August needs to hurry up.</p>
+          </div>
+
+          <div class="polaroid" style="--tilt:1.4deg">
+            <div class="photo"><img src="photo6.jpg" alt="Memory 6" onerror="this.style.display='none'; this.parentElement.innerHTML='photo6.jpg';"></div>
+            <p>More memories. More us. Please.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="adventureSection" class="section">
+      <div class="card">
+        <h1>Next Chapter?</h1>
+        <p>Will you continue this adventure with me?</p>
+
+        <div class="final-buttons">
+          <button onclick="askPinky()">Yes 💖</button>
+          <button onclick="askPinky()">Yes 🤍</button>
+          <button onclick="askPinky()">Definitely yes 🌿</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="pinkySection" class="section hidden">
+      <div class="card">
+        <h1>Pinky promise?</h1>
+        <p>No backing out. This is legally binding in silly couple law.</p>
+        <button onclick="showFinal()">Yes, pinky promise 🤙</button>
+      </div>
+    </section>
+
+    <section id="finalSection" class="section hidden">
+      <div class="card">
+        <h1>Distance Remaining:</h1>
+        <div class="pinkies">🤙💖🤙</div>
+        <h2>One Hug</h2>
+        <p id="finalLine">August 8th, hurry up.</p>
+      </div>
+    </section>
+  </main>
 
   <script>
-    const quiz=[{question:"Question 1: Who is my favorite person?",answers:["You","Still you","Obviously you"],correct:0},{question:"Question 2: What do I want more of?",answers:["Memories with you","Cuddles","Both, obviously"],correct:2},{question:"Question 3: Are you ready for your surprise?",answers:["Yes","YESSS","I was born ready"],correct:2}];
-    const revealMessage=`You passed. Obviously.\n\nThree months with you has been my favorite little adventure.\n\nBut this is not the end of the surprise... 💖`;
-    let quizIndex=0,score=0,playerX=50,gameRunning=false,starTimer,heartTimer;
-    const quizScreen=document.getElementById("quizScreen"),gameScreen=document.getElementById("gameScreen"),surpriseScreen=document.getElementById("surpriseScreen"),questionText=document.getElementById("questionText"),answers=document.getElementById("answers"),feedback=document.getElementById("quizFeedback"),quizProgress=document.getElementById("quizProgress"),game=document.getElementById("game"),player=document.getElementById("player"),scoreEl=document.getElementById("score"),messageEl=document.getElementById("message"),letterSection=document.getElementById("letterSection");
-    renderQuestion();
-    function renderQuestion(){const q=quiz[quizIndex];questionText.textContent=q.question;answers.innerHTML="";feedback.textContent="";quizProgress.textContent=`${quizIndex+1} / ${quiz.length}`;q.answers.forEach((answer,index)=>{const btn=document.createElement("button");btn.className="choice";btn.textContent=answer;btn.onclick=()=>chooseAnswer(index);answers.appendChild(btn)})}
-    function chooseAnswer(index){const q=quiz[quizIndex];if(index===q.correct){feedback.textContent="Correct. You are dangerously cute.";setTimeout(()=>{quizIndex++;if(quizIndex>=quiz.length){startGame()}else{renderQuestion()}},700)}else{feedback.textContent="Hmm... try again, pretty girl."}}
-    function startGame(){quizScreen.classList.add("hidden");gameScreen.classList.remove("hidden");score=0;playerX=50;gameRunning=true;updatePlayer();scoreEl.textContent="Stars: 0 / 12";starTimer=setInterval(dropStar,620)}
-    function updatePlayer(){player.style.left=playerX+"%"}
-    document.addEventListener("keydown",e=>{if(!gameRunning)return;if(e.key==="ArrowLeft"||e.key.toLowerCase()==="a")playerX-=6;if(e.key==="ArrowRight"||e.key.toLowerCase()==="d")playerX+=6;playerX=Math.max(5,Math.min(95,playerX));updatePlayer()});
-    game.addEventListener("pointermove",e=>{if(!gameRunning)return;const rect=game.getBoundingClientRect();playerX=((e.clientX-rect.left)/rect.width)*100;playerX=Math.max(5,Math.min(95,playerX));updatePlayer()});
-    function dropStar(){const star=document.createElement("div");star.className="star";star.textContent=Math.random()>.25?"✨":"🌙";star.style.left=Math.random()*92+"%";star.style.animationDuration=2.1+Math.random()*1.5+"s";game.appendChild(star);const collisionCheck=setInterval(()=>{if(!gameRunning||!star.isConnected){clearInterval(collisionCheck);return}const s=star.getBoundingClientRect(),p=player.getBoundingClientRect();const hit=!(s.right<p.left||s.left>p.right||s.bottom<p.top||s.top>p.bottom);if(hit){star.remove();clearInterval(collisionCheck);score++;scoreEl.textContent=`Stars: ${score} / 12`;popHeart(p.left+p.width/2,p.top);if(score>=12)revealSurprise()}},40);setTimeout(()=>{star.remove();clearInterval(collisionCheck)},4300)}
-    function popHeart(x,y){const h=document.createElement("div");h.className="heart";h.textContent=["💖","💕","💗","💘","💞"][Math.floor(Math.random()*5)];h.style.left=x+"px";h.style.top=y+"px";h.style.bottom="auto";h.style.animationDuration="1.6s";document.body.appendChild(h);setTimeout(()=>h.remove(),1700)}
-    function revealSurprise(){gameRunning=false;clearInterval(starTimer);document.querySelectorAll(".star").forEach(s=>s.remove());explode();startHearts();setTimeout(()=>{gameScreen.classList.add("hidden");surpriseScreen.classList.remove("hidden");typeMessage()},1300)}
-    function explode(){const emojis=["💖","💕","💗","💘","💞","✨","🌸","⭐"];for(let i=0;i<90;i++){const piece=document.createElement("div");piece.className="burst";piece.textContent=emojis[Math.floor(Math.random()*emojis.length)];const angle=Math.random()*Math.PI*2,distance=120+Math.random()*520,x=Math.cos(angle)*distance+"px",y=Math.sin(angle)*distance+"px";piece.style.setProperty("--x",x);piece.style.setProperty("--y",y);piece.style.animationDelay=Math.random()*.2+"s";document.body.appendChild(piece);setTimeout(()=>piece.remove(),2200)}}
-    function startHearts(){heartTimer=setInterval(()=>{const h=document.createElement("div");h.className="heart";h.textContent=["💖","💕","💗","💘","💞","❤️"][Math.floor(Math.random()*6)];h.style.left=Math.random()*100+"vw";h.style.fontSize=18+Math.random()*30+"px";h.style.animationDuration=3.5+Math.random()*3+"s";document.body.appendChild(h);setTimeout(()=>h.remove(),7000)},170)}
-    function typeMessage(){messageEl.textContent="";let i=0;const typer=setInterval(()=>{messageEl.textContent+=revealMessage[i];i++;if(i>=revealMessage.length)clearInterval(typer)},38)}
-    function unlockLetter(){document.body.classList.add("unlocked");surpriseScreen.classList.add("hidden");setTimeout(()=>{surpriseScreen.style.display="none";letterSection.scrollIntoView({behavior:"smooth"})},450)}
+    const meetingDate = new Date("2026-08-08T12:00:00");
+
+    const quiz = [
+      {
+        question: "What is stronger than distance?",
+        answers: ["Bad Wi-Fi", "Time zones", "Us, obviously"],
+        correct: 2
+      },
+      {
+        question: "What flowers did I get you for our 2nd month?",
+        answers: ["Lilies", "Roses", "A suspiciously emotional bouquet"],
+        correct: 0
+      },
+      {
+        question: "What happens on August 8th?",
+        answers: ["The universe explodes", "We finally meet", "Both, probably"],
+        correct: 2
+      }
+    ];
+
+    const revealMessage =
+`12 lily petals collected.
+
+Distance weakened.
+Time zones defeated.
+August 8th unlocked.
+
+For three months,
+I've loved you through screens,
+messages,
+calls,
+and all the space between us.
+
+But soon...
+
+I finally get to hold your hand. 🤍`;
+
+    const introScreen = document.getElementById("introScreen");
+    const quizScreen = document.getElementById("quizScreen");
+    const gameScreen = document.getElementById("gameScreen");
+    const revealScreen = document.getElementById("revealScreen");
+    const willow = document.getElementById("willow");
+
+    const questionText = document.getElementById("questionText");
+    const answers = document.getElementById("answers");
+    const quizFeedback = document.getElementById("quizFeedback");
+    const quizProgress = document.getElementById("quizProgress");
+
+    const game = document.getElementById("game");
+    const player = document.getElementById("player");
+    const scoreEl = document.getElementById("score");
+    const revealText = document.getElementById("revealText");
+
+    let quizIndex = 0;
+    let score = 0;
+    let playerX = 50;
+    let gameRunning = false;
+    let lilyTimer;
+
+    setInterval(makeBackgroundPetal, 900);
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    function startQuiz() {
+      introScreen.classList.add("hidden");
+      quizScreen.classList.remove("hidden");
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const q = quiz[quizIndex];
+
+      questionText.textContent = q.question;
+      answers.innerHTML = "";
+      quizFeedback.textContent = "";
+      quizProgress.textContent = `${quizIndex + 1} / ${quiz.length}`;
+
+      q.answers.forEach((answer, index) => {
+        const btn = document.createElement("button");
+        btn.className = "choice";
+        btn.textContent = answer;
+        btn.onclick = () => chooseAnswer(index);
+        answers.appendChild(btn);
+      });
+    }
+
+    function chooseAnswer(index) {
+      const q = quiz[quizIndex];
+
+      if (index === q.correct) {
+        quizFeedback.textContent = "Correct. Suspiciously cute.";
+        setTimeout(() => {
+          quizIndex++;
+          if (quizIndex >= quiz.length) {
+            startGame();
+          } else {
+            renderQuestion();
+          }
+        }, 700);
+      } else {
+        quizFeedback.textContent = "Try again, pretty girl.";
+      }
+    }
+
+    function startGame() {
+      quizScreen.classList.add("hidden");
+      gameScreen.classList.remove("hidden");
+      willow.classList.add("strong");
+
+      score = 0;
+      playerX = 50;
+      gameRunning = true;
+      scoreEl.textContent = "Lilies: 0 / 12";
+      updatePlayer();
+
+      lilyTimer = setInterval(dropLily, 620);
+    }
+
+    function updatePlayer() {
+      player.style.left = playerX + "%";
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (!gameRunning) return;
+
+      if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") playerX -= 6;
+      if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") playerX += 6;
+
+      playerX = Math.max(5, Math.min(95, playerX));
+      updatePlayer();
+    });
+
+    game.addEventListener("pointermove", (e) => {
+      if (!gameRunning) return;
+
+      const rect = game.getBoundingClientRect();
+      playerX = ((e.clientX - rect.left) / rect.width) * 100;
+      playerX = Math.max(5, Math.min(95, playerX));
+      updatePlayer();
+    });
+
+    function dropLily() {
+      const lily = document.createElement("div");
+      lily.className = "falling-lily";
+      lily.textContent = Math.random() > .25 ? "🤍" : "🌿";
+      lily.style.left = Math.random() * 92 + "%";
+      lily.style.animationDuration = (2.1 + Math.random() * 1.45) + "s";
+      game.appendChild(lily);
+
+      const collisionCheck = setInterval(() => {
+        if (!gameRunning || !lily.isConnected) {
+          clearInterval(collisionCheck);
+          return;
+        }
+
+        const l = lily.getBoundingClientRect();
+        const p = player.getBoundingClientRect();
+        const hit = !(l.right < p.left || l.left > p.right || l.bottom < p.top || l.top > p.bottom);
+
+        if (hit) {
+          lily.remove();
+          clearInterval(collisionCheck);
+
+          score++;
+          scoreEl.textContent = `Lilies: ${score} / 12`;
+          popHeart(p.left + p.width / 2, p.top);
+
+          if (score >= 12) revealSurprise();
+        }
+      }, 40);
+
+      setTimeout(() => {
+        lily.remove();
+        clearInterval(collisionCheck);
+      }, 4300);
+    }
+
+    function revealSurprise() {
+      gameRunning = false;
+      clearInterval(lilyTimer);
+      document.querySelectorAll(".falling-lily").forEach(l => l.remove());
+
+      explode();
+      startHearts();
+
+      setTimeout(() => {
+        gameScreen.classList.add("hidden");
+        revealScreen.classList.remove("hidden");
+        typeReveal();
+      }, 1350);
+    }
+
+    function typeReveal() {
+      revealText.textContent = "";
+      let i = 0;
+
+      const typer = setInterval(() => {
+        revealText.textContent += revealMessage[i];
+        i++;
+
+        if (i >= revealMessage.length) clearInterval(typer);
+      }, 37);
+    }
+
+    function unlockSite() {
+      document.body.classList.add("unlocked");
+      revealScreen.classList.add("hidden");
+
+      setTimeout(() => {
+        revealScreen.style.display = "none";
+        document.querySelector(".content .section").scrollIntoView({ behavior: "smooth" });
+      }, 420);
+    }
+
+    function askPinky() {
+      explode();
+      document.getElementById("adventureSection").classList.add("hidden");
+      document.getElementById("pinkySection").classList.remove("hidden");
+      setTimeout(() => {
+        document.getElementById("pinkySection").scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
+
+    function showFinal() {
+      explode();
+      document.getElementById("pinkySection").classList.add("hidden");
+      document.getElementById("finalSection").classList.remove("hidden");
+      setTimeout(() => {
+        document.getElementById("finalSection").scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
+
+    function explode() {
+      const emojis = ["🤍","💖","✨","🌿","🌸","🎨","💫"];
+      for (let i = 0; i < 100; i++) {
+        const piece = document.createElement("div");
+        piece.className = "burst";
+        piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 130 + Math.random() * 560;
+
+        piece.style.setProperty("--x", Math.cos(angle) * distance + "px");
+        piece.style.setProperty("--y", Math.sin(angle) * distance + "px");
+        piece.style.animationDelay = Math.random() * .18 + "s";
+
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 2300);
+      }
+    }
+
+    function startHearts() {
+      setInterval(() => {
+        const h = document.createElement("div");
+        h.className = "heart";
+        h.textContent = ["🤍","💖","💕","🌿","🌸"][Math.floor(Math.random()*5)];
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.fontSize = (18 + Math.random() * 30) + "px";
+        h.style.animationDuration = (3.5 + Math.random() * 3) + "s";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 7000);
+      }, 190);
+    }
+
+    function popHeart(x, y) {
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = ["🤍","💖","🌿","🌸"][Math.floor(Math.random()*4)];
+      h.style.left = x + "px";
+      h.style.top = y + "px";
+      h.style.bottom = "auto";
+      h.style.animationDuration = "1.45s";
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 1600);
+    }
+
+    function makeBackgroundPetal() {
+      const p = document.createElement("div");
+      p.className = "petal";
+      p.textContent = Math.random() > .5 ? "🤍" : "🌸";
+      p.style.left = Math.random() * 100 + "vw";
+      p.style.fontSize = (14 + Math.random() * 18) + "px";
+      p.style.animationDuration = (7 + Math.random() * 7) + "s";
+      p.style.setProperty("--drift", (-80 + Math.random() * 160) + "px");
+
+      document.body.appendChild(p);
+      setTimeout(() => p.remove(), 15000);
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = meetingDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdownTimer").innerHTML =
+          "<h2 style='grid-column:1/-1'>TODAY IS THE DAY. GO GET YOUR HUG. 🤍</h2>";
+        return;
+      }
+
+      document.getElementById("days").textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+      document.getElementById("hours").textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      document.getElementById("minutes").textContent = Math.floor((diff / (1000 * 60)) % 60);
+      document.getElementById("seconds").textContent = Math.floor((diff / 1000) % 60);
+    }
   </script>
 </body>
 </html>
