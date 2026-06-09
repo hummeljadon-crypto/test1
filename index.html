@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>For You 🤍</title>
+  <title>For You 🤍🌿</title>
 
   <style>
     :root {
-      --night: #060711;
+      --night: #050611;
       --night2: #101935;
       --ink: #2b1a24;
       --paper: #fff4df;
@@ -113,24 +113,20 @@
     }
 
     .card {
-      width: min(880px, 95vw);
-      padding: clamp(24px, 5vw, 50px);
+      width: min(900px, 95vw);
+      padding: clamp(24px, 5vw, 52px);
       border: 1px solid rgba(255,255,255,.18);
       border-radius: 34px;
-      background: rgba(255,255,255,.075);
+      background: rgba(255,255,255,.085);
       backdrop-filter: blur(16px);
       box-shadow: 0 24px 90px var(--shadow);
       position: relative;
       overflow: hidden;
     }
 
-    .card.clean {
-      background: rgba(255,255,255,.09);
-    }
-
     .choice {
       display: block;
-      width: min(100%, 580px);
+      width: min(100%, 600px);
       margin: 12px auto;
     }
 
@@ -154,6 +150,17 @@
       overflow: hidden;
     }
 
+    .star-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.75) 0 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,.45) 0 1px, transparent 1.7px);
+      background-size: 90px 90px, 140px 140px;
+      background-position: 10px 20px, 45px 70px;
+      opacity: .28;
+    }
+
     .moon {
       position: absolute;
       top: 7vh;
@@ -167,17 +174,6 @@
       opacity: .76;
     }
 
-    .star-bg {
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,.8) 0 1px, transparent 1.8px),
-        radial-gradient(circle, rgba(255,255,255,.5) 0 1px, transparent 1.7px);
-      background-size: 90px 90px, 140px 140px;
-      background-position: 10px 20px, 45px 70px;
-      opacity: .32;
-    }
-
     .petal {
       position: fixed;
       top: -40px;
@@ -188,9 +184,19 @@
     }
 
     @keyframes petalFall {
-      from { transform: translateY(-50px) translateX(0) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      to { transform: translateY(110vh) translateX(var(--drift)) rotate(360deg); opacity: 0; }
+      from {
+        transform: translateY(-50px) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(110vh) translateX(var(--drift)) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     .willow {
@@ -199,7 +205,7 @@
       bottom: -80px;
       transform: translateX(-50%) scale(.45);
       z-index: 2;
-      width: min(1250px, 190vw);
+      width: min(1260px, 190vw);
       height: 760px;
       pointer-events: none;
       opacity: .13;
@@ -266,15 +272,49 @@
       animation: sway 4s ease-in-out infinite alternate;
     }
 
-    .b1 { left: 270px; height: 540px; transform: rotate(24deg); animation-delay: .1s; }
-    .b2 { left: 390px; height: 570px; transform: rotate(13deg); animation-delay: .8s; }
-    .b3 { left: 570px; height: 590px; transform: rotate(0deg); animation-delay: .3s; }
-    .b4 { left: 750px; height: 570px; transform: rotate(-13deg); animation-delay: 1s; }
-    .b5 { left: 870px; height: 540px; transform: rotate(-24deg); animation-delay: .5s; }
+    .b1 {
+      left: 270px;
+      height: 540px;
+      transform: rotate(24deg);
+      animation-delay: .1s;
+    }
+
+    .b2 {
+      left: 390px;
+      height: 570px;
+      transform: rotate(13deg);
+      animation-delay: .8s;
+    }
+
+    .b3 {
+      left: 570px;
+      height: 590px;
+      transform: rotate(0deg);
+      animation-delay: .3s;
+    }
+
+    .b4 {
+      left: 750px;
+      height: 570px;
+      transform: rotate(-13deg);
+      animation-delay: 1s;
+    }
+
+    .b5 {
+      left: 870px;
+      height: 540px;
+      transform: rotate(-24deg);
+      animation-delay: .5s;
+    }
 
     @keyframes sway {
-      from { translate: -7px 0; }
-      to { translate: 7px 0; }
+      from {
+        translate: -7px 0;
+      }
+
+      to {
+        translate: 7px 0;
+      }
     }
 
     .leaf {
@@ -299,8 +339,15 @@
     }
 
     @keyframes leafSway {
-      from { translate: -3px 0; rotate: -6deg; }
-      to { translate: 3px 0; rotate: 6deg; }
+      from {
+        translate: -3px 0;
+        rotate: -6deg;
+      }
+
+      to {
+        translate: 3px 0;
+        rotate: 6deg;
+      }
     }
 
     .tree-memory {
@@ -397,8 +444,15 @@
       opacity: .95;
     }
 
-    .mountain.left { left: -10%; }
-    .mountain.right { right: -8%; transform: scaleX(-1); opacity: .78; }
+    .mountain.left {
+      left: -10%;
+    }
+
+    .mountain.right {
+      right: -8%;
+      transform: scaleX(-1);
+      opacity: .78;
+    }
 
     .lake {
       position: absolute;
@@ -443,6 +497,208 @@
       clip-path: polygon(0 100%, 50% 0, 100% 100%);
     }
 
+    .wedding-egg {
+      position: absolute;
+      right: 14%;
+      bottom: 41%;
+      width: 112px;
+      height: 82px;
+      opacity: .74;
+      transform: scale(.82);
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,.25));
+    }
+
+    .wedding-egg .arch {
+      position: absolute;
+      left: 19px;
+      bottom: 18px;
+      width: 72px;
+      height: 58px;
+      border: 4px solid rgba(255,248,235,.88);
+      border-bottom: 0;
+      border-radius: 70px 70px 0 0;
+    }
+
+    .wedding-egg .arch::before,
+    .wedding-egg .arch::after {
+      content: "✿";
+      position: absolute;
+      font-size: 12px;
+      color: #fff4df;
+      text-shadow: 0 0 5px rgba(255,255,255,.5);
+    }
+
+    .wedding-egg .arch::before {
+      left: -6px;
+      top: 12px;
+    }
+
+    .wedding-egg .arch::after {
+      right: -7px;
+      top: 8px;
+    }
+
+    .tiny-bride,
+    .tiny-groom {
+      position: absolute;
+      bottom: 6px;
+      width: 18px;
+      height: 36px;
+    }
+
+    .tiny-bride {
+      left: 41px;
+    }
+
+    .tiny-groom {
+      left: 61px;
+    }
+
+    .tiny-bride::before,
+    .tiny-groom::before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 0;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #e5ad8d;
+    }
+
+    .tiny-bride::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      border-left: 9px solid transparent;
+      border-right: 9px solid transparent;
+      border-bottom: 26px solid rgba(255,255,255,.92);
+    }
+
+    .tiny-groom::after {
+      content: "";
+      position: absolute;
+      left: 3px;
+      bottom: 0;
+      width: 12px;
+      height: 27px;
+      border-radius: 3px;
+      background: #15151d;
+    }
+
+    .lake-creature {
+      position: absolute;
+      left: -170px;
+      bottom: 20%;
+      width: 150px;
+      height: 48px;
+      opacity: .38;
+      animation: swimCreature 24s linear infinite 8s;
+    }
+
+    .lake-creature::before {
+      content: "";
+      position: absolute;
+      left: 22px;
+      top: 19px;
+      width: 88px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(4,20,31,.75);
+    }
+
+    .lake-creature::after {
+      content: "";
+      position: absolute;
+      right: 14px;
+      top: 4px;
+      width: 32px;
+      height: 46px;
+      border-radius: 50% 50% 20% 20%;
+      background: rgba(4,20,31,.75);
+      transform: rotate(20deg);
+    }
+
+    .creature-ripple {
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      bottom: 2px;
+      height: 2px;
+      background: rgba(255,255,255,.35);
+      box-shadow: 0 8px 0 rgba(255,255,255,.18);
+    }
+
+    @keyframes swimCreature {
+      0% {
+        transform: translateX(0) translateY(0);
+        opacity: 0;
+      }
+
+      12% {
+        opacity: .38;
+      }
+
+      55% {
+        transform: translateX(1180px) translateY(-20px);
+        opacity: .38;
+      }
+
+      70% {
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateX(1180px) translateY(-20px);
+        opacity: 0;
+      }
+    }
+
+    .rare-shooting-star {
+      position: absolute;
+      left: 72%;
+      top: 16%;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0;
+      box-shadow: 0 0 18px white;
+      animation: rareStar 18s ease-in-out infinite 5s;
+    }
+
+    .rare-shooting-star::after {
+      content: "";
+      position: absolute;
+      right: 5px;
+      top: 4px;
+      width: 110px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.9));
+    }
+
+    @keyframes rareStar {
+      0%, 70%, 100% {
+        opacity: 0;
+        transform: translate(0, 0) rotate(-25deg);
+      }
+
+      75% {
+        opacity: 1;
+      }
+
+      85% {
+        opacity: 1;
+        transform: translate(-320px, 150px) rotate(-25deg);
+      }
+
+      90% {
+        opacity: 0;
+        transform: translate(-380px, 180px) rotate(-25deg);
+      }
+    }
+
     .game-cloud {
       position: absolute;
       width: 180px;
@@ -476,15 +732,30 @@
       top: -40px;
     }
 
-    .cloud1 { top: 10%; left: -190px; }
-    .cloud2 { top: 25%; left: -260px; animation-delay: 7s; transform: scale(.75); }
-
-    @keyframes cloudDrift {
-      from { translate: 0 0; }
-      to { translate: 1250px 0; }
+    .cloud1 {
+      top: 10%;
+      left: -190px;
     }
 
-    #score, #hint {
+    .cloud2 {
+      top: 25%;
+      left: -260px;
+      animation-delay: 7s;
+      transform: scale(.75);
+    }
+
+    @keyframes cloudDrift {
+      from {
+        translate: 0 0;
+      }
+
+      to {
+        translate: 1250px 0;
+      }
+    }
+
+    #score,
+    #hint {
       position: absolute;
       top: 18px;
       z-index: 4;
@@ -495,8 +766,15 @@
       font-weight: 900;
     }
 
-    #score { left: 20px; }
-    #hint { right: 20px; font-size: .95rem; opacity: .92; }
+    #score {
+      left: 20px;
+    }
+
+    #hint {
+      right: 20px;
+      font-size: .95rem;
+      opacity: .92;
+    }
 
     #player {
       position: absolute;
@@ -568,11 +846,18 @@
     }
 
     @keyframes fall {
-      from { transform: translateY(-80px) rotate(0deg); }
-      to { transform: translateY(790px) rotate(250deg); }
+      from {
+        transform: translateY(-80px) rotate(0deg);
+      }
+
+      to {
+        transform: translateY(790px) rotate(250deg);
+      }
     }
 
-    .particle, .heart, .poured-flower {
+    .particle,
+    .heart,
+    .poured-flower {
       position: fixed;
       z-index: 90;
       pointer-events: none;
@@ -587,8 +872,15 @@
     }
 
     @keyframes burst {
-      from { transform: translate(-50%, -50%) rotate(0deg) scale(.2); opacity: 1; }
-      to { transform: translate(var(--x), var(--y)) rotate(540deg) scale(1.7); opacity: 0; }
+      from {
+        transform: translate(-50%, -50%) rotate(0deg) scale(.2);
+        opacity: 1;
+      }
+
+      to {
+        transform: translate(var(--x), var(--y)) rotate(540deg) scale(1.7);
+        opacity: 0;
+      }
     }
 
     .heart {
@@ -598,9 +890,19 @@
     }
 
     @keyframes floatUp {
-      0% { transform: translateY(0) scale(.6) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      100% { transform: translateY(-115vh) scale(1.4) rotate(360deg); opacity: 0; }
+      0% {
+        transform: translateY(0) scale(.6) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-115vh) scale(1.4) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     .typewriter {
@@ -625,8 +927,75 @@
     }
 
     @keyframes bouquetPop {
-      from { transform: scale(.96) rotate(-2deg); }
-      to { transform: scale(1.05) rotate(2deg); }
+      from {
+        transform: scale(.96) rotate(-2deg);
+      }
+
+      to {
+        transform: scale(1.05) rotate(2deg);
+      }
+    }
+
+    .future-glimpse {
+      display: none;
+      width: min(900px, 95vw);
+      padding: clamp(24px, 5vw, 50px);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 34px;
+      background: rgba(255,255,255,.095);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 24px 90px var(--shadow);
+    }
+
+    .future-glimpse.show {
+      display: block;
+      animation: fadeIn .8s ease forwards;
+    }
+
+    .mini-distance {
+      position: relative;
+      width: min(650px, 90%);
+      height: 90px;
+      margin: 24px auto;
+      font-family: system-ui, sans-serif;
+      font-weight: 900;
+    }
+
+    .mini-distance .place {
+      position: absolute;
+      top: 0;
+      transition: left 2s ease, right 2s ease;
+    }
+
+    .place.germany {
+      left: 0;
+    }
+
+    .place.brazil {
+      right: 0;
+    }
+
+    .mini-distance.closer .germany {
+      left: 22%;
+    }
+
+    .mini-distance.closer .brazil {
+      right: 22%;
+    }
+
+    .distance-thread {
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      bottom: 22px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.8), transparent);
+      transition: left 2s ease, right 2s ease;
+    }
+
+    .mini-distance.closer .distance-thread {
+      left: 34%;
+      right: 34%;
     }
 
     .content {
@@ -681,8 +1050,13 @@
     }
 
     @keyframes planeMove {
-      from { transform: translateX(-12px); }
-      to { transform: translateX(12px); }
+      from {
+        transform: translateX(-12px);
+      }
+
+      to {
+        transform: translateX(12px);
+      }
     }
 
     #countdownTimer {
@@ -810,9 +1184,19 @@
     }
 
     @keyframes pourDown {
-      from { transform: translateY(-80px) translateX(0) rotate(0deg); opacity: 0; }
-      8% { opacity: 1; }
-      to { transform: translateY(120vh) translateX(var(--drift)) rotate(420deg); opacity: 0; }
+      from {
+        transform: translateY(-80px) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      8% {
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(120vh) translateX(var(--drift)) rotate(420deg);
+        opacity: 0;
+      }
     }
 
     .pinky-card {
@@ -889,30 +1273,39 @@
       z-index: -2;
     }
 
-    .final-scene .willow-overlay {
-      position: absolute;
-      inset: auto -10% -15% -10%;
-      height: 70%;
-      pointer-events: none;
-      opacity: .45;
-      background:
-        radial-gradient(ellipse at 50% 95%, rgba(35,73,47,.86), transparent 62%);
-      z-index: -1;
-    }
-
     .vine {
       position: absolute;
-      width: 220px;
-      height: 420px;
+      width: 260px;
+      height: 520px;
       border: 3px solid rgba(147,207,162,.75);
       border-bottom: 0;
       border-right: 0;
       border-radius: 70% 0 0 0;
-      opacity: .55;
+      opacity: .6;
+      animation: vineBreathe 2.8s ease-in-out infinite alternate;
     }
 
-    .vine.left { left: -40px; top: 8%; transform: rotate(-8deg); }
-    .vine.right { right: -40px; top: 8%; transform: scaleX(-1) rotate(-8deg); }
+    .vine.left {
+      left: -40px;
+      top: 4%;
+      transform: rotate(-8deg);
+    }
+
+    .vine.right {
+      right: -40px;
+      top: 4%;
+      transform: scaleX(-1) rotate(-8deg);
+    }
+
+    @keyframes vineBreathe {
+      from {
+        opacity: .45;
+      }
+
+      to {
+        opacity: .8;
+      }
+    }
 
     .sketch-card {
       width: min(940px, 96vw);
@@ -930,12 +1323,20 @@
     .sketch-card::after {
       content: "🌿";
       position: absolute;
-      font-size: 42px;
-      opacity: .35;
+      font-size: 48px;
+      opacity: .32;
     }
 
-    .sketch-card::before { left: 18px; top: 18px; }
-    .sketch-card::after { right: 18px; bottom: 18px; transform: rotate(180deg); }
+    .sketch-card::before {
+      left: 18px;
+      top: 18px;
+    }
+
+    .sketch-card::after {
+      right: 18px;
+      bottom: 18px;
+      transform: rotate(180deg);
+    }
 
     .sketch-map {
       width: min(780px, 100%);
@@ -966,14 +1367,19 @@
     }
 
     @keyframes drawLine {
-      to { stroke-dashoffset: 0; }
+      to {
+        stroke-dashoffset: 0;
+      }
     }
 
     @keyframes closeDistance {
-      to { transform: scaleX(.08); }
+      to {
+        transform: scaleX(.08);
+      }
     }
 
-    .dot-de, .dot-br {
+    .dot-de,
+    .dot-br {
       transform-box: fill-box;
       transform-origin: center;
     }
@@ -987,11 +1393,15 @@
     }
 
     @keyframes moveDE {
-      to { transform: translateX(250px); }
+      to {
+        transform: translateX(250px);
+      }
     }
 
     @keyframes moveBR {
-      to { transform: translateX(-250px); }
+      to {
+        transform: translateX(-250px);
+      }
     }
 
     .hug-figure {
@@ -1004,8 +1414,15 @@
     }
 
     @keyframes hugAppear {
-      from { opacity: 0; transform: scale(.4); }
-      to { opacity: 1; transform: scale(1); }
+      from {
+        opacity: 0;
+        transform: scale(.4);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
 
     .final-title {
@@ -1017,11 +1434,13 @@
     }
 
     @keyframes fadeIn {
-      to { opacity: 1; }
+      to {
+        opacity: 1;
+      }
     }
 
     .sky-section {
-      min-height: 130vh;
+      min-height: 135vh;
       position: relative;
       overflow: hidden;
       background:
@@ -1066,12 +1485,31 @@
     }
 
     @keyframes moonLoop {
-      0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-      12% { opacity: 1; }
-      35% { transform: translate(-120px, 70px) rotate(55deg); }
-      65% { transform: translate(-20px, 150px) rotate(160deg); }
-      88% { opacity: 1; }
-      100% { transform: translate(70px, 10px) rotate(260deg); opacity: 0; }
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0;
+      }
+
+      12% {
+        opacity: 1;
+      }
+
+      35% {
+        transform: translate(-120px, 70px) rotate(55deg);
+      }
+
+      65% {
+        transform: translate(-20px, 150px) rotate(160deg);
+      }
+
+      88% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(70px, 10px) rotate(260deg);
+        opacity: 0;
+      }
     }
 
     .pulse-star {
@@ -1086,8 +1524,15 @@
     }
 
     @keyframes pulseStar {
-      from { transform: scale(.9); opacity: .72; }
-      to { transform: scale(1.2); opacity: 1; }
+      from {
+        transform: scale(.9);
+        opacity: .72;
+      }
+
+      to {
+        transform: scale(1.2);
+        opacity: 1;
+      }
     }
 
     .sky-message {
@@ -1109,7 +1554,9 @@
     }
 
     @media (max-width: 760px) {
-      #hint { display: none; }
+      #hint {
+        display: none;
+      }
 
       #countdownTimer {
         grid-template-columns: repeat(2, 1fr);
@@ -1137,6 +1584,11 @@
       .tree-memory {
         width: 60px;
         height: 76px;
+      }
+
+      .wedding-egg {
+        transform: scale(.62);
+        right: 6%;
       }
 
       .pinky-stage {
@@ -1172,21 +1624,32 @@
     <div class="willow-branch b5"></div>
 
     <div class="tree-memory memory-1" style="left: 340px; top: 235px; --tilt:-6deg;">
-      <div class="mini-img"><img src="photo1.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo1';"></div>
+      <div class="mini-img">
+        <img src="photo1.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo1';">
+      </div>
     </div>
+
     <div class="tree-memory memory-2" style="left: 610px; top: 185px; --tilt:5deg;">
-      <div class="mini-img"><img src="photo2.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo2';"></div>
+      <div class="mini-img">
+        <img src="photo2.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo2';">
+      </div>
     </div>
+
     <div class="tree-memory memory-3" style="left: 785px; top: 270px; --tilt:-4deg;">
-      <div class="mini-img"><img src="photo3.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo3';"></div>
+      <div class="mini-img">
+        <img src="photo3.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo3';">
+      </div>
     </div>
+
     <div class="tree-memory memory-4" style="left: 500px; top: 135px; --tilt:4deg;">
-      <div class="mini-img"><img src="main.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='main';"></div>
+      <div class="mini-img">
+        <img src="main.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='main';">
+      </div>
     </div>
   </div>
 
   <section id="introScene" class="scene active">
-    <div class="card clean">
+    <div class="card">
       <h1>Germany 🇩🇪<br>Brazil 🇧🇷</h1>
       <p>Three months. One ocean. One girl I cannot wait to see.</p>
       <p class="small">August 8th is loading.</p>
@@ -1195,7 +1658,7 @@
   </section>
 
   <section id="quizScene" class="scene">
-    <div class="card clean">
+    <div class="card">
       <h1>Little Love Quiz</h1>
       <p>Official. Scientific. Definitely not rigged.</p>
       <h2 id="questionText"></h2>
@@ -1211,6 +1674,7 @@
         <div class="sunset"></div>
         <div class="mountain left"></div>
         <div class="mountain right"></div>
+
         <div class="village">
           <div class="house"></div>
           <div class="house" style="height:34px"></div>
@@ -1221,7 +1685,21 @@
           <div class="house" style="height:28px"></div>
           <div class="house" style="height:36px"></div>
         </div>
+
+        <div class="wedding-egg">
+          <div class="arch"></div>
+          <div class="tiny-bride"></div>
+          <div class="tiny-groom"></div>
+        </div>
+
         <div class="lake"></div>
+
+        <div class="lake-creature">
+          <div class="creature-ripple"></div>
+        </div>
+
+        <div class="rare-shooting-star"></div>
+
         <div class="game-cloud cloud1"></div>
         <div class="game-cloud cloud2"></div>
       </div>
@@ -1239,13 +1717,26 @@
   </section>
 
   <section id="revealScene" class="scene">
-    <div class="card clean">
+    <div class="card">
       <h1>For You 🤍</h1>
       <div class="bouquet">
         <div class="bouquet-burst">💐</div>
       </div>
+
       <div id="revealText" class="typewriter"></div>
-      <button onclick="unlockSite()">Open the rest ↓</button>
+
+      <div id="futureGlimpse" class="future-glimpse">
+        <p>Some flowers are for today.</p>
+        <p>Some are for tomorrow.</p>
+        <div id="miniDistance" class="mini-distance">
+          <span class="place germany">Germany 🇩🇪</span>
+          <span class="place brazil">Brazil 🇧🇷</span>
+          <div class="distance-thread"></div>
+        </div>
+        <p class="small">Every day, a little closer.</p>
+      </div>
+
+      <button id="openRestButton" style="display:none;" onclick="unlockSite()">Open the rest ↓</button>
       <p class="small">Scroll after this. The basket has more flowers to pour out.</p>
     </div>
   </section>
@@ -1399,7 +1890,6 @@
     </section>
 
     <section id="finalSection" class="final-scene" style="display:none;">
-      <div class="willow-overlay"></div>
       <div class="vine left"></div>
       <div class="vine right"></div>
 
@@ -1447,7 +1937,7 @@
           No matter the time, no matter the day, under these skies I will be by your side.
           Across countries, across oceans, across every quiet night until the end of time.
         </p>
-        <p class="small">You found the little star. Obviously it was hiding something soft.</p>
+        <p class="small">P.S. Did you notice the couple by the lake?</p>
       </div>
     </section>
   </main>
@@ -1522,6 +2012,7 @@ I finally get to hold your hand. 🤍`;
       Object.values(scenes).forEach(scene => {
         scene.classList.remove("active");
       });
+
       scenes[name].classList.add("active");
     }
 
@@ -1654,6 +2145,7 @@ I finally get to hold your hand. 🤍`;
 
       const miniFlowers = "🤍🌹🌸🌿💮";
       let fill = "";
+
       for (let i = 0; i < score; i++) {
         fill += miniFlowers[i % miniFlowers.length];
       }
@@ -1684,14 +2176,26 @@ I finally get to hold your hand. 🤍`;
         revealText.textContent += revealMessage[i];
         i++;
 
-        if (i >= revealMessage.length) clearInterval(typer);
+        if (i >= revealMessage.length) {
+          clearInterval(typer);
+          showFutureGlimpse();
+        }
       }, 37);
+    }
+
+    function showFutureGlimpse() {
+      setTimeout(() => {
+        document.getElementById("futureGlimpse").classList.add("show");
+        setTimeout(() => {
+          document.getElementById("miniDistance").classList.add("closer");
+          document.getElementById("openRestButton").style.display = "inline-block";
+        }, 900);
+      }, 450);
     }
 
     function unlockSite() {
       document.body.classList.add("unlocked");
-      switchScene("intro");
-      scenes.intro.classList.remove("active");
+      scenes.reveal.classList.remove("active");
       pourFlowers();
 
       setTimeout(() => {
@@ -1734,6 +2238,7 @@ I finally get to hold your hand. 🤍`;
 
     function growWillow(stage) {
       willow.classList.remove("stage-1", "stage-2", "stage-3", "stage-4", "stage-final");
+
       if (stage === "final") {
         willow.classList.add("stage-final");
       } else {
@@ -1742,7 +2247,7 @@ I finally get to hold your hand. 🤍`;
     }
 
     function plantWillowLeaves() {
-      for (let i = 0; i < 300; i++) {
+      for (let i = 0; i < 310; i++) {
         const leaf = document.createElement("div");
         leaf.className = "leaf";
 
@@ -1763,6 +2268,7 @@ I finally get to hold your hand. 🤍`;
 
     function explode() {
       const emojis = ["🤍", "💖", "✨", "🌿", "🌸", "🎨", "💫", "🌹", "💮"];
+
       for (let i = 0; i < 105; i++) {
         const piece = document.createElement("div");
         piece.className = "particle";
