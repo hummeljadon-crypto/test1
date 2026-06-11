@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="A romantic interactive website counting down to a special moment." />
   <title>For You 🤍</title>
 
   <style>
@@ -19,6 +20,7 @@
       --deepgreen: #1d3c29;
       --lake: #3d7fa7;
       --shadow: rgba(0,0,0,.42);
+      --transition: 0.55s ease;
     }
 
     * {
@@ -58,6 +60,16 @@
       background: linear-gradient(135deg, #fff, #fff0d5, #d8f3dc);
       box-shadow: 0 10px 34px rgba(255,209,102,.22);
       cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(255,209,102,.32);
+    }
+
+    button:active {
+      transform: translateY(0);
     }
 
     h1 {
@@ -126,7 +138,7 @@
       place-items: center;
       text-align: center;
       opacity: 0;
-      transition: opacity .55s ease;
+      transition: opacity var(--transition);
     }
 
     .scene.active {
@@ -157,6 +169,7 @@
       font-weight: bold;
     }
 
+    /* Willow tree and leaves */
     .willow {
       position: fixed;
       left: 50%;
@@ -298,6 +311,7 @@
       transform: scale(1) rotate(var(--tilt));
     }
 
+    /* Game section */
     #game {
       width: min(100%, 430px);
       height: min(76svh, 620px);
@@ -619,7 +633,8 @@
       to { transform: translateY(680px) rotate(250deg); }
     }
 
-    .particle, .heart, .poured-flower {
+    /* Particle effects */
+    .particle, .heart, .poured-flower, .petal {
       position: fixed;
       z-index: 90;
       pointer-events: none;
@@ -643,10 +658,20 @@
       animation: floatUp 5s linear forwards;
     }
 
+    .petal {
+      font-size: 24px;
+      animation: petalFall 12s linear forwards;
+    }
+
     @keyframes floatUp {
       0% { transform: translateY(0) scale(.6) rotate(0deg); opacity: 0; }
       10% { opacity: 1; }
       100% { transform: translateY(-115vh) scale(1.35) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes petalFall {
+      0% { transform: translateY(-100px) translateX(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) translateX(var(--drift)) rotate(720deg); opacity: 0; }
     }
 
     .typewriter {
@@ -847,6 +872,7 @@
       color: rgba(64,32,48,.82);
       font-family: system-ui, sans-serif;
       font-weight: 800;
+      font-size: 0.85rem;
     }
 
     .photo img {
@@ -1269,6 +1295,11 @@
       display: block;
       animation: fadeIn .8s ease forwards;
     }
+
+    @media (max-width: 480px) {
+      h1 { font-size: clamp(1.8rem, 10vw, 2.8rem); }
+      .scene { padding: max(16px, env(safe-area-inset-top)) 14px max(16px, env(safe-area-inset-bottom)); }
+    }
   </style>
 </head>
 
@@ -1288,16 +1319,16 @@
     <div class="branch b5"></div>
 
     <div class="tree-memory memory-1" style="left: 225px; top: 230px; --tilt:-6deg;">
-      <div class="mini-img"><img src="photo1.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo1';"></div>
+      <div class="mini-img"><img src="photo1.jpg" alt="Memory photo 1" onerror="handleImageError(this)"></div>
     </div>
     <div class="tree-memory memory-2" style="left: 425px; top: 190px; --tilt:5deg;">
-      <div class="mini-img"><img src="photo2.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo2';"></div>
+      <div class="mini-img"><img src="photo2.jpg" alt="Memory photo 2" onerror="handleImageError(this)"></div>
     </div>
     <div class="tree-memory memory-3" style="left: 510px; top: 280px; --tilt:-4deg;">
-      <div class="mini-img"><img src="photo3.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo3';"></div>
+      <div class="mini-img"><img src="photo3.jpg" alt="Memory photo 3" onerror="handleImageError(this)"></div>
     </div>
     <div class="tree-memory memory-4" style="left: 340px; top: 145px; --tilt:4deg;">
-      <div class="mini-img"><img src="main.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='main';"></div>
+      <div class="mini-img"><img src="main.jpg" alt="Main memory photo" onerror="handleImageError(this)"></div>
     </div>
   </div>
 
@@ -1322,13 +1353,13 @@
   </section>
 
   <section id="gameScene" class="scene">
-    <div id="game">
+    <div id="game" role="img" aria-label="Lake Como interactive game scene">
       <div class="como">
-        <div class="sunset"></div>
-        <div class="mountain left"></div>
-        <div class="mountain right"></div>
+        <div class="sunset" aria-hidden="true"></div>
+        <div class="mountain left" aria-hidden="true"></div>
+        <div class="mountain right" aria-hidden="true"></div>
 
-        <div class="village">
+        <div class="village" aria-hidden="true">
           <div class="house"></div>
           <div class="house" style="height:26px"></div>
           <div class="house" style="height:20px"></div>
@@ -1336,15 +1367,15 @@
           <div class="house" style="height:24px"></div>
         </div>
 
-        <div class="wedding-egg">
+        <div class="wedding-egg" aria-hidden="true">
           <div class="arch"></div>
           <div class="tiny-bride"></div>
           <div class="tiny-groom"></div>
         </div>
 
-        <div class="lake"></div>
-        <div class="lake-creature"></div>
-        <div class="rare-star"></div>
+        <div class="lake" aria-hidden="true"></div>
+        <div class="lake-creature" aria-hidden="true"></div>
+        <div class="rare-star" aria-hidden="true"></div>
       </div>
 
       <div id="score">Bouquet pieces: 0 / 14</div>
@@ -1405,7 +1436,7 @@
       <div>
         <div class="polaroid" style="--tilt:-1deg;">
           <div class="photo">
-            <img src="main.jpg" alt="Her main photo" onerror="this.style.display='none'; this.parentElement.innerHTML='main.jpg<br>Main photo of her goes here';">
+            <img src="main.jpg" alt="Main photo of her" onerror="handleImageError(this)">
           </div>
           <p>The main character. Obviously.</p>
         </div>
@@ -1484,32 +1515,32 @@
     <section class="section">
       <div>
         <div class="polaroid" style="--tilt:-2deg">
-          <div class="photo"><img src="photo1.jpg" alt="Memory 1" onerror="this.style.display='none'; this.parentElement.innerHTML='photo1.jpg';"></div>
+          <div class="photo"><img src="photo1.jpg" alt="Memory 1" onerror="handleImageError(this)"></div>
           <p>One of my favorite little memories.</p>
         </div>
 
         <div class="polaroid" style="--tilt:1.5deg">
-          <div class="photo"><img src="photo2.jpg" alt="Memory 2" onerror="this.style.display='none'; this.parentElement.innerHTML='photo2.jpg';"></div>
+          <div class="photo"><img src="photo2.jpg" alt="Memory 2" onerror="handleImageError(this)"></div>
           <p>The smile that makes distance feel smaller.</p>
         </div>
 
         <div class="polaroid" style="--tilt:-1deg">
-          <div class="photo"><img src="photo3.jpg" alt="Memory 3" onerror="this.style.display='none'; this.parentElement.innerHTML='photo3.jpg';"></div>
+          <div class="photo"><img src="photo3.jpg" alt="Memory 3" onerror="handleImageError(this)"></div>
           <p>A moment I wish I could frame forever.</p>
         </div>
 
         <div class="polaroid" style="--tilt:1deg">
-          <div class="photo"><img src="photo4.jpg" alt="Memory 4" onerror="this.style.display='none'; this.parentElement.innerHTML='photo4.jpg';"></div>
+          <div class="photo"><img src="photo4.jpg" alt="Memory 4" onerror="handleImageError(this)"></div>
           <p>Proof that my phone gallery has a favorite person.</p>
         </div>
 
         <div class="polaroid" style="--tilt:-1.5deg">
-          <div class="photo"><img src="photo5.jpg" alt="Memory 5" onerror="this.style.display='none'; this.parentElement.innerHTML='photo5.jpg';"></div>
+          <div class="photo"><img src="photo5.jpg" alt="Memory 5" onerror="handleImageError(this)"></div>
           <p>Another reason August needs to hurry up.</p>
         </div>
 
         <div class="polaroid" style="--tilt:1.2deg">
-          <div class="photo"><img src="photo6.jpg" alt="Memory 6" onerror="this.style.display='none'; this.parentElement.innerHTML='photo6.jpg';"></div>
+          <div class="photo"><img src="photo6.jpg" alt="Memory 6" onerror="handleImageError(this)"></div>
           <p>More memories. More us. Please.</p>
         </div>
       </div>
@@ -1578,7 +1609,7 @@
     <section class="sky-section">
       <div class="big-moon"></div>
       <div class="shooting-star"></div>
-      <div class="pulse-star" onclick="openSkyMessage()">✦</div>
+      <div class="pulse-star" onclick="openSkyMessage()" role="button" tabindex="0" aria-label="Click to see a message">✦</div>
 
       <div id="skyMessage" class="sky-message">
         <h2>To the moon and back</h2>
@@ -1592,7 +1623,32 @@
   </main>
 
   <script>
-    const meetingDate = new Date("2026-08-08T12:00:00");
+    // ==========================================
+    // CONFIGURATION
+    // ==========================================
+    const CONFIG = {
+      meetingDate: "2026-08-08T12:00:00",
+      quizWrongMessage: "Try again, pretty girl.",
+      quizCorrectMessage: "Correct. Suspiciously cute.",
+      totalFlowers: 14
+    };
+
+    // ==========================================
+    // STATE MANAGEMENT
+    // ==========================================
+    const state = {
+      quizIndex: 0,
+      score: 0,
+      playerX: 50,
+      gameRunning: false,
+      timerIntervals: [],
+      animationFrames: []
+    };
+
+    // ==========================================
+    // CORE DATA
+    // ==========================================
+    const meetingDate = new Date(CONFIG.meetingDate);
 
     const quiz = [
       {
@@ -1627,6 +1683,9 @@ Soon...
 
 I finally get to hold your hand. 🤍`;
 
+    // ==========================================
+    // DOM ELEMENTS
+    // ==========================================
     const scenes = {
       intro: document.getElementById("introScene"),
       quiz: document.getElementById("quizScene"),
@@ -1634,36 +1693,72 @@ I finally get to hold your hand. 🤍`;
       reveal: document.getElementById("revealScene")
     };
 
-    const willow = document.getElementById("willow");
-    const questionText = document.getElementById("questionText");
-    const answers = document.getElementById("answers");
-    const quizFeedback = document.getElementById("quizFeedback");
-    const quizProgress = document.getElementById("quizProgress");
-    const game = document.getElementById("game");
-    const player = document.getElementById("player");
-    const basketFill = document.getElementById("basketFill");
-    const scoreEl = document.getElementById("score");
-    const revealText = document.getElementById("revealText");
-    const underWillowSection = document.getElementById("underWillowSection");
+    const elements = {
+      willow: document.getElementById("willow"),
+      questionText: document.getElementById("questionText"),
+      answers: document.getElementById("answers"),
+      quizFeedback: document.getElementById("quizFeedback"),
+      quizProgress: document.getElementById("quizProgress"),
+      game: document.getElementById("game"),
+      player: document.getElementById("player"),
+      basketFill: document.getElementById("basketFill"),
+      scoreEl: document.getElementById("score"),
+      revealText: document.getElementById("revealText"),
+      underWillowSection: document.getElementById("underWillowSection"),
+      countdownTimer: document.getElementById("countdownTimer"),
+      finalTimer: document.querySelector(".final-timer")
+    };
 
-    let quizIndex = 0;
-    let score = 0;
-    let playerX = 50;
-    let gameRunning = false;
-    let flowerTimer = null;
-    let heartTimer = null;
+    // ==========================================
+    // INITIALIZATION
+    // ==========================================
+    function init() {
+      plantWillowLeaves();
+      addBackgroundPetals();
+      updateCountdown();
+      attachEventListeners();
+    }
 
-    plantWillowLeaves();
-    setInterval(makeBackgroundPetal, 1000);
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-    window.addEventListener("scroll", handleScrollScenes);
+    function attachEventListeners() {
+      // Keyboard and pointer controls for game
+      document.addEventListener("keydown", handleGameInput);
+      elements.game.addEventListener("pointermove", handleGamePointer);
+      window.addEventListener("scroll", handleScrollScenes);
+
+      // Cleanup on unload
+      window.addEventListener("unload", cleanup);
+
+      // Start background petals
+      state.timerIntervals.push(
+        setInterval(makeBackgroundPetal, 1000),
+        setInterval(updateCountdown, 1000)
+      );
+    }
+
+    // ==========================================
+    // UTILITY FUNCTIONS
+    // ==========================================
+    function handleImageError(img) {
+      img.style.display = "none";
+      const parent = img.parentElement;
+      if (parent) {
+        parent.textContent = img.alt || "Image";
+      }
+    }
 
     function switchScene(name) {
       Object.values(scenes).forEach(scene => scene.classList.remove("active"));
-      scenes[name].classList.add("active");
+      if (scenes[name]) scenes[name].classList.add("active");
     }
 
+    function cleanup() {
+      state.timerIntervals.forEach(id => clearInterval(id));
+      state.animationFrames.forEach(id => cancelAnimationFrame(id));
+    }
+
+    // ==========================================
+    // QUIZ FUNCTIONALITY
+    // ==========================================
     function startQuiz() {
       growWillow(1);
       switchScene("quiz");
@@ -1671,75 +1766,80 @@ I finally get to hold your hand. 🤍`;
     }
 
     function renderQuestion() {
-      const q = quiz[quizIndex];
-      questionText.textContent = q.question;
-      answers.innerHTML = "";
-      quizFeedback.textContent = "";
-      quizProgress.textContent = `${quizIndex + 1} / ${quiz.length}`;
+      const q = quiz[state.quizIndex];
+      elements.questionText.textContent = q.question;
+      elements.answers.innerHTML = "";
+      elements.quizFeedback.textContent = "";
+      elements.quizProgress.textContent = `${state.quizIndex + 1} / ${quiz.length}`;
 
       q.answers.forEach((answer, index) => {
         const btn = document.createElement("button");
         btn.className = "choice";
         btn.textContent = answer;
         btn.onclick = () => chooseAnswer(index);
-        answers.appendChild(btn);
+        elements.answers.appendChild(btn);
       });
     }
 
     function chooseAnswer(index) {
-      const q = quiz[quizIndex];
+      const q = quiz[state.quizIndex];
 
       if (index === q.correct) {
-        quizFeedback.textContent = "Correct. Suspiciously cute.";
+        elements.quizFeedback.textContent = CONFIG.quizCorrectMessage;
 
         setTimeout(() => {
-          quizIndex++;
+          state.quizIndex++;
 
-          if (quizIndex === 1) growWillow(2);
-          if (quizIndex === 2) growWillow(3);
+          if (state.quizIndex === 1) growWillow(2);
+          if (state.quizIndex === 2) growWillow(3);
 
-          if (quizIndex >= quiz.length) {
+          if (state.quizIndex >= quiz.length) {
             startGame();
           } else {
             renderQuestion();
           }
         }, 650);
       } else {
-        quizFeedback.textContent = "Try again, pretty girl.";
+        elements.quizFeedback.textContent = CONFIG.quizWrongMessage;
       }
     }
 
+    // ==========================================
+    // GAME FUNCTIONALITY
+    // ==========================================
     function startGame() {
       switchScene("game");
       growWillow(3);
-      score = 0;
-      playerX = 50;
-      gameRunning = true;
-      scoreEl.textContent = "Bouquet pieces: 0 / 14";
+      state.score = 0;
+      state.playerX = 50;
+      state.gameRunning = true;
+      elements.scoreEl.textContent = `Bouquet pieces: 0 / ${CONFIG.totalFlowers}`;
       updateBasket();
       updatePlayer();
-      flowerTimer = setInterval(dropFlower, 680);
+      state.timerIntervals.push(
+        setInterval(dropFlower, 680)
+      );
+    }
+
+    function handleGameInput(e) {
+      if (!state.gameRunning) return;
+      if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") state.playerX -= 6;
+      if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") state.playerX += 6;
+      state.playerX = Math.max(8, Math.min(92, state.playerX));
+      updatePlayer();
+    }
+
+    function handleGamePointer(e) {
+      if (!state.gameRunning) return;
+      const rect = elements.game.getBoundingClientRect();
+      state.playerX = ((e.clientX - rect.left) / rect.width) * 100;
+      state.playerX = Math.max(8, Math.min(92, state.playerX));
+      updatePlayer();
     }
 
     function updatePlayer() {
-      player.style.left = playerX + "%";
+      elements.player.style.left = state.playerX + "%";
     }
-
-    document.addEventListener("keydown", (e) => {
-      if (!gameRunning) return;
-      if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") playerX -= 6;
-      if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") playerX += 6;
-      playerX = Math.max(8, Math.min(92, playerX));
-      updatePlayer();
-    });
-
-    game.addEventListener("pointermove", (e) => {
-      if (!gameRunning) return;
-      const rect = game.getBoundingClientRect();
-      playerX = ((e.clientX - rect.left) / rect.width) * 100;
-      playerX = Math.max(8, Math.min(92, playerX));
-      updatePlayer();
-    });
 
     function dropFlower() {
       const flower = document.createElement("div");
@@ -1748,48 +1848,46 @@ I finally get to hold your hand. 🤍`;
       flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
       flower.style.left = Math.random() * 86 + 4 + "%";
       flower.style.animationDuration = (2.4 + Math.random() * 1.4) + "s";
-      game.appendChild(flower);
+      elements.game.appendChild(flower);
 
       const collisionCheck = setInterval(() => {
-        if (!gameRunning || !flower.isConnected) {
+        if (!state.gameRunning || !flower.isConnected) {
           clearInterval(collisionCheck);
           return;
         }
 
         const f = flower.getBoundingClientRect();
-        const b = player.getBoundingClientRect();
+        const b = elements.player.getBoundingClientRect();
         const hit = !(f.right < b.left || f.left > b.right || f.bottom < b.top || f.top > b.bottom);
 
         if (hit) {
           flower.remove();
           clearInterval(collisionCheck);
-          score++;
-          scoreEl.textContent = `Bouquet pieces: ${score} / 14`;
+          state.score++;
+          elements.scoreEl.textContent = `Bouquet pieces: ${state.score} / ${CONFIG.totalFlowers}`;
           updateBasket();
           popFlower(b.left + b.width / 2, b.top);
 
-          if (score >= 14) revealSurprise();
+          if (state.score >= CONFIG.totalFlowers) revealSurprise();
         }
       }, 45);
-
-      setTimeout(() => {
-        flower.remove();
-        clearInterval(collisionCheck);
-      }, 4700);
     }
 
     function updateBasket() {
-      const percent = Math.min(100, (score / 14) * 100);
-      basketFill.style.height = percent + "%";
+      const percent = Math.min(100, (state.score / CONFIG.totalFlowers) * 100);
+      elements.basketFill.style.height = percent + "%";
       const miniFlowers = "🤍🌹🌸🌿💮";
       let fill = "";
-      for (let i = 0; i < score; i++) fill += miniFlowers[i % miniFlowers.length];
-      basketFill.textContent = fill;
+      for (let i = 0; i < state.score; i++) fill += miniFlowers[i % miniFlowers.length];
+      elements.basketFill.textContent = fill;
     }
 
+    // ==========================================
+    // REVEAL & TRANSITIONS
+    // ==========================================
     function revealSurprise() {
-      gameRunning = false;
-      clearInterval(flowerTimer);
+      state.gameRunning = false;
+      // Clear all pending flowers
       document.querySelectorAll(".falling-flower").forEach(f => f.remove());
       growWillow(4);
       explode();
@@ -1802,11 +1900,11 @@ I finally get to hold your hand. 🤍`;
     }
 
     function typeReveal() {
-      revealText.textContent = "";
+      elements.revealText.textContent = "";
       let i = 0;
 
       const typer = setInterval(() => {
-        revealText.textContent += revealMessage[i];
+        elements.revealText.textContent += revealMessage[i];
         i++;
         if (i >= revealMessage.length) {
           clearInterval(typer);
@@ -1857,21 +1955,24 @@ I finally get to hold your hand. 🤍`;
       explode();
     }
 
+    // ==========================================
+    // SCROLL & WILLOW TREE
+    // ==========================================
     function handleScrollScenes() {
       if (!document.body.classList.contains("unlocked")) return;
-      const rect = underWillowSection.getBoundingClientRect();
+      const rect = elements.underWillowSection.getBoundingClientRect();
       const windowH = window.innerHeight;
       const progress = Math.min(1, Math.max(0, (windowH - rect.top) / (rect.height + windowH)));
 
-      underWillowSection.classList.toggle("visible-one", progress > .18);
-      underWillowSection.classList.toggle("visible-two", progress > .42);
-      underWillowSection.classList.toggle("together", progress > .68);
+      elements.underWillowSection.classList.toggle("visible-one", progress > .18);
+      elements.underWillowSection.classList.toggle("visible-two", progress > .42);
+      elements.underWillowSection.classList.toggle("together", progress > .68);
     }
 
     function growWillow(stage) {
-      willow.classList.remove("stage-1", "stage-2", "stage-3", "stage-4", "stage-final");
-      if (stage === "final") willow.classList.add("stage-final");
-      else willow.classList.add("stage-" + stage);
+      elements.willow.classList.remove("stage-1", "stage-2", "stage-3", "stage-4", "stage-final");
+      if (stage === "final") elements.willow.classList.add("stage-final");
+      else elements.willow.classList.add("stage-" + stage);
     }
 
     function plantWillowLeaves() {
@@ -1886,10 +1987,13 @@ I finally get to hold your hand. 🤍`;
         leaf.style.left = left + "px";
         leaf.style.top = top + "px";
         leaf.style.animationDelay = (i * 0.028) + "s";
-        willow.appendChild(leaf);
+        elements.willow.appendChild(leaf);
       }
     }
 
+    // ==========================================
+    // PARTICLE EFFECTS
+    // ==========================================
     function explode() {
       const emojis = ["🤍", "💖", "✨", "🌿", "🌸", "🎨", "💫", "🌹", "💮"];
       for (let i = 0; i < 85; i++) {
@@ -1907,17 +2011,18 @@ I finally get to hold your hand. 🤍`;
     }
 
     function startHearts() {
-      if (heartTimer) return;
-      heartTimer = setInterval(() => {
-        const h = document.createElement("div");
-        h.className = "heart";
-        h.textContent = ["🤍", "💖", "💕", "🌿", "🌸", "🌹"][Math.floor(Math.random() * 6)];
-        h.style.left = Math.random() * 100 + "vw";
-        h.style.fontSize = (18 + Math.random() * 26) + "px";
-        h.style.animationDuration = (3.5 + Math.random() * 3) + "s";
-        document.body.appendChild(h);
-        setTimeout(() => h.remove(), 7000);
-      }, 240);
+      state.timerIntervals.push(
+        setInterval(() => {
+          const h = document.createElement("div");
+          h.className = "heart";
+          h.textContent = ["🤍", "💖", "💕", "🌿", "🌸", "🌹"][Math.floor(Math.random() * 6)];
+          h.style.left = Math.random() * 100 + "vw";
+          h.style.fontSize = (18 + Math.random() * 26) + "px";
+          h.style.animationDuration = (3.5 + Math.random() * 3) + "s";
+          document.body.appendChild(h);
+          setTimeout(() => h.remove(), 7000);
+        }, 240)
+      );
     }
 
     function popFlower(x, y) {
@@ -1948,6 +2053,13 @@ I finally get to hold your hand. 🤍`;
       }, 105);
     }
 
+    function addBackgroundPetals() {
+      // Pre-create some initial petals
+      for (let i = 0; i < 3; i++) {
+        makeBackgroundPetal();
+      }
+    }
+
     function makeBackgroundPetal() {
       const p = document.createElement("div");
       p.className = "petal";
@@ -1960,12 +2072,17 @@ I finally get to hold your hand. 🤍`;
       setTimeout(() => p.remove(), 15000);
     }
 
+    // ==========================================
+    // COUNTDOWN TIMER
+    // ==========================================
     function updateCountdown() {
       const now = new Date();
       const diff = meetingDate - now;
 
       if (diff <= 0) {
-        document.getElementById("countdownTimer").innerHTML = "<h2 style='grid-column:1/-1'>TODAY IS THE DAY. 🤍</h2>";
+        if (elements.countdownTimer) {
+          elements.countdownTimer.innerHTML = "<h2 style='grid-column:1/-1'>TODAY IS THE DAY. 🤍</h2>";
+        }
         return;
       }
 
@@ -1974,16 +2091,33 @@ I finally get to hold your hand. 🤍`;
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = hours;
-      document.getElementById("minutes").textContent = minutes;
-      document.getElementById("seconds").textContent = seconds;
+      // Update main countdown
+      const dayEl = document.getElementById("days");
+      const hourEl = document.getElementById("hours");
+      const minEl = document.getElementById("minutes");
+      const secEl = document.getElementById("seconds");
 
-      document.getElementById("fdays").textContent = days;
-      document.getElementById("fhours").textContent = hours;
-      document.getElementById("fminutes").textContent = minutes;
-      document.getElementById("fseconds").textContent = seconds;
+      if (dayEl) dayEl.textContent = days;
+      if (hourEl) hourEl.textContent = hours;
+      if (minEl) minEl.textContent = minutes;
+      if (secEl) secEl.textContent = seconds;
+
+      // Update final countdown
+      const fdayEl = document.getElementById("fdays");
+      const fhourEl = document.getElementById("fhours");
+      const fminEl = document.getElementById("fminutes");
+      const fsecEl = document.getElementById("fseconds");
+
+      if (fdayEl) fdayEl.textContent = days;
+      if (fhourEl) fhourEl.textContent = hours;
+      if (fminEl) fminEl.textContent = minutes;
+      if (fsecEl) fsecEl.textContent = seconds;
     }
+
+    // ==========================================
+    // START APPLICATION
+    // ==========================================
+    init();
   </script>
 </body>
 </html>
