@@ -2,31 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>For You 🤍🌿</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>For You 🤍</title>
 
   <style>
     :root {
-      --night: #050611;
-      --night2: #101935;
-      --ink: #2b1a24;
+      --bg: #070711;
+      --bg2: #111833;
+      --card: rgba(255,255,255,.095);
+      --white: #fffaf4;
       --paper: #fff4df;
-      --white: #fffaf5;
-      --cream: #fff7e8;
+      --ink: #2c1822;
+      --pink: #ff74a5;
       --gold: #ffd166;
-      --pink: #ff6f9f;
-      --rose: #d94c65;
-      --green: #93cfa2;
-      --deepgreen: #23492f;
-      --softgreen: #d8f3dc;
-      --lake: #517ea1;
-      --lake2: #2f5f83;
+      --green: #9bd7a8;
+      --deepgreen: #1d3c29;
+      --lake: #3d7fa7;
       --shadow: rgba(0,0,0,.42);
     }
 
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html {
@@ -41,9 +38,9 @@
       color: var(--white);
       font-family: Georgia, "Times New Roman", serif;
       background:
-        radial-gradient(circle at 15% 10%, rgba(255,111,159,.16), transparent 28%),
-        radial-gradient(circle at 85% 20%, rgba(147,207,162,.13), transparent 30%),
-        linear-gradient(145deg, #05060e, #11172f 55%, #070711);
+        radial-gradient(circle at 18% 8%, rgba(255,116,165,.18), transparent 30%),
+        radial-gradient(circle at 86% 18%, rgba(155,215,168,.14), transparent 30%),
+        linear-gradient(145deg, #05060f, #111833 56%, #060711);
     }
 
     body.unlocked {
@@ -51,62 +48,85 @@
     }
 
     button {
-      cursor: pointer;
       border: 0;
       border-radius: 999px;
-      padding: 14px 24px;
-      margin: 8px;
+      padding: 15px 22px;
+      margin: 8px 4px;
       font-weight: 900;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: #2d1323;
-      background: linear-gradient(135deg, #ffffff, #fff1d6, #d8f3dc);
-      box-shadow: 0 10px 35px rgba(255, 209, 102, .22);
-      transition: transform .2s ease, filter .2s ease;
-    }
-
-    button:hover {
-      transform: translateY(-2px) scale(1.03);
-      filter: brightness(1.05);
+      background: linear-gradient(135deg, #fff, #fff0d5, #d8f3dc);
+      box-shadow: 0 10px 34px rgba(255,209,102,.22);
+      cursor: pointer;
     }
 
     h1 {
-      margin: 0 0 16px;
-      font-size: clamp(2.35rem, 8vw, 5.6rem);
+      margin: 0 0 14px;
+      font-size: clamp(2.15rem, 13vw, 4.2rem);
       line-height: .95;
-      letter-spacing: -2px;
-      text-shadow: 0 0 28px rgba(255,247,232,.36);
+      letter-spacing: -1.6px;
+      text-shadow: 0 0 26px rgba(255,250,244,.35);
     }
 
     h2 {
-      margin: 0 0 18px;
-      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      margin: 0 0 16px;
+      font-size: clamp(1.7rem, 9vw, 3rem);
       line-height: 1.05;
     }
 
     p {
-      font-size: clamp(1.02rem, 3vw, 1.25rem);
-      line-height: 1.7;
+      font-size: clamp(1.02rem, 4.7vw, 1.2rem);
+      line-height: 1.65;
       opacity: .94;
     }
 
     .small {
-      font-size: .95rem;
+      font-size: .92rem;
       opacity: .72;
     }
 
+    .ambient {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.75) 0 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(255,255,255,.45) 0 1px, transparent 1.7px);
+      background-size: 76px 76px, 120px 120px;
+      background-position: 12px 18px, 40px 60px;
+      opacity: .28;
+    }
+
+    .moon {
+      position: absolute;
+      top: 7vh;
+      right: 7vw;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fffaf0, #ffeeb8 60%, rgba(255,238,184,.2));
+      box-shadow: 0 0 55px rgba(255,238,184,.45);
+      opacity: .8;
+    }
+
     .scene {
-      min-height: 100vh;
       display: none;
-      place-items: center;
-      padding: 24px;
-      text-align: center;
       position: fixed;
       inset: 0;
       z-index: 40;
+      min-height: 100svh;
+      padding: max(22px, env(safe-area-inset-top)) 18px max(22px, env(safe-area-inset-bottom));
+      place-items: center;
+      text-align: center;
       opacity: 0;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      transition: opacity .65s ease;
+      transition: opacity .55s ease;
     }
 
     .scene.active {
@@ -115,279 +135,152 @@
     }
 
     .card {
-      width: min(900px, 95vw);
-      max-height: calc(100vh - 32px);
-      overflow-y: auto;
-      padding: clamp(24px, 5vw, 52px);
+      width: min(100%, 430px);
+      padding: 26px 20px;
+      border-radius: 30px;
+      background: var(--card);
       border: 1px solid rgba(255,255,255,.18);
-      border-radius: 34px;
-      background: rgba(255,255,255,.085);
       backdrop-filter: blur(16px);
-      box-shadow: 0 24px 90px var(--shadow);
-      position: relative;
+      box-shadow: 0 22px 70px var(--shadow);
     }
 
     .choice {
       display: block;
-      width: min(100%, 600px);
-      margin: 12px auto;
+      width: 100%;
+      margin: 11px auto;
+      padding: 15px 18px;
     }
 
     #quizFeedback {
-      min-height: 34px;
+      min-height: 32px;
+      color: #d8f3dc;
       font-weight: bold;
-      color: var(--softgreen);
-    }
-
-    .progress {
-      font-family: system-ui, sans-serif;
-      font-weight: 800;
-      opacity: .7;
-    }
-
-    .ambient {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .star-bg {
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,.75) 0 1px, transparent 1.8px),
-        radial-gradient(circle, rgba(255,255,255,.45) 0 1px, transparent 1.7px);
-      background-size: 90px 90px, 140px 140px;
-      background-position: 10px 20px, 45px 70px;
-      opacity: .28;
-    }
-
-    .moon {
-      position: absolute;
-      top: 7vh;
-      right: 8vw;
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle at 36% 34%, #fffaf0, #ffeeb8 60%, rgba(255,238,184,.2));
-      box-shadow: 0 0 65px rgba(255,238,184,.44);
-      opacity: .76;
-    }
-
-    .petal {
-      position: fixed;
-      top: -40px;
-      z-index: 5;
-      pointer-events: none;
-      animation: petalFall linear forwards;
-      text-shadow: 0 0 10px rgba(255,255,255,.38);
-    }
-
-    @keyframes petalFall {
-      from {
-        transform: translateY(-50px) translateX(0) rotate(0deg);
-        opacity: 0;
-      }
-
-      10% {
-        opacity: 1;
-      }
-
-      to {
-        transform: translateY(110vh) translateX(var(--drift)) rotate(360deg);
-        opacity: 0;
-      }
     }
 
     .willow {
       position: fixed;
       left: 50%;
-      bottom: -80px;
-      transform: translateX(-50%) scale(.45);
+      bottom: -120px;
       z-index: 2;
-      width: min(1260px, 190vw);
-      height: 760px;
+      width: 760px;
+      height: 620px;
+      transform: translateX(-50%) scale(.34);
+      opacity: .12;
       pointer-events: none;
-      opacity: .13;
-      transition: opacity 1s ease, transform 1s ease;
+      transition: transform .9s ease, opacity .9s ease;
     }
 
-    .willow.stage-1 {
-      opacity: .22;
-      transform: translateX(-50%) scale(.58);
-    }
-
-    .willow.stage-2 {
-      opacity: .36;
-      transform: translateX(-50%) scale(.72);
-    }
-
-    .willow.stage-3 {
-      opacity: .56;
-      transform: translateX(-50%) scale(.88);
-    }
-
-    .willow.stage-4 {
-      opacity: .78;
-      transform: translateX(-50%) scale(1.05);
-    }
-
-    .willow.stage-final {
-      opacity: .96;
-      transform: translateX(-50%) scale(1.26);
-    }
+    .willow.stage-1 { opacity: .22; transform: translateX(-50%) scale(.42); }
+    .willow.stage-2 { opacity: .35; transform: translateX(-50%) scale(.50); }
+    .willow.stage-3 { opacity: .52; transform: translateX(-50%) scale(.60); }
+    .willow.stage-4 { opacity: .72; transform: translateX(-50%) scale(.72); }
+    .willow.stage-final { opacity: .95; transform: translateX(-50%) scale(.86); }
 
     .trunk {
       position: absolute;
-      bottom: 0;
       left: 50%;
-      width: 90px;
-      height: 455px;
+      bottom: 0;
+      width: 74px;
+      height: 420px;
       transform: translateX(-50%);
-      border-radius: 48% 48% 0 0;
-      background: linear-gradient(90deg, #21140d, #765139 48%, #2c1c12);
-      box-shadow: inset -22px 0 30px rgba(0,0,0,.48);
+      border-radius: 45% 45% 0 0;
+      background: linear-gradient(90deg, #21140d, #765139, #2c1c12);
+      box-shadow: inset -18px 0 26px rgba(0,0,0,.46);
     }
 
     .canopy {
       position: absolute;
       left: 50%;
-      bottom: 330px;
-      width: 940px;
-      height: 390px;
+      bottom: 300px;
+      width: 650px;
+      height: 280px;
       transform: translateX(-50%);
       border-radius: 50%;
-      background:
-        radial-gradient(circle at 50% 42%, rgba(195,240,198,.9), rgba(71,125,80,.7) 49%, transparent 75%);
-      filter: blur(.2px);
+      background: radial-gradient(circle at 50% 42%, rgba(195,240,198,.9), rgba(71,125,80,.7) 50%, transparent 76%);
     }
 
-    .willow-branch {
+    .branch {
       position: absolute;
-      top: 175px;
-      width: 10px;
+      top: 160px;
+      width: 8px;
       border-radius: 999px;
       transform-origin: top;
-      background: linear-gradient(var(--green), rgba(147,207,162,.3), transparent);
+      background: linear-gradient(#93cfa2, rgba(147,207,162,.22), transparent);
       animation: sway 4s ease-in-out infinite alternate;
     }
 
-    .b1 {
-      left: 270px;
-      height: 540px;
-      transform: rotate(24deg);
-      animation-delay: .1s;
-    }
-
-    .b2 {
-      left: 390px;
-      height: 570px;
-      transform: rotate(13deg);
-      animation-delay: .8s;
-    }
-
-    .b3 {
-      left: 570px;
-      height: 590px;
-      transform: rotate(0deg);
-      animation-delay: .3s;
-    }
-
-    .b4 {
-      left: 750px;
-      height: 570px;
-      transform: rotate(-13deg);
-      animation-delay: 1s;
-    }
-
-    .b5 {
-      left: 870px;
-      height: 540px;
-      transform: rotate(-24deg);
-      animation-delay: .5s;
-    }
+    .b1 { left: 210px; height: 430px; transform: rotate(24deg); }
+    .b2 { left: 300px; height: 460px; transform: rotate(12deg); animation-delay: .7s; }
+    .b3 { left: 380px; height: 470px; transform: rotate(0deg); animation-delay: .2s; }
+    .b4 { left: 460px; height: 460px; transform: rotate(-12deg); animation-delay: 1s; }
+    .b5 { left: 550px; height: 430px; transform: rotate(-24deg); animation-delay: .4s; }
 
     @keyframes sway {
-      from {
-        translate: -7px 0;
-      }
-
-      to {
-        translate: 7px 0;
-      }
+      from { translate: -6px 0; }
+      to { translate: 6px 0; }
     }
 
     .leaf {
       position: absolute;
-      width: 13px;
-      height: 24px;
+      width: 12px;
+      height: 22px;
       border-radius: 80% 20% 80% 20%;
       background: linear-gradient(135deg, #e7ffe9, #77bc86);
       opacity: 0;
       transform: scale(.08);
-      transition: opacity .9s ease, transform .9s ease;
-      animation: leafSway 3.4s ease-in-out infinite alternate;
+      transition: opacity .8s ease, transform .8s ease;
+      animation: leafSway 3.2s ease-in-out infinite alternate;
     }
 
-    .stage-1 .leaf:nth-of-type(-n+45),
-    .stage-2 .leaf:nth-of-type(-n+100),
-    .stage-3 .leaf:nth-of-type(-n+160),
-    .stage-4 .leaf:nth-of-type(-n+230),
+    .stage-1 .leaf:nth-of-type(-n+35),
+    .stage-2 .leaf:nth-of-type(-n+75),
+    .stage-3 .leaf:nth-of-type(-n+120),
+    .stage-4 .leaf:nth-of-type(-n+175),
     .stage-final .leaf {
-      opacity: .95;
+      opacity: .94;
       transform: scale(1);
     }
 
     @keyframes leafSway {
-      from {
-        translate: -3px 0;
-        rotate: -6deg;
-      }
-
-      to {
-        translate: 3px 0;
-        rotate: 6deg;
-      }
+      from { translate: -3px 0; rotate: -6deg; }
+      to { translate: 3px 0; rotate: 6deg; }
     }
 
     .tree-memory {
       position: absolute;
-      width: 78px;
-      height: 94px;
-      padding: 5px;
+      width: 58px;
+      height: 72px;
+      padding: 4px;
       background: #fffdf8;
-      box-shadow: 0 10px 25px rgba(0,0,0,.28);
       border-radius: 4px;
       opacity: 0;
-      transform: scale(.3) rotate(var(--tilt));
-      transition: opacity 1s ease, transform 1s ease;
+      transform: scale(.2) rotate(var(--tilt));
+      box-shadow: 0 8px 18px rgba(0,0,0,.3);
+      transition: opacity .9s ease, transform .9s ease;
     }
 
     .tree-memory::before {
       content: "";
       position: absolute;
       left: 50%;
-      top: -28px;
+      top: -22px;
       width: 1px;
-      height: 30px;
+      height: 23px;
       background: rgba(255,255,255,.65);
     }
 
     .mini-img {
       width: 100%;
-      height: 65px;
+      height: 48px;
       border-radius: 3px;
-      background: linear-gradient(135deg, #ffe1ed, #d8f3dc);
       display: grid;
       place-items: center;
-      color: #5c3344;
-      font-size: 10px;
-      font-family: system-ui, sans-serif;
-      font-weight: 800;
       overflow: hidden;
+      font-family: system-ui, sans-serif;
+      font-size: 9px;
+      color: #5c3344;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffe1ed, #d8f3dc);
     }
 
     .mini-img img {
@@ -399,7 +292,6 @@
     .stage-2 .memory-1,
     .stage-3 .memory-1,
     .stage-3 .memory-2,
-    .stage-3 .memory-3,
     .stage-4 .tree-memory,
     .stage-final .tree-memory {
       opacity: .95;
@@ -407,84 +299,74 @@
     }
 
     #game {
-      width: min(980px, 96vw);
-      height: min(660px, 78vh);
+      width: min(100%, 430px);
+      height: min(76svh, 620px);
+      min-height: 520px;
       position: relative;
-      border-radius: 32px;
-      border: 1px solid rgba(255,255,255,.22);
-      box-shadow: inset 0 0 70px rgba(255,255,255,.08), 0 20px 90px rgba(0,0,0,.44);
       overflow: hidden;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,.2);
+      box-shadow: 0 22px 70px rgba(0,0,0,.42);
       touch-action: none;
       background: linear-gradient(180deg, #1d2b5d 0%, #628fc7 42%, #ecbca8 62%, #4783a9 63%, #245477 100%);
     }
 
-    .como-scene {
+    .como {
       position: absolute;
       inset: 0;
       pointer-events: none;
-      overflow: hidden;
     }
 
     .sunset {
       position: absolute;
       left: 50%;
-      top: 16%;
-      width: 136px;
-      height: 136px;
-      transform: translateX(-50%);
+      top: 13%;
+      width: 110px;
+      height: 110px;
       border-radius: 50%;
+      transform: translateX(-50%);
       background: radial-gradient(circle, #fff3b0, #ffb36b 65%, transparent 70%);
       opacity: .78;
     }
 
     .mountain {
       position: absolute;
-      bottom: 38%;
-      width: 62%;
-      height: 35%;
+      bottom: 39%;
+      width: 78%;
+      height: 34%;
       background: linear-gradient(135deg, #17263f, #375d7c);
       clip-path: polygon(0 100%, 35% 22%, 50% 62%, 68% 18%, 100% 100%);
-      opacity: .95;
+      opacity: .92;
     }
 
-    .mountain.left {
-      left: -10%;
-    }
-
-    .mountain.right {
-      right: -8%;
-      transform: scaleX(-1);
-      opacity: .78;
-    }
+    .mountain.left { left: -22%; }
+    .mountain.right { right: -22%; transform: scaleX(-1); opacity: .75; }
 
     .lake {
       position: absolute;
       left: -5%;
       right: -5%;
       bottom: 0;
-      height: 39%;
+      height: 40%;
       background:
         repeating-linear-gradient(0deg, rgba(255,255,255,.18) 0 2px, transparent 2px 12px),
-        linear-gradient(180deg, rgba(99,160,195,.8), rgba(34,82,119,.98));
-      opacity: .93;
+        linear-gradient(180deg, rgba(99,160,195,.82), rgba(34,82,119,.98));
     }
 
     .village {
       position: absolute;
       left: 7%;
-      bottom: 38%;
-      width: 86%;
-      height: 54px;
+      bottom: 39%;
       display: flex;
       align-items: flex-end;
-      gap: 8px;
-      opacity: .82;
+      gap: 5px;
+      opacity: .75;
     }
 
     .house {
-      width: 34px;
-      height: 28px;
-      background: rgba(255,231,188,.85);
+      width: 24px;
+      height: 22px;
+      background: rgba(255,231,188,.86);
       border-radius: 3px 3px 0 0;
       position: relative;
     }
@@ -494,69 +376,55 @@
       position: absolute;
       left: -2px;
       right: -2px;
-      top: -13px;
-      height: 14px;
+      top: -10px;
+      height: 11px;
       background: #a35d54;
       clip-path: polygon(0 100%, 50% 0, 100% 100%);
     }
 
     .wedding-egg {
       position: absolute;
-      right: 18%;
-      bottom: 37.2%;
-      width: 92px;
-      height: 68px;
-      opacity: .62;
-      transform: scale(.72);
-      filter: drop-shadow(0 3px 5px rgba(0,0,0,.25));
-      z-index: 3;
+      right: 9%;
+      bottom: 35%;
+      width: 88px;
+      height: 70px;
+      opacity: .74;
+      transform: scale(.78);
+      filter: drop-shadow(0 3px 5px rgba(0,0,0,.24));
     }
 
-    .wedding-egg .arch {
+    .arch {
       position: absolute;
-      left: 15px;
+      left: 16px;
       bottom: 14px;
-      width: 62px;
+      width: 58px;
       height: 48px;
-      border: 3px solid rgba(255,248,235,.88);
+      border: 4px solid rgba(255,248,235,.9);
       border-bottom: 0;
-      border-radius: 70px 70px 0 0;
+      border-radius: 60px 60px 0 0;
     }
 
-    .wedding-egg .arch::before,
-    .wedding-egg .arch::after {
+    .arch::before,
+    .arch::after {
       content: "✿";
       position: absolute;
-      font-size: 10px;
+      font-size: 11px;
       color: #fff4df;
-      text-shadow: 0 0 5px rgba(255,255,255,.5);
     }
 
-    .wedding-egg .arch::before {
-      left: -6px;
-      top: 10px;
-    }
-
-    .wedding-egg .arch::after {
-      right: -7px;
-      top: 6px;
-    }
+    .arch::before { left: -7px; top: 10px; }
+    .arch::after { right: -7px; top: 7px; }
 
     .tiny-bride,
     .tiny-groom {
       position: absolute;
-      bottom: 3px;
+      bottom: 5px;
       width: 16px;
-      height: 32px;
+      height: 30px;
     }
 
-    .tiny-bride {
-      left: 33px;
-    }
-
-    .tiny-groom {
-      left: 51px;
-    }
+    .tiny-bride { left: 34px; }
+    .tiny-groom { left: 52px; }
 
     .tiny-bride::before,
     .tiny-groom::before {
@@ -586,254 +454,124 @@
       left: 3px;
       bottom: 0;
       width: 11px;
-      height: 24px;
-      border-radius: 3px;
+      height: 23px;
       background: #15151d;
+      border-radius: 3px;
     }
 
     .lake-creature {
       position: absolute;
-      left: -240px;
-      bottom: 14%;
-      width: 230px;
-      height: 72px;
-      opacity: .42;
-      z-index: 2;
-      animation: swimCreature 26s linear infinite 8s;
-    }
-
-    .lake-creature .hump {
-      position: absolute;
-      bottom: 22px;
-      width: 52px;
-      height: 34px;
-      border-top: 12px solid rgba(4,20,31,.72);
-      border-radius: 60px 60px 0 0;
-    }
-
-    .lake-creature .h1 {
-      left: 34px;
-      transform: rotate(-7deg);
-    }
-
-    .lake-creature .h2 {
-      left: 86px;
-      height: 42px;
-      transform: rotate(3deg);
-    }
-
-    .lake-creature .h3 {
-      left: 142px;
-      transform: rotate(9deg);
-    }
-
-    .lake-creature .head {
-      position: absolute;
-      right: 7px;
-      bottom: 42px;
-      width: 34px;
-      height: 22px;
-      border-radius: 50% 50% 45% 45%;
-      background: rgba(4,20,31,.72);
-      transform: rotate(12deg);
-    }
-
-    .lake-creature .neck {
-      position: absolute;
-      right: 35px;
-      bottom: 31px;
-      width: 12px;
+      left: -130px;
+      bottom: 18%;
+      width: 120px;
       height: 44px;
+      opacity: .34;
+      animation: swim 24s linear infinite 7s;
+    }
+
+    .lake-creature::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      top: 27px;
+      width: 90px;
+      height: 4px;
+      background: rgba(4,20,31,.55);
       border-radius: 999px;
-      background: rgba(4,20,31,.72);
-      transform: rotate(22deg);
-      transform-origin: bottom;
+      box-shadow: 18px -8px 0 -1px rgba(4,20,31,.55), 44px -13px 0 -2px rgba(4,20,31,.55);
     }
 
-    .creature-ripple {
+    .lake-creature::after {
+      content: "";
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 16px;
-      height: 2px;
-      background: rgba(255,255,255,.28);
-      box-shadow:
-        0 9px 0 rgba(255,255,255,.14),
-        45px 18px 0 rgba(255,255,255,.10),
-        92px 6px 0 rgba(255,255,255,.12);
+      right: 12px;
+      top: 7px;
+      width: 24px;
+      height: 34px;
+      border: 5px solid rgba(4,20,31,.55);
+      border-left: 0;
+      border-bottom: 0;
+      border-radius: 0 80% 0 0;
+      transform: rotate(-12deg);
     }
 
-    @keyframes swimCreature {
-      0% {
-        transform: translateX(0) translateY(0);
-        opacity: 0;
-      }
-
-      12% {
-        opacity: .42;
-      }
-
-      52% {
-        transform: translateX(1220px) translateY(-18px);
-        opacity: .42;
-      }
-
-      68% {
-        opacity: 0;
-      }
-
-      100% {
-        transform: translateX(1220px) translateY(-18px);
-        opacity: 0;
-      }
+    @keyframes swim {
+      0%, 100% { transform: translateX(0); opacity: 0; }
+      12% { opacity: .34; }
+      58% { transform: translateX(620px) translateY(-14px); opacity: .34; }
+      72% { opacity: 0; }
     }
 
-    .rare-shooting-star {
+    .rare-star {
       position: absolute;
-      left: 72%;
-      top: 16%;
-      width: 9px;
-      height: 9px;
+      left: 78%;
+      top: 15%;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: white;
+      box-shadow: 0 0 16px white;
       opacity: 0;
-      box-shadow: 0 0 18px white;
-      animation: rareStar 18s ease-in-out infinite 5s;
+      animation: rareStar 17s ease-in-out infinite 4s;
     }
 
-    .rare-shooting-star::after {
+    .rare-star::after {
       content: "";
       position: absolute;
       right: 5px;
       top: 4px;
-      width: 110px;
+      width: 80px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.9));
+      background: linear-gradient(90deg, transparent, white);
     }
 
     @keyframes rareStar {
-      0%, 70%, 100% {
-        opacity: 0;
-        transform: translate(0, 0) rotate(-25deg);
-      }
-
-      75% {
-        opacity: 1;
-      }
-
-      85% {
-        opacity: 1;
-        transform: translate(-320px, 150px) rotate(-25deg);
-      }
-
-      90% {
-        opacity: 0;
-        transform: translate(-380px, 180px) rotate(-25deg);
-      }
+      0%, 70%, 100% { opacity: 0; transform: translate(0,0) rotate(-25deg); }
+      76% { opacity: 1; }
+      88% { opacity: 1; transform: translate(-260px, 130px) rotate(-25deg); }
+      92% { opacity: 0; transform: translate(-300px, 150px) rotate(-25deg); }
     }
 
-    .game-cloud {
+    #score, #hint {
       position: absolute;
-      width: 180px;
-      height: 60px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.72);
-      filter: blur(2px);
-      animation: cloudDrift 16s linear infinite;
-      opacity: .7;
-    }
-
-    .game-cloud::before,
-    .game-cloud::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,.82);
-    }
-
-    .game-cloud::before {
-      width: 80px;
-      height: 80px;
-      left: 30px;
-      top: -28px;
-    }
-
-    .game-cloud::after {
-      width: 100px;
-      height: 100px;
-      right: 25px;
-      top: -40px;
-    }
-
-    .cloud1 {
-      top: 10%;
-      left: -190px;
-    }
-
-    .cloud2 {
-      top: 25%;
-      left: -260px;
-      animation-delay: 7s;
-      transform: scale(.75);
-    }
-
-    @keyframes cloudDrift {
-      from {
-        translate: 0 0;
-      }
-
-      to {
-        translate: 1250px 0;
-      }
-    }
-
-    #score,
-    #hint {
-      position: absolute;
-      top: 18px;
-      z-index: 4;
-      padding: 10px 14px;
+      z-index: 5;
+      left: 14px;
+      right: 14px;
+      padding: 10px 12px;
       border-radius: 999px;
       background: rgba(0,0,0,.30);
       font-family: system-ui, sans-serif;
       font-weight: 900;
+      font-size: .88rem;
     }
 
-    #score {
-      left: 20px;
-    }
-
-    #hint {
-      right: 20px;
-      font-size: .95rem;
-      opacity: .92;
-    }
+    #score { top: 12px; right: auto; }
+    #hint { top: 58px; }
 
     #player {
       position: absolute;
       left: 50%;
-      bottom: 28px;
+      bottom: 24px;
       transform: translateX(-50%);
-      width: 104px;
-      height: 86px;
-      z-index: 5;
-      user-select: none;
+      width: 100px;
+      height: 84px;
+      z-index: 6;
       filter: drop-shadow(0 14px 18px rgba(0,0,0,.25));
     }
 
     .basket {
-      width: 104px;
-      height: 74px;
+      width: 100px;
+      height: 72px;
       position: relative;
     }
 
     .basket::before {
       content: "";
       position: absolute;
-      left: 18px;
-      top: -22px;
-      width: 68px;
-      height: 46px;
+      left: 17px;
+      top: -21px;
+      width: 66px;
+      height: 44px;
       border: 7px solid #8b5a2b;
       border-bottom: 0;
       border-radius: 70px 70px 0 0;
@@ -843,13 +581,11 @@
       position: absolute;
       bottom: 0;
       left: 6px;
-      width: 92px;
-      height: 58px;
+      width: 88px;
+      height: 56px;
       border-radius: 0 0 26px 26px;
-      background:
-        repeating-linear-gradient(45deg, #b98245 0 8px, #8f5e2f 8px 16px);
+      background: repeating-linear-gradient(45deg, #b98245 0 8px, #8f5e2f 8px 16px);
       border: 4px solid #6c421f;
-      overflow: hidden;
     }
 
     .basket-fill {
@@ -866,12 +602,12 @@
       gap: 1px;
       font-size: 15px;
       overflow: hidden;
-      z-index: 6;
+      z-index: 7;
     }
 
     .falling-flower {
       position: absolute;
-      font-size: 35px;
+      font-size: 34px;
       user-select: none;
       animation: fall linear forwards;
       filter: drop-shadow(0 0 10px rgba(255,255,255,.35));
@@ -879,18 +615,11 @@
     }
 
     @keyframes fall {
-      from {
-        transform: translateY(-80px) rotate(0deg);
-      }
-
-      to {
-        transform: translateY(790px) rotate(250deg);
-      }
+      from { transform: translateY(-80px) rotate(0deg); }
+      to { transform: translateY(680px) rotate(250deg); }
     }
 
-    .particle,
-    .heart,
-    .poured-flower {
+    .particle, .heart, .poured-flower {
       position: fixed;
       z-index: 90;
       pointer-events: none;
@@ -899,85 +628,59 @@
     .particle {
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 34px;
+      font-size: 32px;
       animation: burst 1.8s ease-out forwards;
     }
 
     @keyframes burst {
-      from {
-        transform: translate(-50%, -50%) rotate(0deg) scale(.2);
-        opacity: 1;
-      }
-
-      to {
-        transform: translate(var(--x), var(--y)) rotate(540deg) scale(1.7);
-        opacity: 0;
-      }
+      from { transform: translate(-50%, -50%) rotate(0deg) scale(.2); opacity: 1; }
+      to { transform: translate(var(--x), var(--y)) rotate(540deg) scale(1.55); opacity: 0; }
     }
 
     .heart {
       bottom: -40px;
-      font-size: 24px;
+      font-size: 22px;
       animation: floatUp 5s linear forwards;
     }
 
     @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(.6) rotate(0deg);
-        opacity: 0;
-      }
-
-      10% {
-        opacity: 1;
-      }
-
-      100% {
-        transform: translateY(-115vh) scale(1.4) rotate(360deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) scale(.6) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-115vh) scale(1.35) rotate(360deg); opacity: 0; }
     }
 
     .typewriter {
-      min-height: 170px;
+      min-height: 150px;
       white-space: pre-wrap;
-      font-size: clamp(1.08rem, 3.3vw, 1.5rem);
-      line-height: 1.7;
+      font-size: clamp(1.05rem, 4.8vw, 1.22rem);
+      line-height: 1.65;
     }
 
     .bouquet {
-      margin: 20px auto;
-      width: min(360px, 82vw);
-      min-height: 240px;
+      margin: 14px auto;
+      min-height: 170px;
       display: grid;
       place-items: center;
     }
 
     .bouquet-burst {
-      font-size: clamp(5.4rem, 18vw, 10.5rem);
-      filter: drop-shadow(0 0 30px rgba(255,255,255,.35));
+      font-size: 6.5rem;
       animation: bouquetPop 1.4s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 30px rgba(255,255,255,.35));
     }
 
     @keyframes bouquetPop {
-      from {
-        transform: scale(.96) rotate(-2deg);
-      }
-
-      to {
-        transform: scale(1.05) rotate(2deg);
-      }
+      from { transform: scale(.96) rotate(-2deg); }
+      to { transform: scale(1.05) rotate(2deg); }
     }
 
     .future-glimpse {
       display: none;
-      width: min(900px, 95vw);
-      padding: clamp(24px, 5vw, 50px);
+      margin-top: 14px;
+      padding: 18px 14px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.08);
       border: 1px solid rgba(255,255,255,.18);
-      border-radius: 34px;
-      background: rgba(255,255,255,.095);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 24px 90px var(--shadow);
     }
 
     .future-glimpse.show {
@@ -987,46 +690,35 @@
 
     .mini-distance {
       position: relative;
-      width: min(650px, 90%);
-      height: 90px;
-      margin: 24px auto;
+      height: 92px;
+      margin: 18px auto;
       font-family: system-ui, sans-serif;
       font-weight: 900;
     }
 
-    .mini-distance .place {
+    .place {
       position: absolute;
       top: 0;
       transition: left 2s ease, right 2s ease;
     }
 
-    .place.germany {
-      left: 0;
-    }
+    .germany { left: 0; }
+    .brazil { right: 0; }
 
-    .place.brazil {
-      right: 0;
-    }
-
-    .mini-distance.closer .germany {
-      left: 22%;
-    }
-
-    .mini-distance.closer .brazil {
-      right: 22%;
-    }
+    .closer .germany { left: 18%; }
+    .closer .brazil { right: 18%; }
 
     .distance-thread {
       position: absolute;
       left: 12%;
       right: 12%;
-      bottom: 22px;
+      bottom: 24px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.8), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.85), transparent);
       transition: left 2s ease, right 2s ease;
     }
 
-    .mini-distance.closer .distance-thread {
+    .closer .distance-thread {
       left: 34%;
       right: 34%;
     }
@@ -1042,100 +734,84 @@
     }
 
     .section {
-      min-height: 100vh;
-      padding: 100px 20px;
+      min-height: 100svh;
+      padding: 84px 16px;
       display: grid;
       place-items: center;
       position: relative;
       overflow: hidden;
     }
 
-    .countdown-card {
-      width: min(980px, 96vw);
-      padding: clamp(28px, 5vw, 54px);
-      border-radius: 36px;
+    .glass {
+      width: min(100%, 430px);
+      padding: 24px 18px;
+      border-radius: 30px;
       background: rgba(255,255,255,.09);
-      border: 1px solid rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,.18);
       backdrop-filter: blur(14px);
       text-align: center;
-      box-shadow: 0 24px 90px rgba(0,0,0,.34);
+      box-shadow: 0 22px 70px rgba(0,0,0,.34);
     }
 
-    .route {
-      margin: 28px auto;
+    .route-mobile {
+      margin: 24px auto;
       display: grid;
-      grid-template-columns: 1fr auto 1fr auto 1fr;
-      gap: 14px;
-      align-items: center;
-      width: min(780px, 100%);
+      grid-template-columns: 1fr;
+      gap: 10px;
       font-family: system-ui, sans-serif;
       font-weight: 900;
     }
 
-    .line {
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
-    }
-
-    .plane {
+    .plane-down {
       font-size: 2rem;
-      animation: planeMove 2.6s ease-in-out infinite alternate;
+      animation: planeDown 1.6s ease-in-out infinite alternate;
     }
 
-    @keyframes planeMove {
-      from {
-        transform: translateX(-12px);
-      }
-
-      to {
-        transform: translateX(12px);
-      }
+    @keyframes planeDown {
+      from { transform: translateY(-5px) rotate(90deg); }
+      to { transform: translateY(7px) rotate(90deg); }
     }
 
     #countdownTimer {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin: 26px auto 0;
-      width: min(760px, 100%);
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 22px;
       font-family: system-ui, sans-serif;
     }
 
     .time-box {
       padding: 18px 10px;
-      border-radius: 22px;
+      border-radius: 20px;
       background: rgba(255,255,255,.1);
       border: 1px solid rgba(255,255,255,.18);
     }
 
     .time-box span {
       display: block;
-      font-size: clamp(2rem, 6vw, 4rem);
-      line-height: 1;
+      font-size: 2.55rem;
       font-weight: 1000;
+      line-height: 1;
       color: var(--gold);
-      text-shadow: 0 0 22px rgba(255,209,102,.35);
     }
 
     .time-box small {
       display: block;
-      margin-top: 8px;
-      opacity: .8;
+      margin-top: 6px;
+      opacity: .78;
       text-transform: uppercase;
       letter-spacing: 1px;
-      font-size: .75rem;
+      font-size: .72rem;
     }
 
     .letter {
-      width: min(900px, 95vw);
-      padding: clamp(28px, 6vw, 62px);
-      border-radius: 18px 42px 22px 38px;
+      width: min(100%, 430px);
+      padding: 28px 20px;
+      border-radius: 26px;
       background: linear-gradient(135deg, rgba(255,252,243,.98), rgba(255,242,218,.98));
       color: var(--ink);
-      box-shadow: 0 28px 95px rgba(0,0,0,.38);
+      box-shadow: 0 22px 70px rgba(0,0,0,.36);
       text-align: left;
-      position: relative;
-      transform: rotate(-.8deg);
     }
 
     .letter h2 {
@@ -1146,30 +822,17 @@
     .letter p {
       color: var(--ink);
       opacity: 1;
-      font-size: clamp(1.06rem, 2.6vw, 1.22rem);
-    }
-
-    .gallery {
-      width: min(1050px, 95vw);
-      margin: 44px auto 0;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-      position: relative;
     }
 
     .polaroid {
+      width: min(100%, 390px);
+      margin: 18px auto;
       background: #fffdf8;
       color: #4a2635;
       padding: 14px 14px 20px;
       border-radius: 8px;
       box-shadow: 0 18px 50px rgba(0,0,0,.34);
       transform: rotate(var(--tilt));
-      transition: transform .25s ease;
-    }
-
-    .polaroid:hover {
-      transform: rotate(0deg) translateY(-6px) scale(1.02);
     }
 
     .photo {
@@ -1195,186 +858,245 @@
     }
 
     .polaroid p {
-      font-family: system-ui, sans-serif;
-      margin: 12px 0 0;
       color: #4a2635;
       opacity: .9;
-      font-size: .98rem;
+      font-family: system-ui, sans-serif;
+      font-size: .96rem;
       line-height: 1.35;
       text-align: center;
+      margin: 12px 0 0;
     }
 
-    .main-photo {
-      width: min(420px, 88vw);
-      margin: 0 auto 36px;
-      transform: rotate(-2deg);
+    .under-willow {
+      min-height: 155svh;
+      background:
+        radial-gradient(circle at 50% 15%, rgba(255,255,255,.09), transparent 36%),
+        linear-gradient(180deg, rgba(7,7,17,0), #07100b 34%, #05100a);
+    }
+
+    .willow-garden {
+      width: min(100%, 430px);
+      min-height: 780px;
+      position: relative;
+      margin: 0 auto;
+    }
+
+    .garden-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .pond {
+      position: absolute;
+      left: 50%;
+      bottom: 76px;
+      width: 250px;
+      height: 70px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background:
+        repeating-linear-gradient(0deg, rgba(255,255,255,.15) 0 2px, transparent 2px 10px),
+        linear-gradient(180deg, rgba(91,150,180,.85), rgba(33,83,111,.95));
+      box-shadow: 0 0 35px rgba(91,150,180,.35);
+      opacity: .82;
+    }
+
+    .swing {
+      position: absolute;
+      left: 50%;
+      top: 170px;
+      width: 150px;
+      height: 250px;
+      transform: translateX(-50%);
+      animation: gentleSwing 3s ease-in-out infinite alternate;
+      transform-origin: top center;
+    }
+
+    .rope {
+      position: absolute;
+      top: 0;
+      width: 2px;
+      height: 210px;
+      background: rgba(255,255,255,.45);
+    }
+
+    .rope.left { left: 38px; }
+    .rope.right { right: 38px; }
+
+    .seat {
+      position: absolute;
+      bottom: 22px;
+      left: 25px;
+      width: 100px;
+      height: 10px;
+      border-radius: 999px;
+      background: #8b5a2b;
+    }
+
+    .cat {
+      position: absolute;
+      bottom: 34px;
+      left: 63px;
+      font-size: 32px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,.3));
+    }
+
+    @keyframes gentleSwing {
+      from { rotate: -2deg; }
+      to { rotate: 2deg; }
+    }
+
+    .person {
+      position: absolute;
+      bottom: 140px;
+      width: 74px;
+      height: 150px;
+      opacity: 0;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .person.one {
+      left: 72px;
+      transform: translateX(-22px);
+    }
+
+    .person.two {
+      right: 72px;
+      transform: translateX(22px);
+    }
+
+    .under-willow.visible-one .person.one,
+    .under-willow.visible-two .person.two,
+    .under-willow.together .person {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .head {
+      position: absolute;
+      left: 24px;
+      top: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #e4a382;
+    }
+
+    .body {
+      position: absolute;
+      left: 18px;
+      top: 32px;
+      width: 40px;
+      height: 82px;
+      border-radius: 22px 22px 10px 10px;
+    }
+
+    .one .body {
+      background: #1c1d29;
+    }
+
+    .two .body {
+      background: #fff4f7;
+    }
+
+    .arm {
+      position: absolute;
+      top: 54px;
+      width: 46px;
+      height: 7px;
+      border-radius: 999px;
+      background: #e4a382;
+    }
+
+    .one .arm {
+      right: -22px;
+      transform: rotate(-14deg);
+    }
+
+    .two .arm {
+      left: -22px;
+      transform: rotate(14deg);
+    }
+
+    .held-heart {
+      position: absolute;
+      left: 50%;
+      bottom: 210px;
+      transform: translateX(-50%) scale(.2);
+      font-size: 34px;
+      opacity: 0;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .under-willow.together .held-heart {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
     }
 
     .poured-flower {
       top: -40px;
-      font-size: 26px;
+      font-size: 24px;
       animation: pourDown linear forwards;
     }
 
     @keyframes pourDown {
-      from {
-        transform: translateY(-80px) translateX(0) rotate(0deg);
-        opacity: 0;
-      }
-
-      8% {
-        opacity: 1;
-      }
-
-      to {
-        transform: translateY(120vh) translateX(var(--drift)) rotate(420deg);
-        opacity: 0;
-      }
+      from { transform: translateY(-80px) translateX(0) rotate(0deg); opacity: 0; }
+      8% { opacity: 1; }
+      to { transform: translateY(120vh) translateX(var(--drift)) rotate(420deg); opacity: 0; }
     }
 
     .pinky-card {
-      width: min(900px, 96vw);
-      padding: clamp(28px, 5vw, 54px);
-      border-radius: 36px;
+      width: min(100%, 430px);
+      padding: 24px 18px;
+      border-radius: 30px;
       background: rgba(255,255,255,.09);
-      border: 1px solid rgba(255,255,255,.2);
+      border: 1px solid rgba(255,255,255,.18);
       backdrop-filter: blur(14px);
       text-align: center;
-      box-shadow: 0 24px 90px rgba(0,0,0,.34);
+      box-shadow: 0 22px 70px rgba(0,0,0,.34);
     }
 
-    .pinky-stage {
-      width: min(760px, 94vw);
-      height: 360px;
-      margin: 20px auto;
-      position: relative;
-      overflow: hidden;
+    .promise-symbol {
+      height: 190px;
+      display: grid;
+      place-items: center;
+      font-size: 5rem;
+      filter: drop-shadow(0 0 24px rgba(255,116,165,.38));
+      animation: promisePulse 1.35s ease-in-out infinite alternate;
     }
 
-    .pinky-svg {
-      width: 100%;
-      height: 100%;
-      overflow: visible;
-    }
-
-    .left-pinky {
-      transform: translateX(-90px);
-      transition: transform 1.4s ease;
-    }
-
-    .right-pinky {
-      transform: translateX(90px);
-      transition: transform 1.4s ease;
-    }
-
-    .hooked .left-pinky {
-      transform: translateX(55px) rotate(1deg);
-    }
-
-    .hooked .right-pinky {
-      transform: translateX(-55px) rotate(-1deg);
-    }
-
-    .pinky-heart {
-      opacity: 0;
-      transform: scale(.2);
-      transform-origin: 380px 135px;
-      transition: opacity .7s ease .8s, transform .7s ease .8s;
-    }
-
-    .hooked .pinky-heart {
-      opacity: 1;
-      transform: scale(1);
+    @keyframes promisePulse {
+      from { transform: scale(.96); }
+      to { transform: scale(1.04); }
     }
 
     .final-scene {
-      min-height: 100vh;
-      position: relative;
-      overflow: hidden;
-      padding: 90px 20px;
+      min-height: 100svh;
+      padding: 84px 16px;
       display: grid;
       place-items: center;
-    }
-
-    .final-scene::before {
-      content: "";
-      position: absolute;
-      inset: 0;
+      position: relative;
+      overflow: hidden;
       background:
-        radial-gradient(circle at 50% 15%, rgba(255,255,255,.10), transparent 38%),
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,.09), transparent 36%),
         linear-gradient(180deg, #050713, #101935 48%, #07100b);
-      z-index: -2;
-    }
-
-    .vine {
-      position: absolute;
-      width: 260px;
-      height: 520px;
-      border: 3px solid rgba(147,207,162,.75);
-      border-bottom: 0;
-      border-right: 0;
-      border-radius: 70% 0 0 0;
-      opacity: .6;
-      animation: vineBreathe 2.8s ease-in-out infinite alternate;
-    }
-
-    .vine.left {
-      left: -40px;
-      top: 4%;
-      transform: rotate(-8deg);
-    }
-
-    .vine.right {
-      right: -40px;
-      top: 4%;
-      transform: scaleX(-1) rotate(-8deg);
-    }
-
-    @keyframes vineBreathe {
-      from {
-        opacity: .45;
-      }
-
-      to {
-        opacity: .8;
-      }
     }
 
     .sketch-card {
-      width: min(940px, 96vw);
-      padding: clamp(28px, 5vw, 54px);
-      border-radius: 26px;
+      width: min(100%, 430px);
+      padding: 24px 18px;
+      border-radius: 28px;
       background: linear-gradient(135deg, rgba(255,250,240,.98), rgba(255,240,215,.98));
       color: var(--ink);
-      box-shadow: 0 25px 90px rgba(0,0,0,.38);
+      box-shadow: 0 22px 70px rgba(0,0,0,.36);
       text-align: center;
       position: relative;
       overflow: hidden;
     }
 
-    .sketch-card::before,
-    .sketch-card::after {
-      content: "🌿";
-      position: absolute;
-      font-size: 48px;
-      opacity: .32;
-    }
-
-    .sketch-card::before {
-      left: 18px;
-      top: 18px;
-    }
-
-    .sketch-card::after {
-      right: 18px;
-      bottom: 18px;
-      transform: rotate(180deg);
-    }
-
     .sketch-map {
-      width: min(780px, 100%);
-      height: 360px;
-      margin: 20px auto;
+      width: 100%;
+      height: 270px;
       display: block;
     }
 
@@ -1384,7 +1106,7 @@
     }
 
     .final-animate .sketch-line {
-      animation: drawLine 2.6s ease forwards;
+      animation: drawLine 2.4s ease forwards;
     }
 
     .closing-line {
@@ -1394,47 +1116,36 @@
     }
 
     .final-animate .closing-line {
-      animation:
-        drawLine 2.6s ease forwards .5s,
-        closeDistance 2.5s ease forwards 3.4s;
+      animation: drawLine 2.4s ease forwards .4s, closeDistance 2.4s ease forwards 3.2s;
     }
 
     @keyframes drawLine {
-      to {
-        stroke-dashoffset: 0;
-      }
+      to { stroke-dashoffset: 0; }
     }
 
     @keyframes closeDistance {
-      to {
-        transform: scaleX(.08);
-      }
+      to { transform: scaleX(.1); }
     }
 
-    .dot-de,
-    .dot-br {
+    .dot-de, .dot-br {
       transform-box: fill-box;
       transform-origin: center;
     }
 
     .final-animate .dot-de {
-      animation: moveDE 2.5s ease forwards 3.4s;
+      animation: moveDE 2.4s ease forwards 3.2s;
     }
 
     .final-animate .dot-br {
-      animation: moveBR 2.5s ease forwards 3.4s;
+      animation: moveBR 2.4s ease forwards 3.2s;
     }
 
     @keyframes moveDE {
-      to {
-        transform: translateX(250px);
-      }
+      to { transform: translateX(210px); }
     }
 
     @keyframes moveBR {
-      to {
-        transform: translateX(-250px);
-      }
+      to { transform: translateX(-210px); }
     }
 
     .hug-figure {
@@ -1443,19 +1154,12 @@
     }
 
     .final-animate .hug-figure {
-      animation: hugAppear 1.3s ease forwards 5.8s;
+      animation: hugAppear 1.2s ease forwards 5.5s;
     }
 
     @keyframes hugAppear {
-      from {
-        opacity: 0;
-        transform: scale(.4);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+      from { opacity: 0; transform: scale(.4); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     .final-title {
@@ -1463,17 +1167,23 @@
     }
 
     .final-animate .final-title {
-      animation: fadeIn 1.2s ease forwards 6.3s;
+      animation: fadeIn 1s ease forwards 6s;
     }
 
     @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+      to { opacity: 1; }
+    }
+
+    .final-timer {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      font-family: system-ui, sans-serif;
     }
 
     .sky-section {
-      min-height: 135vh;
+      min-height: 130svh;
       position: relative;
       overflow: hidden;
       background:
@@ -1481,26 +1191,26 @@
         linear-gradient(180deg, #07100b 0%, #070711 35%, #02030a 100%);
       display: grid;
       place-items: center;
-      padding: 100px 20px;
+      padding: 100px 16px;
     }
 
-    .sky-section .big-moon {
+    .big-moon {
       position: absolute;
       top: 18%;
-      right: 16%;
-      width: 140px;
-      height: 140px;
+      right: 10%;
+      width: 112px;
+      height: 112px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #fffaf0, #ffeeb8 60%, rgba(255,238,184,.2));
-      box-shadow: 0 0 90px rgba(255,238,184,.48);
+      box-shadow: 0 0 80px rgba(255,238,184,.48);
     }
 
     .shooting-star {
       position: absolute;
       top: 27%;
-      right: 20%;
-      width: 12px;
-      height: 12px;
+      right: 16%;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
       background: #fff;
       box-shadow: 0 0 18px #fff;
@@ -1510,7 +1220,7 @@
     .shooting-star::after {
       content: "";
       position: absolute;
-      width: 120px;
+      width: 100px;
       height: 2px;
       right: 10px;
       top: 5px;
@@ -1518,36 +1228,17 @@
     }
 
     @keyframes moonLoop {
-      0% {
-        transform: translate(0, 0) rotate(0deg);
-        opacity: 0;
-      }
-
-      12% {
-        opacity: 1;
-      }
-
-      35% {
-        transform: translate(-120px, 70px) rotate(55deg);
-      }
-
-      65% {
-        transform: translate(-20px, 150px) rotate(160deg);
-      }
-
-      88% {
-        opacity: 1;
-      }
-
-      100% {
-        transform: translate(70px, 10px) rotate(260deg);
-        opacity: 0;
-      }
+      0% { transform: translate(0,0) rotate(0deg); opacity: 0; }
+      12% { opacity: 1; }
+      35% { transform: translate(-90px, 60px) rotate(55deg); }
+      65% { transform: translate(-20px, 135px) rotate(160deg); }
+      88% { opacity: 1; }
+      100% { transform: translate(55px, 10px) rotate(260deg); opacity: 0; }
     }
 
     .pulse-star {
       position: absolute;
-      left: 22%;
+      left: 16%;
       top: 38%;
       font-size: 42px;
       cursor: pointer;
@@ -1557,26 +1248,19 @@
     }
 
     @keyframes pulseStar {
-      from {
-        transform: scale(.9);
-        opacity: .72;
-      }
-
-      to {
-        transform: scale(1.2);
-        opacity: 1;
-      }
+      from { transform: scale(.9); opacity: .72; }
+      to { transform: scale(1.2); opacity: 1; }
     }
 
     .sky-message {
       display: none;
-      width: min(820px, 94vw);
-      padding: clamp(28px, 5vw, 54px);
-      border-radius: 36px;
+      width: min(100%, 430px);
+      padding: 24px 18px;
+      border-radius: 30px;
       background: rgba(255,255,255,.10);
       border: 1px solid rgba(255,255,255,.22);
       backdrop-filter: blur(14px);
-      box-shadow: 0 24px 90px rgba(0,0,0,.34);
+      box-shadow: 0 22px 70px rgba(0,0,0,.34);
       text-align: center;
       z-index: 4;
     }
@@ -1585,99 +1269,35 @@
       display: block;
       animation: fadeIn .8s ease forwards;
     }
-
-    @media (max-width: 760px) {
-      #hint {
-        display: none;
-      }
-
-      #countdownTimer {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .gallery {
-        grid-template-columns: 1fr;
-      }
-
-      .route {
-        grid-template-columns: 1fr;
-      }
-
-      .line {
-        height: 54px;
-        width: 2px;
-        margin: 0 auto;
-        background: linear-gradient(180deg, transparent, rgba(255,255,255,.65), transparent);
-      }
-
-      .willow {
-        width: 230vw;
-      }
-
-      .tree-memory {
-        width: 60px;
-        height: 76px;
-      }
-
-      .wedding-egg {
-        transform: scale(.62);
-        right: 6%;
-      }
-
-      .pinky-stage {
-        height: 300px;
-      }
-
-      .sky-section .big-moon {
-        right: 9%;
-        width: 110px;
-        height: 110px;
-      }
-
-      .pulse-star {
-        left: 14%;
-      }
-    }
   </style>
 </head>
 
 <body>
   <div class="ambient">
-    <div class="star-bg"></div>
+    <div class="stars"></div>
     <div class="moon"></div>
   </div>
 
   <div id="willow" class="willow">
     <div class="canopy"></div>
     <div class="trunk"></div>
-    <div class="willow-branch b1"></div>
-    <div class="willow-branch b2"></div>
-    <div class="willow-branch b3"></div>
-    <div class="willow-branch b4"></div>
-    <div class="willow-branch b5"></div>
+    <div class="branch b1"></div>
+    <div class="branch b2"></div>
+    <div class="branch b3"></div>
+    <div class="branch b4"></div>
+    <div class="branch b5"></div>
 
-    <div class="tree-memory memory-1" style="left: 340px; top: 235px; --tilt:-6deg;">
-      <div class="mini-img">
-        <img src="photo1.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo1';">
-      </div>
+    <div class="tree-memory memory-1" style="left: 225px; top: 230px; --tilt:-6deg;">
+      <div class="mini-img"><img src="photo1.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo1';"></div>
     </div>
-
-    <div class="tree-memory memory-2" style="left: 610px; top: 185px; --tilt:5deg;">
-      <div class="mini-img">
-        <img src="photo2.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo2';">
-      </div>
+    <div class="tree-memory memory-2" style="left: 425px; top: 190px; --tilt:5deg;">
+      <div class="mini-img"><img src="photo2.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo2';"></div>
     </div>
-
-    <div class="tree-memory memory-3" style="left: 785px; top: 270px; --tilt:-4deg;">
-      <div class="mini-img">
-        <img src="photo3.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo3';">
-      </div>
+    <div class="tree-memory memory-3" style="left: 510px; top: 280px; --tilt:-4deg;">
+      <div class="mini-img"><img src="photo3.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='photo3';"></div>
     </div>
-
-    <div class="tree-memory memory-4" style="left: 500px; top: 135px; --tilt:4deg;">
-      <div class="mini-img">
-        <img src="main.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='main';">
-      </div>
+    <div class="tree-memory memory-4" style="left: 340px; top: 145px; --tilt:4deg;">
+      <div class="mini-img"><img src="main.jpg" alt="" onerror="this.style.display='none'; this.parentElement.textContent='main';"></div>
     </div>
   </div>
 
@@ -1697,26 +1317,23 @@
       <h2 id="questionText"></h2>
       <div id="answers"></div>
       <p id="quizFeedback"></p>
-      <p id="quizProgress" class="progress"></p>
+      <p id="quizProgress" class="small"></p>
     </div>
   </section>
 
   <section id="gameScene" class="scene">
     <div id="game">
-      <div class="como-scene">
+      <div class="como">
         <div class="sunset"></div>
         <div class="mountain left"></div>
         <div class="mountain right"></div>
 
         <div class="village">
           <div class="house"></div>
-          <div class="house" style="height:34px"></div>
-          <div class="house" style="height:24px"></div>
-          <div class="house" style="height:38px"></div>
           <div class="house" style="height:26px"></div>
-          <div class="house" style="height:32px"></div>
-          <div class="house" style="height:28px"></div>
-          <div class="house" style="height:36px"></div>
+          <div class="house" style="height:20px"></div>
+          <div class="house" style="height:30px"></div>
+          <div class="house" style="height:24px"></div>
         </div>
 
         <div class="wedding-egg">
@@ -1726,24 +1343,12 @@
         </div>
 
         <div class="lake"></div>
-
-        <div class="lake-creature" aria-hidden="true">
-          <span class="hump h1"></span>
-          <span class="hump h2"></span>
-          <span class="hump h3"></span>
-          <span class="neck"></span>
-          <span class="head"></span>
-          <span class="creature-ripple"></span>
-        </div>
-
-        <div class="rare-shooting-star"></div>
-
-        <div class="game-cloud cloud1"></div>
-        <div class="game-cloud cloud2"></div>
+        <div class="lake-creature"></div>
+        <div class="rare-star"></div>
       </div>
 
       <div id="score">Bouquet pieces: 0 / 14</div>
-      <div id="hint">Lake Como quest: catch the bouquet pieces</div>
+      <div id="hint">Drag the basket. Catch the bouquet pieces.</div>
 
       <div id="player">
         <div class="basket">
@@ -1757,39 +1362,33 @@
   <section id="revealScene" class="scene">
     <div class="card">
       <h1>For You 🤍</h1>
-      <div class="bouquet">
-        <div class="bouquet-burst">💐</div>
-      </div>
-
+      <div class="bouquet"><div class="bouquet-burst">💐</div></div>
       <div id="revealText" class="typewriter"></div>
 
       <div id="futureGlimpse" class="future-glimpse">
-        <p>Some flowers are for today.</p>
-        <p>Some are for tomorrow.</p>
+        <p>Algunas flores son para hoy.</p>
+        <p>Some flowers are for the future we're walking toward.</p>
         <div id="miniDistance" class="mini-distance">
           <span class="place germany">Germany 🇩🇪</span>
           <span class="place brazil">Brazil 🇧🇷</span>
           <div class="distance-thread"></div>
         </div>
-        <p class="small">Every day, a little closer.</p>
+        <p class="small">Cada día, a little closer.</p>
       </div>
 
       <button id="openRestButton" style="display:none;" onclick="unlockSite()">Open the rest ↓</button>
-      <p class="small">Scroll after this. The basket has more flowers to pour out.</p>
     </div>
   </section>
 
   <main class="content">
     <section class="section">
-      <div class="countdown-card">
-        <h2>First Hug Countdown ✈️</h2>
-        <p>Until Germany and Brazil become one hug.</p>
+      <div class="glass">
+        <h2>First Hug Countdown</h2>
+        <p>Germany to Brazil. One direction. One hug waiting at the end.</p>
 
-        <div class="route">
+        <div class="route-mobile">
           <div>Germany 🇩🇪</div>
-          <div class="line"></div>
-          <div class="plane">✈️</div>
-          <div class="line"></div>
+          <div class="plane-down">✈️</div>
           <div>Brazil 🇧🇷</div>
         </div>
 
@@ -1799,17 +1398,12 @@
           <div class="time-box"><span id="minutes">0</span><small>Minutes</small></div>
           <div class="time-box"><span id="seconds">0</span><small>Seconds</small></div>
         </div>
-
-        <p class="small">
-          Distance remaining: Germany ↔ Brazil<br>
-          Future distance: one hug.
-        </p>
       </div>
     </section>
 
-    <section class="section album-section">
+    <section class="section">
       <div>
-        <div class="polaroid main-photo">
+        <div class="polaroid" style="--tilt:-1deg;">
           <div class="photo">
             <img src="main.jpg" alt="Her main photo" onerror="this.style.display='none'; this.parentElement.innerHTML='main.jpg<br>Main photo of her goes here';">
           </div>
@@ -1845,7 +1439,7 @@
           </p>
 
           <p>
-            Happy 3 months, baby. Distance has been loud, but us? We have been louder.
+            Feliz tres meses, baby. Distance has been loud, but us? We have been louder.
           </p>
 
           <p>
@@ -1853,84 +1447,94 @@
             Me 🤍
           </p>
         </div>
+      </div>
+    </section>
 
-        <div class="gallery">
-          <div class="polaroid" style="--tilt:-3deg">
-            <div class="photo"><img src="photo1.jpg" alt="Memory 1" onerror="this.style.display='none'; this.parentElement.innerHTML='photo1.jpg';"></div>
-            <p>One of my favorite little memories.</p>
-          </div>
+    <section id="underWillowSection" class="section under-willow">
+      <div class="willow-garden">
+        <div class="garden-title">
+          <h2>Under the willow</h2>
+          <p>Scroll slowly. Some things only appear when you stay a little longer.</p>
+        </div>
 
-          <div class="polaroid" style="--tilt:2deg">
-            <div class="photo"><img src="photo2.jpg" alt="Memory 2" onerror="this.style.display='none'; this.parentElement.innerHTML='photo2.jpg';"></div>
-            <p>The smile that makes distance feel smaller.</p>
-          </div>
+        <div class="swing">
+          <div class="rope left"></div>
+          <div class="rope right"></div>
+          <div class="seat"></div>
+          <div class="cat">🐈</div>
+        </div>
 
-          <div class="polaroid" style="--tilt:-1deg">
-            <div class="photo"><img src="photo3.jpg" alt="Memory 3" onerror="this.style.display='none'; this.parentElement.innerHTML='photo3.jpg';"></div>
-            <p>A moment I wish I could frame forever.</p>
-          </div>
+        <div class="person one">
+          <div class="head"></div>
+          <div class="body"></div>
+          <div class="arm"></div>
+        </div>
 
-          <div class="polaroid" style="--tilt:2.8deg">
-            <div class="photo"><img src="photo4.jpg" alt="Memory 4" onerror="this.style.display='none'; this.parentElement.innerHTML='photo4.jpg';"></div>
-            <p>Proof that my phone gallery has a favorite person.</p>
-          </div>
+        <div class="person two">
+          <div class="head"></div>
+          <div class="body"></div>
+          <div class="arm"></div>
+        </div>
 
-          <div class="polaroid" style="--tilt:-2.2deg">
-            <div class="photo"><img src="photo5.jpg" alt="Memory 5" onerror="this.style.display='none'; this.parentElement.innerHTML='photo5.jpg';"></div>
-            <p>Another reason August needs to hurry up.</p>
-          </div>
+        <div class="held-heart">🤍</div>
+        <div class="pond"></div>
+      </div>
+    </section>
 
-          <div class="polaroid" style="--tilt:1.4deg">
-            <div class="photo"><img src="photo6.jpg" alt="Memory 6" onerror="this.style.display='none'; this.parentElement.innerHTML='photo6.jpg';"></div>
-            <p>More memories. More us. Please.</p>
-          </div>
+    <section class="section">
+      <div>
+        <div class="polaroid" style="--tilt:-2deg">
+          <div class="photo"><img src="photo1.jpg" alt="Memory 1" onerror="this.style.display='none'; this.parentElement.innerHTML='photo1.jpg';"></div>
+          <p>One of my favorite little memories.</p>
+        </div>
+
+        <div class="polaroid" style="--tilt:1.5deg">
+          <div class="photo"><img src="photo2.jpg" alt="Memory 2" onerror="this.style.display='none'; this.parentElement.innerHTML='photo2.jpg';"></div>
+          <p>The smile that makes distance feel smaller.</p>
+        </div>
+
+        <div class="polaroid" style="--tilt:-1deg">
+          <div class="photo"><img src="photo3.jpg" alt="Memory 3" onerror="this.style.display='none'; this.parentElement.innerHTML='photo3.jpg';"></div>
+          <p>A moment I wish I could frame forever.</p>
+        </div>
+
+        <div class="polaroid" style="--tilt:1deg">
+          <div class="photo"><img src="photo4.jpg" alt="Memory 4" onerror="this.style.display='none'; this.parentElement.innerHTML='photo4.jpg';"></div>
+          <p>Proof that my phone gallery has a favorite person.</p>
+        </div>
+
+        <div class="polaroid" style="--tilt:-1.5deg">
+          <div class="photo"><img src="photo5.jpg" alt="Memory 5" onerror="this.style.display='none'; this.parentElement.innerHTML='photo5.jpg';"></div>
+          <p>Another reason August needs to hurry up.</p>
+        </div>
+
+        <div class="polaroid" style="--tilt:1.2deg">
+          <div class="photo"><img src="photo6.jpg" alt="Memory 6" onerror="this.style.display='none'; this.parentElement.innerHTML='photo6.jpg';"></div>
+          <p>More memories. More us. Please.</p>
         </div>
       </div>
     </section>
 
     <section id="adventureSection" class="section">
-      <div class="countdown-card">
+      <div class="glass">
         <h1>Next Chapter?</h1>
         <p>Will you continue this adventure with me?</p>
-        <button onclick="askPinky()">Yes 💖</button>
-        <button onclick="askPinky()">Yes 🤍</button>
-        <button onclick="askPinky()">Definitely yes 🌿</button>
+        <button onclick="askPromise()">Yes 💖</button>
+        <button onclick="askPromise()">Yes 🤍</button>
+        <button onclick="askPromise()">Definitely yes 🌿</button>
       </div>
     </section>
 
-    <section id="pinkySection" class="section" style="display:none;">
+    <section id="promiseSection" class="section" style="display:none;">
       <div class="pinky-card">
         <h1>Pinky promise?</h1>
         <p>No backing out. This is legally binding in silly couple law.</p>
-
-        <div id="pinkyStage" class="pinky-stage">
-          <svg class="pinky-svg" viewBox="0 0 760 360" role="img" aria-label="Animated pinky promise">
-            <g class="left-pinky">
-              <path d="M30 238 C95 176, 170 165, 250 215 C285 238, 304 267, 334 306 L185 328 C145 278, 102 270, 42 286 Z" fill="#f0a596"/>
-              <path d="M247 213 C286 130, 338 108, 383 150 C355 168, 322 202, 300 246 Z" fill="#f0a596"/>
-              <path d="M247 213 C286 130, 338 108, 383 150" fill="none" stroke="#8b4c42" stroke-width="10" stroke-linecap="round"/>
-              <path d="M76 245 C130 215, 180 221, 232 260" fill="none" stroke="#cf7f73" stroke-width="5" stroke-linecap="round" opacity=".55"/>
-            </g>
-
-            <g class="right-pinky">
-              <path d="M730 238 C665 176, 590 165, 510 215 C475 238, 456 267, 426 306 L575 328 C615 278, 658 270, 718 286 Z" fill="#c77b65"/>
-              <path d="M513 213 C474 130, 422 108, 377 150 C405 168, 438 202, 460 246 Z" fill="#c77b65"/>
-              <path d="M513 213 C474 130, 422 108, 377 150" fill="none" stroke="#6f3b32" stroke-width="10" stroke-linecap="round"/>
-              <path d="M684 245 C630 215, 580 221, 528 260" fill="none" stroke="#a75e50" stroke-width="5" stroke-linecap="round" opacity=".55"/>
-            </g>
-
-            <text class="pinky-heart" x="380" y="130" text-anchor="middle" font-size="60">🤍</text>
-          </svg>
-        </div>
-
-        <button onclick="hookPinkies()">Yes, pinky promise</button>
+        <div class="promise-symbol">🤙🤍🤙</div>
+        <button onclick="showFinal()">Yes, pinky promise</button>
       </div>
     </section>
 
     <section id="finalSection" class="final-scene" style="display:none;">
-      <div class="vine left"></div>
-      <div class="vine right"></div>
-
       <div id="sketchCard" class="sketch-card">
         <h1 class="final-title">Distance Remaining:</h1>
 
@@ -1960,7 +1564,14 @@
         </svg>
 
         <h2 class="final-title">One Hug</h2>
-        <p class="final-title">August 8th is not just a date anymore. It is where the distance ends.</p>
+        <p class="final-title">August 8th is where the distance ends.</p>
+
+        <div class="final-timer final-title">
+          <div class="time-box"><span id="fdays">0</span><small>Days</small></div>
+          <div class="time-box"><span id="fhours">0</span><small>Hours</small></div>
+          <div class="time-box"><span id="fminutes">0</span><small>Minutes</small></div>
+          <div class="time-box"><span id="fseconds">0</span><small>Seconds</small></div>
+        </div>
       </div>
     </section>
 
@@ -1995,8 +1606,8 @@
         correct: 0
       },
       {
-        question: "What is August 8th really?",
-        answers: ["Just another day", "The day the screen finally disappears", "A suspicious potato sequel"],
+        question: "What is August 8th?",
+        answers: ["Just another day", "The day the screen finally disappears", "A very suspiciously cute chapter"],
         correct: 1
       }
     ];
@@ -2033,6 +1644,7 @@ I finally get to hold your hand. 🤍`;
     const basketFill = document.getElementById("basketFill");
     const scoreEl = document.getElementById("score");
     const revealText = document.getElementById("revealText");
+    const underWillowSection = document.getElementById("underWillowSection");
 
     let quizIndex = 0;
     let score = 0;
@@ -2042,15 +1654,13 @@ I finally get to hold your hand. 🤍`;
     let heartTimer = null;
 
     plantWillowLeaves();
-    setInterval(makeBackgroundPetal, 900);
+    setInterval(makeBackgroundPetal, 1000);
     updateCountdown();
     setInterval(updateCountdown, 1000);
+    window.addEventListener("scroll", handleScrollScenes);
 
     function switchScene(name) {
-      Object.values(scenes).forEach(scene => {
-        scene.classList.remove("active");
-      });
-
+      Object.values(scenes).forEach(scene => scene.classList.remove("active"));
       scenes[name].classList.add("active");
     }
 
@@ -2062,7 +1672,6 @@ I finally get to hold your hand. 🤍`;
 
     function renderQuestion() {
       const q = quiz[quizIndex];
-
       questionText.textContent = q.question;
       answers.innerHTML = "";
       quizFeedback.textContent = "";
@@ -2094,7 +1703,7 @@ I finally get to hold your hand. 🤍`;
           } else {
             renderQuestion();
           }
-        }, 700);
+        }, 650);
       } else {
         quizFeedback.textContent = "Try again, pretty girl.";
       }
@@ -2103,15 +1712,13 @@ I finally get to hold your hand. 🤍`;
     function startGame() {
       switchScene("game");
       growWillow(3);
-
       score = 0;
       playerX = 50;
       gameRunning = true;
       scoreEl.textContent = "Bouquet pieces: 0 / 14";
       updateBasket();
       updatePlayer();
-
-      flowerTimer = setInterval(dropFlower, 570);
+      flowerTimer = setInterval(dropFlower, 680);
     }
 
     function updatePlayer() {
@@ -2120,32 +1727,27 @@ I finally get to hold your hand. 🤍`;
 
     document.addEventListener("keydown", (e) => {
       if (!gameRunning) return;
-
       if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") playerX -= 6;
       if (e.key === "ArrowRight" || e.key.toLowerCase() === "d") playerX += 6;
-
-      playerX = Math.max(6, Math.min(94, playerX));
+      playerX = Math.max(8, Math.min(92, playerX));
       updatePlayer();
     });
 
     game.addEventListener("pointermove", (e) => {
       if (!gameRunning) return;
-
       const rect = game.getBoundingClientRect();
       playerX = ((e.clientX - rect.left) / rect.width) * 100;
-      playerX = Math.max(6, Math.min(94, playerX));
+      playerX = Math.max(8, Math.min(92, playerX));
       updatePlayer();
     });
 
     function dropFlower() {
       const flower = document.createElement("div");
       flower.className = "falling-flower";
-
       const flowers = ["🤍", "🌹", "🌸", "🌿", "💮"];
       flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
-
-      flower.style.left = Math.random() * 92 + "%";
-      flower.style.animationDuration = (2.05 + Math.random() * 1.35) + "s";
+      flower.style.left = Math.random() * 86 + 4 + "%";
+      flower.style.animationDuration = (2.4 + Math.random() * 1.4) + "s";
       game.appendChild(flower);
 
       const collisionCheck = setInterval(() => {
@@ -2161,7 +1763,6 @@ I finally get to hold your hand. 🤍`;
         if (hit) {
           flower.remove();
           clearInterval(collisionCheck);
-
           score++;
           scoreEl.textContent = `Bouquet pieces: ${score} / 14`;
           updateBasket();
@@ -2169,25 +1770,20 @@ I finally get to hold your hand. 🤍`;
 
           if (score >= 14) revealSurprise();
         }
-      }, 40);
+      }, 45);
 
       setTimeout(() => {
         flower.remove();
         clearInterval(collisionCheck);
-      }, 4300);
+      }, 4700);
     }
 
     function updateBasket() {
       const percent = Math.min(100, (score / 14) * 100);
       basketFill.style.height = percent + "%";
-
       const miniFlowers = "🤍🌹🌸🌿💮";
       let fill = "";
-
-      for (let i = 0; i < score; i++) {
-        fill += miniFlowers[i % miniFlowers.length];
-      }
-
+      for (let i = 0; i < score; i++) fill += miniFlowers[i % miniFlowers.length];
       basketFill.textContent = fill;
     }
 
@@ -2195,7 +1791,6 @@ I finally get to hold your hand. 🤍`;
       gameRunning = false;
       clearInterval(flowerTimer);
       document.querySelectorAll(".falling-flower").forEach(f => f.remove());
-
       growWillow(4);
       explode();
       startHearts();
@@ -2203,7 +1798,7 @@ I finally get to hold your hand. 🤍`;
       setTimeout(() => {
         switchScene("reveal");
         typeReveal();
-      }, 1200);
+      }, 1000);
     }
 
     function typeReveal() {
@@ -2213,12 +1808,11 @@ I finally get to hold your hand. 🤍`;
       const typer = setInterval(() => {
         revealText.textContent += revealMessage[i];
         i++;
-
         if (i >= revealMessage.length) {
           clearInterval(typer);
           showFutureGlimpse();
         }
-      }, 37);
+      }, 36);
     }
 
     function showFutureGlimpse() {
@@ -2227,58 +1821,35 @@ I finally get to hold your hand. 🤍`;
         setTimeout(() => {
           document.getElementById("miniDistance").classList.add("closer");
           document.getElementById("openRestButton").style.display = "inline-block";
-        }, 900);
+        }, 850);
       }, 450);
     }
 
     function unlockSite() {
-      gameRunning = false;
       document.body.classList.add("unlocked");
-
-      Object.values(scenes).forEach(scene => {
-        scene.classList.remove("active");
-        scene.style.display = "none";
-        scene.style.pointerEvents = "none";
-      });
-
+      Object.values(scenes).forEach(scene => scene.classList.remove("active"));
       pourFlowers();
-
       setTimeout(() => {
-        const firstSection = document.querySelector(".content .section");
-        if (firstSection) {
-          firstSection.scrollIntoView({ behavior: "smooth", block: "start" });
-        } else {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }
+        document.querySelector(".content .section").scrollIntoView({ behavior: "smooth" });
       }, 250);
     }
 
-    function askPinky() {
+    function askPromise() {
       explode();
-
       document.getElementById("adventureSection").style.display = "none";
-      document.getElementById("pinkySection").style.display = "grid";
-
-      setTimeout(() => {
-        document.getElementById("pinkySection").scrollIntoView({ behavior: "smooth" });
-      }, 300);
+      document.getElementById("promiseSection").style.display = "grid";
+      setTimeout(() => document.getElementById("promiseSection").scrollIntoView({ behavior: "smooth" }), 250);
     }
 
-    function hookPinkies() {
-      document.getElementById("pinkyStage").classList.add("hooked");
+    function showFinal() {
       explode();
-
+      document.getElementById("promiseSection").style.display = "none";
+      document.getElementById("finalSection").style.display = "grid";
+      growWillow("final");
       setTimeout(() => {
-        document.getElementById("pinkySection").style.display = "none";
-        document.getElementById("finalSection").style.display = "grid";
-        growWillow("final");
-
         document.getElementById("finalSection").scrollIntoView({ behavior: "smooth" });
-
-        setTimeout(() => {
-          document.getElementById("sketchCard").classList.add("final-animate");
-        }, 500);
-      }, 1600);
+        setTimeout(() => document.getElementById("sketchCard").classList.add("final-animate"), 500);
+      }, 250);
     }
 
     function openSkyMessage() {
@@ -2286,51 +1857,50 @@ I finally get to hold your hand. 🤍`;
       explode();
     }
 
+    function handleScrollScenes() {
+      if (!document.body.classList.contains("unlocked")) return;
+      const rect = underWillowSection.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      const progress = Math.min(1, Math.max(0, (windowH - rect.top) / (rect.height + windowH)));
+
+      underWillowSection.classList.toggle("visible-one", progress > .18);
+      underWillowSection.classList.toggle("visible-two", progress > .42);
+      underWillowSection.classList.toggle("together", progress > .68);
+    }
+
     function growWillow(stage) {
       willow.classList.remove("stage-1", "stage-2", "stage-3", "stage-4", "stage-final");
-
-      if (stage === "final") {
-        willow.classList.add("stage-final");
-      } else {
-        willow.classList.add("stage-" + stage);
-      }
+      if (stage === "final") willow.classList.add("stage-final");
+      else willow.classList.add("stage-" + stage);
     }
 
     function plantWillowLeaves() {
-      for (let i = 0; i < 310; i++) {
+      for (let i = 0; i < 190; i++) {
         const leaf = document.createElement("div");
         leaf.className = "leaf";
-
         const angle = Math.random() * Math.PI * 2;
-        const radiusX = 90 + Math.random() * 470;
-        const radiusY = 30 + Math.random() * 205;
-
-        const left = 625 + Math.cos(angle) * radiusX;
-        const top = 290 + Math.sin(angle) * radiusY;
-
+        const radiusX = 60 + Math.random() * 310;
+        const radiusY = 25 + Math.random() * 150;
+        const left = 380 + Math.cos(angle) * radiusX;
+        const top = 260 + Math.sin(angle) * radiusY;
         leaf.style.left = left + "px";
         leaf.style.top = top + "px";
-        leaf.style.animationDelay = (i * 0.025) + "s";
-
+        leaf.style.animationDelay = (i * 0.028) + "s";
         willow.appendChild(leaf);
       }
     }
 
     function explode() {
       const emojis = ["🤍", "💖", "✨", "🌿", "🌸", "🎨", "💫", "🌹", "💮"];
-
-      for (let i = 0; i < 105; i++) {
+      for (let i = 0; i < 85; i++) {
         const piece = document.createElement("div");
         piece.className = "particle";
         piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-
         const angle = Math.random() * Math.PI * 2;
-        const distance = 130 + Math.random() * 560;
-
+        const distance = 90 + Math.random() * 320;
         piece.style.setProperty("--x", Math.cos(angle) * distance + "px");
         piece.style.setProperty("--y", Math.sin(angle) * distance + "px");
         piece.style.animationDelay = Math.random() * .18 + "s";
-
         document.body.appendChild(piece);
         setTimeout(() => piece.remove(), 2300);
       }
@@ -2338,18 +1908,16 @@ I finally get to hold your hand. 🤍`;
 
     function startHearts() {
       if (heartTimer) return;
-
       heartTimer = setInterval(() => {
         const h = document.createElement("div");
         h.className = "heart";
         h.textContent = ["🤍", "💖", "💕", "🌿", "🌸", "🌹"][Math.floor(Math.random() * 6)];
         h.style.left = Math.random() * 100 + "vw";
-        h.style.fontSize = (18 + Math.random() * 30) + "px";
+        h.style.fontSize = (18 + Math.random() * 26) + "px";
         h.style.animationDuration = (3.5 + Math.random() * 3) + "s";
-
         document.body.appendChild(h);
         setTimeout(() => h.remove(), 7000);
-      }, 190);
+      }, 240);
     }
 
     function popFlower(x, y) {
@@ -2360,29 +1928,24 @@ I finally get to hold your hand. 🤍`;
       h.style.top = y + "px";
       h.style.bottom = "auto";
       h.style.animationDuration = "1.45s";
-
       document.body.appendChild(h);
       setTimeout(() => h.remove(), 1600);
     }
 
     function pourFlowers() {
       let count = 0;
-
       const pour = setInterval(() => {
         count++;
-
         const flower = document.createElement("div");
         flower.className = "poured-flower";
         flower.textContent = ["🤍", "🌹", "🌸", "🌿", "💮"][Math.floor(Math.random() * 5)];
-        flower.style.left = (35 + Math.random() * 30) + "vw";
+        flower.style.left = (25 + Math.random() * 50) + "vw";
         flower.style.animationDuration = (4 + Math.random() * 3) + "s";
-        flower.style.setProperty("--drift", (-220 + Math.random() * 440) + "px");
-
+        flower.style.setProperty("--drift", (-170 + Math.random() * 340) + "px");
         document.body.appendChild(flower);
         setTimeout(() => flower.remove(), 8000);
-
-        if (count > 85) clearInterval(pour);
-      }, 90);
+        if (count > 70) clearInterval(pour);
+      }, 105);
     }
 
     function makeBackgroundPetal() {
@@ -2390,10 +1953,9 @@ I finally get to hold your hand. 🤍`;
       p.className = "petal";
       p.textContent = Math.random() > .5 ? "🤍" : "🌸";
       p.style.left = Math.random() * 100 + "vw";
-      p.style.fontSize = (14 + Math.random() * 18) + "px";
+      p.style.fontSize = (13 + Math.random() * 16) + "px";
       p.style.animationDuration = (7 + Math.random() * 7) + "s";
       p.style.setProperty("--drift", (-80 + Math.random() * 160) + "px");
-
       document.body.appendChild(p);
       setTimeout(() => p.remove(), 15000);
     }
@@ -2403,18 +1965,25 @@ I finally get to hold your hand. 🤍`;
       const diff = meetingDate - now;
 
       if (diff <= 0) {
-        document.getElementById("countdownTimer").innerHTML =
-          "<h2 style='grid-column:1/-1'>TODAY IS THE DAY. GO GET YOUR HUG. 🤍</h2>";
+        document.getElementById("countdownTimer").innerHTML = "<h2 style='grid-column:1/-1'>TODAY IS THE DAY. 🤍</h2>";
         return;
       }
 
-      document.getElementById("days").textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
-      document.getElementById("hours").textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      document.getElementById("minutes").textContent = Math.floor((diff / (1000 * 60)) % 60);
-      document.getElementById("seconds").textContent = Math.floor((diff / 1000) % 60);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+
+      document.getElementById("fdays").textContent = days;
+      document.getElementById("fhours").textContent = hours;
+      document.getElementById("fminutes").textContent = minutes;
+      document.getElementById("fseconds").textContent = seconds;
     }
   </script>
 </body>
 </html>
-
-
